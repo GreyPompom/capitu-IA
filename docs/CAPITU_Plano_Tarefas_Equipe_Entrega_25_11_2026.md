@@ -1,25 +1,25 @@
 # Plano de tarefas da equipe CAPITU até 25 de novembro de 2026
 
-> **Sincronização obrigatória: qualquer alteração neste documento deve ser reproduzida no PDF e no Markdown do mesmo nome-base antes do commit.**
+> **Sincronização obrigatória: o Markdown é a fonte textual; qualquer alteração deve ser refletida no DOCX e no PDF do mesmo nome-base antes do commit.**
 > **PDF correspondente:** `CAPITU_Plano_Tarefas_Equipe_Entrega_25_11_2026.pdf`
 
 ## Plano de execução e divisão de tarefas
 
-**Equipe:** Emely, Millena e Miguel<br>**Professor:** Marcelo da Silva<br>**Entrega:** 25 de novembro de 2026<br>**Planejamento:** 7 de outubro a 25 de novembro de 2026 • Versão 1.0
+**Equipe:** Emely, Millena e Miguel<br>**Professor:** Marcelo da Silva<br>**Entrega:** 25 de novembro de 2026<br>**Planejamento:** 7 de outubro a 25 de novembro de 2026 • Versão 1.1
 
-**Estado informado pela equipe:** proposta de implementação aprovada pelo professor; UI já desenvolvida por Millena. A UI é contribuição concluída declarada, ainda não inspecionada nesta etapa. Este plano agenda integração, validação e ajustes sem atribuir novamente a criação da interface.
+**Estado confirmado pela equipe:** proposta de implementação aprovada pelo professor; Millena concluiu o design visual da UI, fornecido em PDF. O código da interface ainda não foi desenvolvido: `static/index.html`, `static/styles.css` e `static/chat.js` contêm placeholders. A versão 1.1 corrige essa premissa e inclui implementação, integração e validação da UI no escopo de Millena.
 
-Emely assume arquitetura, PLN, diálogo, API, integração, métricas e revisão técnica, com mais tarefas e maior complexidade. Millena e Miguel recebem oito tarefas restantes cada, com 32 horas estimadas por pessoa e atividades delimitadas de menor complexidade.
+Emely assume arquitetura, PLN, diálogo, API, integração, métricas e revisão técnica, com mais tarefas e maior complexidade. Millena e Miguel recebem oito tarefas cada; a previsão atual é de 38 horas para Millena e 32 para Miguel, considerando a implementação da interface. As atividades de Millena permanecem delimitadas e sem responsabilidade pelo núcleo de IA.
 
 | Pessoa | Tasks restantes | Horas estimadas | Responsabilidade principal |
 | --- | --- | --- | --- |
 | Emely | 18 | 88 | Núcleo técnico e coordenação |
-| Millena | 8 | 32 | UI existente, dados e materiais |
+| Millena | 8 | 38 | UI a implementar a partir do design, dados e materiais |
 | Miguel | 8 | 32 | Dados, testes guiados e reprodução |
 
-**Carga total restante:** 152 horas-pessoa. A igualdade entre Millena e Miguel considera apenas o trabalho futuro. O tempo já gasto na UI não foi informado e não é contado como zero; deve ser registrado separadamente.
+**Carga total restante:** 158 horas-pessoa. Millena e Miguel mantêm o mesmo número de tasks; a estimativa de horas difere porque o código da UI ainda precisa ser construído. O tempo dedicado ao design visual não foi informado e não é estimado retroativamente.
 
-**Premissa de disponibilidade:** reservar cerca de 14 h/semana para Emely e 5 h/semana para Millena e Miguel, incluindo folga. Estimativas não são compromissos garantidos: revisar na primeira reunião. Duração em horas representa esforço; a janela de datas representa tempo corrido para executar e revisar.
+**Premissa de disponibilidade:** reservar cerca de 14 h/semana para Emely, 6 h/semana para Millena e 5 h/semana para Miguel, incluindo folga. Estimativas não são compromissos garantidos: revisar na primeira reunião. Duração em horas representa esforço; a janela de datas representa tempo corrido para executar e revisar.
 
 **Escopo mantido:** Python; TF-IDF + similaridade e regras; Open Library; chat web local; quatro intenções bibliográficas. Sem LLM, personalização, empréstimos ou disponibilidade do acervo universitário.
 
@@ -29,11 +29,11 @@ Emely assume arquitetura, PLN, diálogo, API, integração, métricas e revisão
 
 | Janela | Emely | Millena | Miguel |
 | --- | --- | --- | --- |
-| 07-13/10 | E01-E02: contratos e base | M01; início M02 | G01-G02: dados/negativos |
-| 14-20/10 | E03-E04: corpus e similaridade | M02: UI documentada | Preparar estudo das fixtures |
-| 21-27/10 | E05; início E06 | M04: texto do relatório | G03; início G04 |
-| 28/10-03/11 | Final E06; E07-E08 | Revisar UI contra contrato | Final G04; preparar casos |
-| 04-10/11 | E09-E10; início E11 | M03; início M05 | G05; início G06 |
+| 07-13/10 | E01-E02: contratos e base | M01; preparar M02 | G01-G02: dados/negativos |
+| 14-20/10 | E03-E04: corpus e similaridade | M02: desenvolver UI sobre o contrato e respostas simuladas (início) | Preparar estudo das fixtures |
+| 21-27/10 | E05; início E06 | M02: concluir UI funcional e testar com simulação | G03; início G04 |
+| 28/10-03/11 | Final E06; E07-E08 | M04: texto do relatório | Final G04; preparar casos |
+| 04-10/11 | E09-E10; início E11 | M03: integrar UI ao backend real; início M05 | G05; início G06 |
 | 11-17/11 | Final E11; E12-E13 | Final M05; revisar textos | Final G06; G07 |
 | 18-21/11 | E14-E15: relatório/pacote | M06-M07 | G08: evidências/defesa |
 | 22-24/11 | E16-E18: ensaio/reserva/freeze | M08: revisão e ensaio | Participar do ensaio e revisar sua fala |
@@ -57,11 +57,11 @@ As datas acima são marcos internos, não datas informadas pelo professor, excet
 
 ## 2. Dependências e acordos de trabalho
 
-**Caminho crítico:** E01 → E02 + dados M01/G01/G02 → E03 → E04 → E05 → E06 → E07; em paralelo G03/G04 preparam E08. E07 + E08 → E09 → E10 → E11 → E12 → E13 → E14 → M06 → E15 → ensaio/revisão → E18 → entrega.
+**Caminho crítico:** E01 → E02 + dados M01/G01/G02; após E02, M02 implementa a UI usando o contrato e respostas simuladas enquanto E03-E08 constroem IA e integração. E07 + E08 → E09 → M03 integra a UI ao backend real; E10 + M03 → M05 valida estados e fluxos até o congelamento funcional em 12/11. Em paralelo G03/G04 preparam E08. Depois E10 → E11 → E12 → E13 → E14 → M06 → E15 → ensaio/revisão → E18 → entrega.
 
 **Handoff essencial:** Emely entrega contrato e exemplos em 09/10; Millena/Miguel entregam dados até 13/10; Miguel entrega sondagem até 30/10; Emely entrega backend integrado até 06/11; os dois validam até 12/11. Texto técnico vai à Millena até 19/11; o PDF consolidado volta até 20/11.
 
-**Trabalho paralelo:** dados das duas pessoas não exigem backend; UI usa simulador antes da API; fixtures e sondagem não exigem cliente completo; relatório avança por seções durante desenvolvimento. Conflitos de contrato e regras de IA ficam com Emely, sem deixar Millena/Miguel responsáveis por arquitetura.
+**Trabalho paralelo:** dados das duas pessoas não exigem backend; após E02, a UI pode ser desenvolvida e exercitada com resposta bibliográfica simulada antes da integração E09; fixtures e sondagem não exigem cliente completo; relatório avança por seções durante desenvolvimento. Conflitos de contrato e regras de IA ficam com Emely, sem deixar Millena/Miguel responsáveis por arquitetura.
 
 ### Rotina de acompanhamento
 
@@ -75,9 +75,17 @@ Uma task termina quando: entrega existe; aceite foi conferido; teste/validação
 
 Código de IA, backend e API exige testes automatizados significativos com pytest e respostas controladas. UI, coleta, relatório e slides usam roteiros manuais ou revisão documental: não criar testes artificiais para checar uma frase do texto. Em todos os casos registrar entrada/procedimento, esperado, obtido e resultado. Millena/Miguel podem usar templates fornecidos por Emely para automação simples.
 
-### Trabalho já concluído pela Millena
+### Trabalho de design já concluído pela Millena
 
-**M00 • UI inicial • status: concluída conforme informação da equipe.** Preservar autoria e histórico. Tempo e data reais: a registrar; não estimados retroativamente. Evidência: código, commits e screenshots originais. Validação futura: M02 verifica fluxos e compatibilidade; M03 integra; M05/M08 avaliam. A UI não deve ser reconstruída sem necessidade técnica identificada.
+**M00 • Design visual da UI • status: concluído.** A contribuição confirmada é o design visual no PDF `UI Capitu.IA.pdf`; não há código de interface concluído. Registrar o PDF como evidência e preservar a autoria do design. Não estimar retroativamente o tempo utilizado. M02 implementa o design nos placeholders; M03 integra; M05/M08 avaliam e revisam o resultado.
+
+### Validação tripla da correção do planejamento • 08/10/2026
+
+1. **Evidência do estado do projeto:** a equipe confirmou que foi criado somente o design. O PDF anexo contém telas de referência; os três arquivos em `static/` continuam placeholders e `app/main.py` ainda não implementa a rota. Portanto, M00 registra design concluído, não desenvolvimento.
+2. **Rastreabilidade ao contrato e ao cronograma:** E01 define `POST /api/chat` com `message` e `session_id`, respostas com `text`, `state`, `results` e estados de conversa. O marco E02 prevê backend local com resposta simulada até 12/10; E09 prevê backend integrado até 06/11; o congelamento funcional ocorre em 12/11. Assim, M02 usa simulação após E02, M03 integra após E09 e M05 conclui a verificação até 12/11.
+3. **Consulta à documentação técnica oficial:** FastAPI documenta o serviço de arquivos estáticos com `StaticFiles`; MDN descreve `fetch`, verificação de `Response.ok` e envio de corpo JSON; FastAPI documenta testes HTTP com `TestClient`/pytest. A implementação local deve servir UI e endpoint na mesma origem quando integrada, diferenciar erro HTTP de falha de rede e validar a API com respostas controladas.
+
+As três verificações foram feitas contra os artefatos do repositório e documentação oficial listada na seção 8. As 10 horas de M02 são uma estimativa de planejamento, não medição de implementação já executada; Millena deverá confirmar ou revisar a estimativa na reunião semanal.
 
 ### Reserva e redução de escopo
 
@@ -93,7 +101,7 @@ P0: quatro intenções, corpus, PLN, contexto mínimo, API, falhas, 20+ testes, 
 
 **Descrição e o que fazer:** Definir módulos, endpoint do chat e modelos de mensagem, interpretação, livro e sessão; fixar precedência e limites. Preparar contrato que permita UI e testes trabalharem antes da API real.
 
-**O que consultar:** Planejamento aprovado; FastAPI/Pydantic para schemas; requisitos R1-R4; estrutura real da UI da Millena.
+**O que consultar:** Planejamento aprovado; FastAPI/Pydantic para schemas; requisitos R1-R4; PDF do design visual da Millena e placeholders existentes em `static/`.
 
 **Teste ou validação a escrever/executar:** Escrever cenários de contrato: mensagem válida aceita; entrada vazia tratada; resposta contém texto, estado e lista. Converter para teste automatizado quando E02 existir.
 
@@ -103,13 +111,13 @@ P0: quatro intenções, corpus, PLN, contexto mínimo, API, falhas, 20+ testes, 
 
 **Responsável:** Emely • **Esforço:** 4 h • **Janela:** 10/10 a 12/10/2026<br>**Complexidade:** Média/alta • **Dependências:** E01<br>**Prioridade:** P0; incrementos citados só se couberem • **Rastreabilidade:** B11-B12; R1, R4, R7
 
-**Descrição e o que fazer:** Criar ambiente Python, dependências, endpoint mínimo e dados simulados; organizar pytest, configurações e inicialização. Entregar base executável sem IA fingida.
+**Descrição e o que fazer:** Criar ambiente Python, dependências, endpoint mínimo com dados simulados, servir o esqueleto web local em `static/` na mesma origem e organizar pytest, configurações e inicialização. Entregar base executável sem IA fingida; a UI completa será implementada por Millena em M02.
 
 **O que consultar:** FastAPI: testes e execução; pytest: fixtures; contratos E01; Git/README.
 
-**Teste ou validação a escrever/executar:** Escrever teste de POST /chat com payload válido e inválido; verificar estado HTTP e schema. Rodar instalação em ambiente virtual novo.
+**Teste ou validação a escrever/executar:** Escrever testes de POST `/api/chat` com payload válido e inválido; verificar status e schema. Verificar que `GET /` serve `static/index.html` e que os assets locais carregam no navegador na mesma origem. Rodar instalação em ambiente virtual novo. A resposta bibliográfica permanece simulada.
 
-**Aceite e evidência:** Servidor local e suite inicial executam; Miguel e Millena conseguem usar contrato. Registrar comandos.
+**Aceite e evidência:** Servidor local, página inicial/arquivos estáticos e suite inicial executam; o endpoint responde conforme o contrato com dados simulados. Miguel e Millena conseguem usar contrato e UI na origem local. Registrar comandos.
 
 ## 3. Tasks de Emely
 
@@ -203,9 +211,9 @@ P0: quatro intenções, corpus, PLN, contexto mínimo, API, falhas, 20+ testes, 
 
 **Responsável:** Emely • **Esforço:** 7 h • **Janela:** 04/11 a 06/11/2026<br>**Complexidade:** Alta • **Dependências:** E07, E08<br>**Prioridade:** P0; incrementos citados só se couberem • **Rastreabilidade:** B21; R1-R4
 
-**Descrição e o que fazer:** Conectar endpoint, interpretação, política, diálogo e fonte. Gerar templates das quatro intenções; retornar estado e candidatos para UI existente.
+**Descrição e o que fazer:** Conectar endpoint, interpretação, política, diálogo e fonte. Gerar templates das quatro intenções; retornar estado e candidatos para a UI que Millena implementará a partir do design.
 
-**O que consultar:** Contratos E01; UI documentada M02; componentes E04-E08; critérios T01-T24.
+**O que consultar:** Contrato E01 e exemplos da UI construídos em M02; componentes E04-E08; critérios T01-T24.
 
 **Teste ou validação a escrever/executar:** Escrever quatro testes ponta a ponta com API simulada, cobrindo intenção, entidade, consulta e resposta/fonte. Incluir pedido de parâmetro e seleção.
 
@@ -337,7 +345,7 @@ P0: quatro intenções, corpus, PLN, contexto mínimo, API, falhas, 20+ testes, 
 
 ## 4. Tasks de Millena
 
-8 tarefas restantes • 32 horas estimadas • Esta página: M01 e M02
+8 tarefas restantes • 38 horas estimadas • Esta página: M01 e M02
 
 ### M01 • Coletar exemplos e organizar casos de uso
 
@@ -351,41 +359,41 @@ P0: quatro intenções, corpus, PLN, contexto mínimo, API, falhas, 20+ testes, 
 
 **Aceite e evidência:** 40 frases revisáveis entregues a Emely com origem e grupos aproximados; tabela de casos de uso.
 
-### M02 • Registrar UI existente e validar fluxos básicos
+### M02 • Implementar UI a partir do design e validar fluxos básicos
 
-**Responsável:** Millena • **Esforço:** 4 h • **Janela:** 14/10 a 20/10/2026<br>**Complexidade:** Baixa • **Dependências:** E01, E02<br>**Prioridade:** P0; incrementos citados só se couberem • **Rastreabilidade:** B22 parcial; R1 / autoria
+**Responsável:** Millena • **Esforço:** 10 h • **Janela:** 14/10 a 27/10/2026<br>**Complexidade:** Baixa/média, com design pronto • **Dependências:** E01, E02<br>**Prioridade:** P0; incrementos citados só se couberem • **Rastreabilidade:** B22; R1-R4
 
-**Descrição e o que fazer:** Preservar UI já criada; documentar componentes e ajustar somente o necessário para payload, carregamento, mensagem vazia e exibição de resultado. Usar backend simulado.
+**Descrição e o que fazer:** Construir a interface web local em `static/index.html`, `static/styles.css` e `static/chat.js` seguindo o PDF de design. Implementar layout responsivo simples, início de conversa, formulário e envio, mensagens do usuário/CAPITU, carregamento, validação de campo vazio, atalhos de busca, cartões com os dados disponíveis, clique para pedir detalhes e botão “Nova conversa”. Consumir `POST /api/chat` usando `message` e `session_id`; mapear `text`, `state` e `results` para os estados de resposta do contrato. Tratar ausência de capa/campo opcional sem quebrar os cartões. Nesta fase usar as respostas controladas do E02; não implementar PLN nem chamar Open Library diretamente no navegador.
 
-**O que consultar:** Código da própria UI; contrato E01; endpoint E02; princípios básicos de mensagens de estado.
+**O que consultar:** PDF de design fornecido por Millena; contrato E01 e `app/schemas.py`; endpoint/respostas simuladas do E02; documentação oficial FastAPI StaticFiles, MDN Fetch e MDN `textContent`. Preferir UI servida pela aplicação FastAPI na mesma origem para usar caminho relativo `/api/chat` e evitar CORS no MVP.
 
-**Teste ou validação a escrever/executar:** Escrever roteiro UI-01 a UI-04: envio válido, entrada vazia, carregamento e lista simulada. Executar manualmente; teste de documentação/fluxo não precisa automatização artificial.
+**Teste ou validação a escrever/executar:** Executar UI-01 a UI-04 com dados simulados: envio válido aparece uma vez; vazio é impedido; carregamento termina e impede envio duplicado; lista vazia/um/múltiplos livros renderiza sem trocar ordem. Verificar tab/Enter, rótulos acessíveis, foco visível e mensagem de estado. Registrar esperado, obtido, versão e screenshot; usar `textContent`/construção DOM segura para dados externos.
 
-**Aceite e evidência:** UI original registrada com evidência de autoria; ajustes pequenos funcionando contra simulador.
+**Aceite e evidência:** As três telas-base do design (início, conversa e resultados) são navegáveis localmente; shortcuts preenchem o campo; os cartões mostram somente metadados presentes e permitem iniciar pedido de detalhes; uma sessão simulada funciona pelo contrato. Capturas de tela, roteiro UI-01 a UI-04 e commit registrados. Não marcar como concluída antes de executar o servidor E02.
 
 ## 4. Tasks de Millena
 
-8 tarefas restantes • 32 horas estimadas • Esta página: M03 e M04
+8 tarefas restantes • 38 horas estimadas • Esta página: M03 e M04
 
-### M03 • Ligar UI ao endpoint integrado
+### M03 • Integrar UI ao backend completo
 
 **Responsável:** Millena • **Esforço:** 4 h • **Janela:** 07/11 a 09/11/2026<br>**Complexidade:** Baixa, com contrato pronto • **Dependências:** E09, M02<br>**Prioridade:** P0; incrementos citados só se couberem • **Rastreabilidade:** B22; R1-R4
 
-**Descrição e o que fazer:** Configurar URL local e fetch/envio; renderizar mensagens e lista; enviar seleção pelo contrato. Emely resolve lógica/erros de backend; não transferir arquitetura para Millena.
+**Descrição e o que fazer:** Trocar as respostas simuladas pela integração com o backend E09 na origem local. Enviar JSON conforme E01 (`message`, `session_id`), reutilizar o UUID devolvido em turnos da mesma conversa, limpar a sessão ao iniciar “Nova conversa”, conferir `response.ok` antes de interpretar respostas HTTP e diferenciar erro de rede de estados de negócio. Mapear `answered`, `awaiting_clarification`, `awaiting_selection`, `no_results`, `out_of_scope` e `source_unavailable`; clique num cartão envia “Detalhes de <título>” pela mesma rota. Emely mantém a responsabilidade pela lógica de intenção, regras e API.
 
-**O que consultar:** Contrato E01; exemplos reais de E09; MDN fetch; guia da UI existente.
+**O que consultar:** Contrato E01; schemas; exemplos reais do E09; MDN Fetch (JSON, `Response.ok` e erros de rede); implementação de static hosting FastAPI do E02.
 
-**Teste ou validação a escrever/executar:** Escrever e executar UI-05 a UI-08: título, autor, assunto e detalhes, contra API controlada; verificar corpo enviado e resposta apresentada.
+**Teste ou validação a escrever/executar:** Executar UI-05 a UI-07 e percursos integrados E2E-01 a E2E-04 contra backend controlado: título, autor, assunto e detalhes; conferir JSON enviado, continuidade/reset da sessão, texto/estado/lista renderizados e detalhe iniciado pelo cartão. Testar status HTTP não-2xx e falha de rede separadamente.
 
-**Aceite e evidência:** Quatro fluxos acessíveis na UI; screenshots e divergências registrados, sem criar regras de IA no frontend.
+**Aceite e evidência:** Os quatro fluxos de negócio usam a rota real local e o schema acordado; contexto da sessão continua apenas durante a conversa; cartão selecionado e “Nova conversa” funcionam; nenhum request é enviado à Open Library pelo navegador. Guardar screenshots, payloads sem dados sensíveis, versão e divergências corrigidas.
 
 ### M04 • Redigir problema, requisitos e discussão inicial
 
-**Responsável:** Millena • **Esforço:** 4 h • **Janela:** 21/10 a 27/10/2026<br>**Complexidade:** Baixa • **Dependências:** M01, M02<br>**Prioridade:** P0; incrementos citados só se couberem • **Rastreabilidade:** B33 parcial; relatório
+**Responsável:** Millena • **Esforço:** 4 h • **Janela:** 28/10 a 03/11/2026<br>**Complexidade:** Baixa • **Dependências:** M01, M02<br>**Prioridade:** P0; incrementos citados só se couberem • **Rastreabilidade:** B33 parcial; relatório
 
 **Descrição e o que fazer:** Preparar seções 1, 2 e rascunho da 7: problema, público, objetivos, escopo, intenções, fluxos e limitações. Atualizar discussão após resultados.
 
-**O que consultar:** Enunciado: seções obrigatórias; proposta aprovada; decisões e casos de uso; documentação da UI.
+**O que consultar:** Enunciado: seções obrigatórias; proposta aprovada; decisões e casos de uso; design e implementação da UI em M02.
 
 **Teste ou validação a escrever/executar:** Validação documental por checklist: cenário simulado identificado, quatro intenções consistentes, nenhum acervo/resultado alegado sem evidência; revisão por Miguel.
 
@@ -393,19 +401,19 @@ P0: quatro intenções, corpus, PLN, contexto mínimo, API, falhas, 20+ testes, 
 
 ## 4. Tasks de Millena
 
-8 tarefas restantes • 32 horas estimadas • Esta página: M05 e M06
+8 tarefas restantes • 38 horas estimadas • Esta página: M05 e M06
 
 ### M05 • Testar usabilidade e estados de erro na UI
 
 **Responsável:** Millena • **Esforço:** 4 h • **Janela:** 10/11 a 12/11/2026<br>**Complexidade:** Baixa • **Dependências:** M03, E10<br>**Prioridade:** P0; incrementos citados só se couberem • **Rastreabilidade:** B28 parcial; R1, R5
 
-**Descrição e o que fazer:** Executar testes de seleção, parâmetro ausente, falha externa, retorno vazio e troca de contexto; registrar obtido e screenshots com versão. Não corrigir backend complexo.
+**Descrição e o que fazer:** Validar os fluxos visíveis e estados da UI depois da integração: pergunta ambígua/esclarecimento, seleção, ausência de resultado, fora de escopo, falha externa, timeout/rede, HTTP 422, troca de contexto e nova conversa. Conferir que loading termina em todo ramo, mensagens não duplicam e dados ausentes não criam cartões quebrados. Registrar obtido, screenshots e versão; encaminhar defeito de backend à Emely.
 
-**O que consultar:** Plano de 24 casos; endpoint E10; fixtures de Miguel; estados e limites da aplicação.
+**O que consultar:** Plano de 24 casos; contrato E01; API E10; fixtures de Miguel; estados e limites da aplicação; documentação FastAPI TestClient/pytest para confirmar que as respostas controladas usadas correspondem ao contrato.
 
-**Teste ou validação a escrever/executar:** Escrever UI-09 a UI-14 com pré-condição e esperado; executar manualmente com respostas controladas e verificar que mensagem não fica presa no carregamento.
+**Teste ou validação a escrever/executar:** Executar UI-01 a UI-14, incluindo nova conversa/reset de UUID, esclarecimento/seleção, fonte indisponível versus busca vazia, HTTP 422 versus falha de rede e repetição sem mensagens duplicadas. Executar manualmente com respostas controladas, verificar acessibilidade básica e confirmar que nenhum caminho fica preso no carregamento. Não chamar Open Library nos testes manuais padrão.
 
-**Aceite e evidência:** Seis casos de interface documentados; defeitos encaminhados a Emely com passos para reproduzir.
+**Aceite e evidência:** UI-01 a UI-14 registram esperado/obtido/passou com screenshots e modo controlado; bloqueadores resolvidos ou encaminhados a Emely com reprodução até 12/11, data de congelamento funcional.
 
 ### M06 • Consolidar e formatar relatório final
 
@@ -421,7 +429,7 @@ P0: quatro intenções, corpus, PLN, contexto mínimo, API, falhas, 20+ testes, 
 
 ## 4. Tasks de Millena
 
-8 tarefas restantes • 32 horas estimadas • Esta página: M07 e M08
+8 tarefas restantes • 38 horas estimadas • Esta página: M07 e M08
 
 ### M07 • Montar slides e fala da interface
 
@@ -598,7 +606,7 @@ Taxa geral de sucesso é a métrica central; accuracy, precision/recall/F1 e mat
 | --- | --- |
 | Disponibilidade semanal | Todos na primeira reunião; comparar com cerca de 14 h/semana Emely e 5 h/semana por colega |
 | Dados de identificação | Millena registra instituição/curso/turma em M04; conferir antes do relatório |
-| Tempo real da UI já feita | Millena registra M00 com evidência; não entra nas 32 h restantes |
+| Tempo real do design visual | Millena registra M00 com o PDF/evidência disponível; não estimar retroativamente nem confundir com as 38 h de desenvolvimento restantes |
 | Repositório e acesso do professor | Emely organiza E02/E18; todos registram autoria |
 | Canal, horário e forma de entrega | Emely confirma com professor até 21/11; antecedência conforme regra oficial |
 | Data da apresentação | A confirmar; ensaio interno em 22/11 permanece recomendado |
@@ -609,7 +617,7 @@ Taxa geral de sucesso é a métrica central; accuracy, precision/recall/F1 e mat
 | Risco | Resposta de planejamento |
 | --- | --- |
 | Emely é gargalo | Contrato cedo; tarefas leves paralelas; revisão semanal e corte de diferenciais |
-| UI não segue contrato | M02 com simulador; M03 integra; Emely corrige contrato/backend |
+| UI não segue contrato | M02 valida com simulador; M03 integra; M05 cobre estados e erros; Emely corrige contrato/backend |
 | Dado atrasado ou repetitivo | Entrega conjunta em 13/10 e curadoria E03; revisão cruzada |
 | Fonte sem dados/falha | Sondagem G04, erro tratado E10 e contingência G08 |
 | Avaliação revela falhas | Congelar funções em 12/11; diagnóstico/correção E12 antes do pacote |
@@ -618,7 +626,7 @@ Taxa geral de sucesso é a métrica central; accuracy, precision/recall/F1 e mat
 | Internet falha na defesa | Demonstração controlada identificada; não alegar consulta ao vivo |
 | Mudança após release | Só bloquear/corrigir com regressão; atualizar versão, relatório e pacote |
 
-Este plano respeita a preferência de concentrar dificuldade e volume em Emely. A igualdade dos outros dois é de oito tarefas e 32 horas restantes; não afirma igualdade do esforço histórico. A contribuição de todos continua verificável e todos participam do ensaio, mesmo sem receber task extra por reunião compartilhada.
+Este plano respeita a preferência de concentrar as tarefas mais numerosas e complexas em Emely e manter oito tasks de menor complexidade para cada colega. A estimativa de Millena é seis horas maior que a de Miguel porque abrange a construção da UI cujo design já existe; a diferença de esforço histórico do design não foi medida. A contribuição de todos continua verificável e todos participam do ensaio.
 
 ## 8. Fontes de consulta por atividade
 
@@ -662,6 +670,14 @@ CAPITU Planejamento detalhado para a equipe, versão 1.0; aprovação informada 
 
 [https://fastapi.tiangolo.com/tutorial/testing/](https://fastapi.tiangolo.com/tutorial/testing/)
 
+### FastAPI: servir arquivos estáticos
+
+[https://fastapi.tiangolo.com/tutorial/static-files/](https://fastapi.tiangolo.com/tutorial/static-files/)
+
+### FastAPI: resposta de arquivo/HTML
+
+[https://fastapi.tiangolo.com/advanced/custom-response/](https://fastapi.tiangolo.com/advanced/custom-response/)
+
 ### httpx: timeouts e exceções
 
 [https://www.python-httpx.org/advanced/timeouts/](https://www.python-httpx.org/advanced/timeouts/)
@@ -676,6 +692,10 @@ CAPITU Planejamento detalhado para a equipe, versão 1.0; aprovação informada 
 
 ### Frontend: fetch
 
-[https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API)
+[https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+### Frontend: texto seguro no DOM
+
+[https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
 
 Conferir documentação vigente na execução; links são fontes para estudo, não evidência de testes já realizados. Biblioteca é meio de implementação: a defesa deve explicar algoritmo, política e autoria. Este planejamento foi preparado com apoio de IA generativa e deve ser revisado pela equipe; resultados futuros serão registrados por quem executou.

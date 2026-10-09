@@ -1,6 +1,6 @@
 # Documentação de testes e validação da CAPITU
 
-> **Sincronização obrigatória: qualquer alteração neste documento deve ser reproduzida no PDF e no Markdown do mesmo nome-base antes do commit.**
+> **Sincronização obrigatória: o Markdown é a fonte textual; qualquer alteração deve ser refletida no DOCX e no PDF do mesmo nome-base antes do commit.**
 > **PDF correspondente:** `CAPITU_Documentacao_Padrao_e_Plano_de_Testes.pdf`
 
 ## Documentação de testes e validação
@@ -83,7 +83,7 @@ Use uma especificação comum para que os três integrantes possam preparar, exe
 | Dados | Frases autorais/curadas, grupos de variação e splits | Teste está independente; não há vazamento de paráfrase? |
 | Fonte externa | Open Library; obra/edição; campos incompletos | Consulta corresponde ao pedido; erros e limites são seguros? |
 | Resposta | Templates só com dados disponíveis; origem visível | Resposta evita alegar acervo, completude ou dado ausente? |
-| Interface | Chat web existente de Millena; execução local | Envio, espera, resultados e falhas são visíveis/utilizáveis? |
+| Interface | Chat web desenvolvido por Millena a partir do design; execução local com backend controlado/real | Envio, espera, resultados, seleção, sessão e falhas são visíveis/utilizáveis? |
 | Entrega/defesa | README, código, dados, resultados e contribuição individual | Outra pessoa executa? Cada integrante explica sua parte? |
 
 ### Quatro resultados de intenção não são quatro respostas iguais
@@ -119,7 +119,7 @@ Use uma especificação comum para que os três integrantes possam preparar, exe
 | Unitário - serviço | Mapeamento de parâmetros, parse, normalização, HTTP errors, cache/limite se houver | Não | Em cada mudança do adapter | Emely |
 | Integração backend | POST /chat e composição de módulos com cliente fake | Não | Após contrato e integração | Emely; fixture de Miguel |
 | Aceitação T01-T24 | Comportamento do sistema como um todo | Controlada por padrão | Marco de avaliação e regressão final | Miguel consolida; todos revisam |
-| UI manual/componente | UI M00, mensagens, loading, seleção, erro e acessibilidade básica | Backend local/mock | Após alteração visual e na versão final | Millena |
+| UI manual/componente | UI implementada em M02 a partir do design M00; mensagens, loading, seleção, erro e acessibilidade básica | Backend local/mock e integrado | M02, M03, M05 e versão final | Millena |
 | Smoke live opcional | Conexão mínima e esquema da Open Library | Sim, poucas consultas deliberadas | Após adapter ou antes da demo | Miguel sondagem; Emely implementação |
 | Instalação/reprodução | README, env, dados, comandos, execução limpa | Pode começar offline | Antes do pacote e release | Miguel executa; Emely corrige |
 | Defesa/documentação | Pergunta inédita, falha explicada e contribuição | Demonstração controlada ou live identificada | Ensaio e apresentação | Todos |
@@ -233,11 +233,17 @@ Esta tabela amplia o plano de 24 perguntas com os testes internos que sustentam 
 | UI-02 | Entrada vazia | Enviar vazio/só espaços | Validação clara; sem chamada ao backend/API. | MVP |
 | UI-03 | Carregamento e erro | Enviar mensagem | Estado de carregamento termina; erro não deixa chat travado. | MVP |
 | UI-04 | Renderização de múltiplos resultados | Abrir resultados | Todos IDs/títulos selecionáveis, sem trocar a ordem. | MVP |
-| UI-05 | Seleção do usuário | Selecionar item e pedir detalhe | UI envia referência estável conforme contrato. | MVP |
+| UI-05 | Seleção do usuário | Selecionar cartão e pedir detalhe | UI envia consulta de detalhes com o título selecionado e mantém o mesmo `session_id`, conforme E01. | MVP |
 | UI-06 | Falha da fonte na UI | Enviar nova busca | Exibe mensagem de fonte indisponível e mantém uso básico. | MVP |
 | UI-07 | Sem resultado na UI | Enviar consulta | Diferencia ausência de resultado de indisponibilidade. | MVP |
 | UI-08 | Acessibilidade/usabilidade básica | Navegar teclado, foco e contraste básico | Campo/envio/resultados operáveis; foco visível e rótulos compreensíveis. | MVP |
-| UI-09 | Modo técnico, se implementado P1 | Abrir modo de demonstração | Scores chamados similaridade; ausência não quebra chat regular. | P1 opcional |
+| UI-09 | Nova conversa | Iniciar nova conversa após obter sessão | UI descarta UUID anterior; a próxima mensagem inicia sessão independente. | MVP |
+| UI-10 | Esclarecimento | Enviar pergunta sem parâmetro obrigatório | Pergunta da CAPITU aparece, sem cartão de livro nem chamada desnecessária. | MVP |
+| UI-11 | Seleção pendente | Enviar consulta com múltiplos candidatos e escolher um | Lista permanece ordenada; resposta curta ou clique refere-se à lista da sessão ativa. | MVP |
+| UI-12 | Estados sem cartão | Receber `no_results` ou `out_of_scope` | Texto correto é mostrado sem cartão inventado; busca vazia e fora de escopo ficam distinguíveis. | MVP |
+| UI-13 | Erro HTTP e falha de rede | Simular HTTP 422 e indisponibilidade de conexão | UI mostra recuperação adequada para cada falha, encerra loading e permite nova tentativa. | MVP |
+| UI-14 | Reenvio e carregamento | Enviar uma mensagem e tentar reenviar antes da resposta | Envio duplicado é evitado; loading termina após resposta, erro ou timeout controlado. | MVP |
+| UI-15 | Modo técnico, se implementado P1 | Abrir modo de demonstração | Scores são rotulados como similaridade; ausência do modo não quebra chat regular. | P1 opcional |
 
 **Sobre limites da Open Library:** limite compartilhado requer teste de concorrência usando relógio/transport fake. Não inferir rate limit após enviar carga real. A suíte default não deve exigir chave; conferir que nenhum segredo está embutido. Smoke live fica manual, com poucas chamadas e conforme as regras atuais da fonte.
 
@@ -377,13 +383,19 @@ A Open Library documenta política de consultas e recomenda limitar/cuidar de us
 | UI-02 | Enviar vazio/só espaços | Aviso; nenhuma busca desnecessária |
 | UI-03 | Fazer backend atrasar/falhar | Indicador para e erro pode ser recuperado |
 | UI-04 | Mostrar lista controlada com três itens | IDs/títulos e ordem visíveis; seleção possível |
-| UI-05 | Selecionar item e pedir detalhe | Request referencia resultado selecionado |
+| UI-05 | Clicar em um cartão e pedir detalhe | UI envia pergunta com título selecionado e `session_id` atual |
 | UI-06 | API simulada como indisponível | Usuário entende que fonte falhou; estado não fica preso |
 | UI-07 | API controlada sem resultado | Mensagem difere de indisponibilidade |
 | UI-08 | Navegar por teclado/foco/labels | Controles operáveis e mensagens compreensíveis |
-| UI-09 | Ativar modo técnico, se implementado | Score é explicitado como similaridade; UI comum continua funcional |
+| UI-09 | Iniciar nova conversa | UUID da conversa anterior deixa de ser enviado |
+| UI-10 | Receber pedido de esclarecimento | Pergunta aparece sem livros incorretos |
+| UI-11 | Exibir seleção pendente e concluir escolha | Ordem e sessão preservadas; detalhe corresponde ao candidato escolhido |
+| UI-12 | Receber no_results e out_of_scope | Textos são distintos e nenhum cartão é inventado |
+| UI-13 | Receber HTTP 422 e simular falha de rede | Erros são distintos, loading termina e há nova tentativa possível |
+| UI-14 | Tentar reenvio enquanto loading | Só uma requisição por ação; sem mensagem duplicada |
+| UI-15 | Ativar modo técnico, se implementado | Score é explicitado como similaridade; UI comum continua funcional |
 
-**UI existente:** Millena já construiu a interface conforme informado. M00 guarda autoria; M02 registra/ajusta compatibilidade com contrato; M03 integra; M05/M08 validam. Os casos de interface não exigem reconstrução total nem cobram de Millena o núcleo de PLN.
+**Estado da interface:** Millena concluiu apenas o design visual; a implementação web é a task M02, a integração com `POST /api/chat` é M03 e a validação dos fluxos/estados é M05/M08. M00 preserva o design como evidência, sem afirmar que existe código pronto. Millena implementa apresentação e consumo HTTP; não implementa nem altera o núcleo de PLN.
 
 ### Desafio de defesa
 
@@ -394,23 +406,23 @@ Treinar formulação que não esteja no corpus: alguém pede “algo parecido co
 | Responsável | Pacote de trabalho de testes | Quando/entrega |
 | --- | --- | --- |
 | Emely | NLP/ENT/DIA/API/E2E/MET/REG; mock padrão; métricas; três falhas | Automação e integração até 12/11; diagnóstico até 15/11 |
-| Millena | UI-01 a UI-09, roteiros, screenshots e PDF visual; preserva UI original | Fluxos locais, integração e revisão até 24/11 |
+| Millena | Implementar UI a partir do design (M02), integrar contrato (M03), UI-01 a UI-14, roteiros e screenshots | Protótipo simulado em 27/10; integração e validação até 12/11; revisão até 24/11 |
 | Miguel | G03 fixtures, G04 smoke/sondagem, T01-T24, RUN-01, evidências | Tabela consolidada até 12/11; instalação até 16/11 |
 | Todos | Revisão cruzada e ensaio inédito; autoria e limites | Ensaio de equipe em 22/11; versão final 24/11 |
 
 ### Checklist por task
 
-☐ A especificação tem entrada e estado definidos antes da execução?
+- [ ] A especificação tem entrada e estado definidos antes da execução?
 
-☐ Há resultado esperado verificável, inclusive efeitos colaterais de API/contexto?
+- [ ] Há resultado esperado verificável, inclusive efeitos colaterais de API/contexto?
 
-☐ A execução registra versão, fixture/modo, obtido e passou/falhou/bloqueado?
+- [ ] A execução registra versão, fixture/modo, obtido e passou/falhou/bloqueado?
 
-☐ Uma falha leva ao componente provável e vira regressão após correção?
+- [ ] Uma falha leva ao componente provável e vira regressão após correção?
 
-☐ Dados, logs e evidências não contêm credenciais ou dados pessoais?
+- [ ] Dados, logs e evidências não contêm credenciais ou dados pessoais?
 
-☐ O integrante responsável consegue explicar por que a verificação é adequada?
+- [ ] O integrante responsável consegue explicar por que a verificação é adequada?
 
 ### Ordem até a entrega
 
@@ -450,7 +462,7 @@ A tabela da A3 pode ser uma planilha ou CSV; este documento define os campos e o
 | GATE-C Unitários | Lógica de decisão, contexto e adapter testada com casos normais, borda e erro. |
 | GATE-D Integração | Quatro fluxos E2E usando API controlada; consulta é coerente com intenção/parâmetro. |
 | GATE-E Resiliência | Vazio, campo ausente, múltiplos resultados, rede/timeout/429/5xx e JSON inválido têm saída definida. |
-| GATE-F UI | Mensagens, lista/seleção, loading, erros e sessão verificados manualmente na UI existente. |
+| GATE-F UI | Mensagens, lista/cartões, loading, erros, sessão e acessibilidade básica verificados manualmente na UI implementada a partir do design. |
 | GATE-G Métricas | Resultados reproduzíveis; taxa de sucesso, métricas de classe/confusão e fallback têm denominadores. |
 | GATE-H Falhas | Pelo menos três falhas reais examinadas; causa e melhoria fundamentadas. |
 | GATE-I Entrega | README funciona em ambiente novo; release/pacote e tabela de evidências conferidos. |
