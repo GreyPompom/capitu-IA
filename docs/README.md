@@ -14,3 +14,4 @@ Os PDFs de referência e seus espelhos Markdown ficam juntos nesta pasta. O arqu
 - [Padrão e plano de testes](CAPITU_Documentacao_Padrao_e_Plano_de_Testes.md)
 - [Requisitos e rastreabilidade](requirements.md)
 - [Arquitetura e limites](architecture.md)
+- [Contrato HTTP do chat v1](contracts/chat-v1.md)

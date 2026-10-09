@@ -1,6 +1,6 @@
 # CAPITU IA
 
-Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. Este repositório inicia a estrutura aprovada do projeto; os módulos de aplicação ainda são esqueleto e não devem ser tratados como funcionalidades implementadas.
+Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. Este repositório contém a estrutura aprovada do projeto e os schemas de contrato E01; as funcionalidades do chatbot e a rota HTTP ainda estão em desenvolvimento.
 
 ## Documentação
 
@@ -18,4 +18,4 @@ Consulte [`docs/README.md`](docs/README.md) para os documentos de planejamento e
 
 ## Estado
 
-Planejamento aprovado pelo professor conforme informado pela equipe. Implementação e avaliação ainda pendentes.
+Planejamento aprovado pelo professor conforme informado pela equipe. E01 define o contrato v1, os schemas Pydantic e seus testes unitários. A rota HTTP, PLN, integração com Open Library e avaliação funcional continuam pendentes.

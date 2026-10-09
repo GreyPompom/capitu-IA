@@ -9,6 +9,7 @@ description = "Chatbot inteligente de descoberta bibliográfica CAPITU"
 requires-python = ">=3.10"
 dependencies = [
   "fastapi",
+  "pydantic>=2,<3",
   "uvicorn[standard]",
   "httpx",
   "scikit-learn",
