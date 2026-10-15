@@ -1,1 +1,7 @@
-/* Estilos da interface web local da CAPITU. */
+body {
+  margin: 2rem auto;
+  max-width: 48rem;
+  padding: 0 1rem;
+  color: #263b50;
+  font-family: system-ui, sans-serif;
+}

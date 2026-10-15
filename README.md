@@ -1,6 +1,6 @@
 # CAPITU IA
 
-Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. Este repositório contém a estrutura aprovada do projeto e os schemas de contrato E01; as funcionalidades do chatbot e a rota HTTP ainda estão em desenvolvimento.
+Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. O backend FastAPI valida o contrato E01 e disponibiliza uma resposta demonstrativa local; a interpretação de intenções e a consulta real à Open Library serão implementadas nas próximas tarefas.
 
 ## Documentação
 
@@ -18,4 +18,19 @@ Consulte [`docs/README.md`](docs/README.md) para os documentos de planejamento e
 
 ## Estado
 
-Planejamento aprovado pelo professor conforme informado pela equipe. E01 define o contrato v1, os schemas Pydantic e seus testes unitários. A rota HTTP, PLN, integração com Open Library e avaliação funcional continuam pendentes.
+Planejamento aprovado pelo professor conforme informado pela equipe. E01 define o contrato v1 e os schemas Pydantic. E02 entrega o servidor local, `POST /api/chat`, página estática-base e testes HTTP. A resposta da E02 contém um livro fictício explicitamente identificado como simulação; ainda não há PLN nem chamada à Open Library.
+
+## Executar localmente
+
+Requer Python 3.10 ou superior.
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
+```
+
+Abra `http://127.0.0.1:8000/`. A documentação HTTP fica em `http://127.0.0.1:8000/docs`.
+
+Para validar o projeto, execute `.\.venv\Scripts\python.exe -m pytest -q`.

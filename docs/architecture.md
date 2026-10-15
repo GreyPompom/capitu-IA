@@ -17,6 +17,6 @@ Usuário → chat web local → backend FastAPI → pré-processamento → inter
 
 A CAPITU ajuda na descoberta bibliográfica usando dados públicos. Não representa o acervo da universidade e não opera empréstimos, renovações, reservas, compras nem recomendações personalizadas. Os resultados dependem da cobertura e disponibilidade da Open Library.
 
-## Contrato executável da E01
+## Contrato executável
 
-[`app/schemas.py`](../app/schemas.py) define os modelos Pydantic v2 para mensagens, pedidos, interpretação, entidades, livros, resposta e contexto de sessão. A E02 conectará o endpoint `POST /api/chat` ao orquestrador e adicionará testes HTTP com resposta simulada, sem chamar a API externa.
+[`app/schemas.py`](../app/schemas.py) define os modelos Pydantic v2 para mensagens, pedidos, interpretação, entidades, livros, resposta e contexto de sessão. `app/main.py` implementa `POST /api/chat` com resposta local simulada e serve a página-base e os assets em `/static/`. A classificação de intenção e a integração com a Open Library serão conectadas nas tasks seguintes.
