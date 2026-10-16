@@ -470,7 +470,22 @@ A tabela da A3 pode ser uma planilha ou CSV; este documento define os campos e o
 
 Um gate que falhe não deve ser ocultado. Registrar o que bloqueia, quem resolve e data; a ausência de teste executado não equivale a aprovado. Resultados e meta interna devem ser reportados mesmo se abaixo de 85%.
 
-## 16. Referências e relação com documentos existentes
+
+## 16. Limites do Sistema (Fora do Escopo)
+- Não realiza recomendações personalizadas por perfil do aluno.
+- Não verifica disponibilidade de exemplares físicos, empréstimos, multas ou reservas.
+- Consultas bibliográficas somente leitura, sem ações externas.
+
+## 17. Fluxos de Interação (Intenções)
+
+| Pergunta de Exemplo | Intenção | Entidade | Ação | Fallback |
+|---|---|---|---|---|
+| "Procure Dom Casmurro" | buscar_por_titulo | Título | Consulta o título na fonte e lista candidatos. | Pede o título se ausente, ou informa ausência na fonte. |
+| "Quais livros de Machado?" | buscar_obras_autor | Autor | Consulta obras por autor na fonte. | Pede o nome completo se houver homônimos ou ambiguidade. |
+| "Mostre ficção científica" | buscar_por_assunto | Assunto/Gênero | Consulta o assunto e apresenta obras relacionadas. | Pede especificação caso o termo não seja encontrado. |
+| "Quem escreveu o segundo?" | consultar_detalhes | Obra (Contexto/ID) e Campo solicitado | Resolve a obra na sessão e mostra os campos disponíveis. | Pede para identificar a obra se o contexto estiver vazio. |
+
+## 18. Referências e relação com documentos existentes
 
 ### Enunciado oficial
 
