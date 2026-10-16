@@ -1,41 +1,41 @@
-texto,intencao,entidade,origem
-Você encontra Dom Casmurro?,buscar_por_titulo,Dom Casmurro,Simulado Millena
-Estou procurando A Hora da Estrela.,buscar_por_titulo,A Hora da Estrela,Simulado Millena
-Teria o livro 1984 no sistema?,buscar_por_titulo,1984,Simulado Millena
-Queria ler Capitães da Areia,buscar_por_titulo,Capitães da Areia,Simulado Millena
-Busca pra mim O Senhor dos Anéis,buscar_por_titulo,O Senhor dos Anéis,Simulado Millena
-Vocês têm a obra O Alquimista?,buscar_por_titulo,O Alquimista,Simulado Millena
-Quero achar Cem Anos de Solidão,buscar_por_titulo,Cem Anos de Solidão,Simulado Millena
-Você acha Orgulho e Preconceito?,buscar_por_titulo,Orgulho e Preconceito,Simulado Millena
-Tô caçando o livro Vidas Secas,buscar_por_titulo,Vidas Secas,Simulado Millena
-Pesquisa o título Admirável Mundo Novo,buscar_por_titulo,Admirável Mundo Novo,Simulado Millena
-Quais livros Machado de Assis escreveu?,buscar_obras_autor,Machado de Assis,Simulado Millena
-Tem obras de George Orwell?,buscar_obras_autor,George Orwell,Simulado Millena
-Mostra livros da Clarice Lispector,buscar_obras_autor,Clarice Lispector,Simulado Millena
-Quero ler algo do Jorge Amado,buscar_obras_autor,Jorge Amado,Simulado Millena
-Quais são os livros do Tolkien?,buscar_obras_autor,Tolkien,Simulado Millena
-Tem alguma coisa escrita por Agatha Christie?,buscar_obras_autor,Agatha Christie,Simulado Millena
-Lista as obras do Stephen King,buscar_obras_autor,Stephen King,Simulado Millena
-O que vocês têm da J.K. Rowling?,buscar_obras_autor,J.K. Rowling,Simulado Millena
-Livros do autor Érico Veríssimo,buscar_obras_autor,Érico Veríssimo,Simulado Millena
-Busca as publicações de Isaac Asimov,buscar_obras_autor,Isaac Asimov,Simulado Millena
-Quero livros sobre inteligência artificial.,buscar_por_assunto,inteligência artificial,Simulado Millena
-Mostre livros de ficção científica.,buscar_por_assunto,ficção científica,Simulado Millena
-Tem livros de história do Brasil?,buscar_por_assunto,história do Brasil,Simulado Millena
-Queria indicações de fantasia,buscar_por_assunto,fantasia,Simulado Millena
-Busca obras sobre astronomia,buscar_por_assunto,astronomia,Simulado Millena
-Queria ler livros de terror,buscar_por_assunto,terror,Simulado Millena
-Tem algo sobre filosofia?,buscar_por_assunto,filosofia,Simulado Millena
-Quero ver livros de poesia brasileira,buscar_por_assunto,poesia brasileira,Simulado Millena
-Mostre romances clássicos,buscar_por_assunto,romances clássicos,Simulado Millena
-Material sobre engenharia de software,buscar_por_assunto,engenharia de software,Simulado Millena
-Quem escreveu Dom Casmurro?,consultar_detalhes,Dom Casmurro,Simulado Millena
-Qual é o ano dessa edição?,consultar_detalhes,ano,Simulado Millena
-Pode mostrar os detalhes do segundo livro?,consultar_detalhes,segundo livro,Simulado Millena
-Quem é o autor de 1984?,consultar_detalhes,1984,Simulado Millena
-Me dá o ISBN desse livro,consultar_detalhes,ISBN,Simulado Millena
-Qual a editora do primeiro livro?,consultar_detalhes,primeiro livro,Simulado Millena
-De que ano é essa obra?,consultar_detalhes,ano,Simulado Millena
-Pode me dar mais detalhes sobre A Hora da Estrela?,consultar_detalhes,A Hora da Estrela,Simulado Millena
-Qual o resumo do livro 3?,consultar_detalhes,livro 3,Simulado Millena
-Quem publicou isso?,consultar_detalhes,editora,Simulado Millena
+texto,intencao,entidade,campo_solicitado,grupo_variacao,origem
+Você encontra Dom Casmurro?,buscar_por_titulo,Dom Casmurro,,G01-Encontrar,Autoral Millena
+Estou procurando A Hora da Estrela.,buscar_por_titulo,A Hora da Estrela,,G02-Procurar,Autoral Millena
+Teria o livro 1984 no sistema?,buscar_por_titulo,1984,,G03-TerLivro,Autoral Millena
+Queria ler Capitães da Areia,buscar_por_titulo,Capitães da Areia,,G04-QuererLer,Autoral Millena
+Busca pra mim O Senhor dos Anéis,buscar_por_titulo,O Senhor dos Anéis,,G05-Buscar,Autoral Millena
+Vocês têm a obra O Alquimista?,buscar_por_titulo,O Alquimista,,G03-TerLivro,Autoral Millena
+Quero achar Cem Anos de Solidão,buscar_por_titulo,Cem Anos de Solidão,,G04-QuererLer,Autoral Millena
+Você acha Orgulho e Preconceito?,buscar_por_titulo,Orgulho e Preconceito,,G01-Encontrar,Autoral Millena
+Tô caçando o livro Vidas Secas,buscar_por_titulo,Vidas Secas,,G02-Procurar,Autoral Millena
+Pesquisa o título Admirável Mundo Novo,buscar_por_titulo,Admirável Mundo Novo,,G05-Buscar,Autoral Millena
+Quais livros Machado de Assis escreveu?,buscar_obras_autor,Machado de Assis,,G06-QuaisEscreveu,Autoral Millena
+Tem obras de George Orwell?,buscar_obras_autor,George Orwell,,G07-TemObras,Autoral Millena
+Mostra livros da Clarice Lispector,buscar_obras_autor,Clarice Lispector,,G08-MostraLivros,Autoral Millena
+Quero ler algo do Jorge Amado,buscar_obras_autor,Jorge Amado,,G09-LerAlgo,Autoral Millena
+Quais são os livros do Tolkien?,buscar_obras_autor,Tolkien,,G06-QuaisEscreveu,Autoral Millena
+Tem alguma coisa escrita por Agatha Christie?,buscar_obras_autor,Agatha Christie,,G07-TemObras,Autoral Millena
+Lista as obras do Stephen King,buscar_obras_autor,Stephen King,,G10-ListaObras,Autoral Millena
+O que vocês têm da J.K. Rowling?,buscar_obras_autor,J.K. Rowling,,G11-OQueTem,Autoral Millena
+Livros do autor Érico Veríssimo,buscar_obras_autor,Érico Veríssimo,,G12-LivrosAutor,Autoral Millena
+Busca as publicações de Isaac Asimov,buscar_obras_autor,Isaac Asimov,,G10-ListaObras,Autoral Millena
+Quero livros sobre inteligência artificial.,buscar_por_assunto,inteligência artificial,,G13-LivrosSobre,Autoral Millena
+Mostre livros de ficção científica.,buscar_por_assunto,ficção científica,,G14-MostreAssunto,Autoral Millena
+Tem livros de história do Brasil?,buscar_por_assunto,história do Brasil,,G15-TemAssunto,Autoral Millena
+Queria indicações de fantasia,buscar_por_assunto,fantasia,,G16-Indicacoes,Autoral Millena
+Busca obras sobre astronomia,buscar_por_assunto,astronomia,,G17-BuscaSobre,Autoral Millena
+Queria ler livros de terror,buscar_por_assunto,terror,,G18-LerAssunto,Autoral Millena
+Tem algo sobre filosofia?,buscar_por_assunto,filosofia,,G15-TemAssunto,Autoral Millena
+Quero ver livros de poesia brasileira,buscar_por_assunto,poesia brasileira,,G19-VerAssunto,Autoral Millena
+Mostre romances clássicos,buscar_por_assunto,romances clássicos,,G14-MostreAssunto,Autoral Millena
+Material sobre engenharia de software,buscar_por_assunto,engenharia de software,,G20-MaterialSobre,Autoral Millena
+Quem escreveu Dom Casmurro?,consultar_detalhes,Dom Casmurro,autor,G21-QuemEscreveu,Autoral Millena
+Qual é o ano dessa edição?,consultar_detalhes,dessa edição,ano,G22-QualAno,Autoral Millena
+Pode mostrar os detalhes do segundo livro?,consultar_detalhes,segundo livro,detalhes,G23-MostrarDetalhes,Autoral Millena
+Quem é o autor de 1984?,consultar_detalhes,1984,autor,G21-QuemEscreveu,Autoral Millena
+Me dá o ISBN desse livro,consultar_detalhes,desse livro,ISBN,G24-MeDaCampo,Autoral Millena
+Qual a editora do primeiro livro?,consultar_detalhes,primeiro livro,editora,G25-QualCampo,Autoral Millena
+De que ano é essa obra?,consultar_detalhes,essa obra,ano,G22-QualAno,Autoral Millena
+Pode me dar mais detalhes sobre A Hora da Estrela?,consultar_detalhes,A Hora da Estrela,detalhes,G23-MostrarDetalhes,Autoral Millena
+Qual o resumo do livro 3?,consultar_detalhes,livro 3,resumo,G25-QualCampo,Autoral Millena
+Quem publicou isso?,consultar_detalhes,isso,editora,G26-QuemPublicou,Autoral Millena

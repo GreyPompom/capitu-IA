@@ -470,7 +470,22 @@ A tabela da A3 pode ser uma planilha ou CSV; este documento define os campos e o
 
 Um gate que falhe não deve ser ocultado. Registrar o que bloqueia, quem resolve e data; a ausência de teste executado não equivale a aprovado. Resultados e meta interna devem ser reportados mesmo se abaixo de 85%.
 
-## 16. Referências e relação com documentos existentes
+
+## 16. Limites do Sistema (Fora do Escopo)
+- Não realiza recomendações personalizadas por perfil do aluno.
+- Não verifica disponibilidade de exemplares físicos, empréstimos, multas ou reservas.
+- Consultas bibliográficas somente leitura, sem ações externas.
+
+## 17. Fluxos de Interação (Intenções)
+
+| Pergunta de Exemplo | Intenção | Entidade | Ação | Fallback |
+|---|---|---|---|---|
+| "Procure Dom Casmurro" | buscar_por_titulo | Título | Consulta o título na fonte e lista candidatos. | Pede o título se ausente, ou informa ausência na fonte. |
+| "Quais livros de Machado?" | buscar_obras_autor | Autor | Consulta obras por autor na fonte. | Pede o nome completo se houver homônimos ou ambiguidade. |
+| "Mostre ficção científica" | buscar_por_assunto | Assunto/Gênero | Consulta o assunto e apresenta obras relacionadas. | Pede especificação caso o termo não seja encontrado. |
+| "Quem escreveu o segundo?" | consultar_detalhes | Obra (Contexto/ID) e Campo solicitado | Resolve a obra na sessão e mostra os campos disponíveis. | Pede para identificar a obra se o contexto estiver vazio. |
+
+## 18. Referências e relação com documentos existentes
 
 ### Enunciado oficial
 
@@ -525,33 +540,3 @@ CAPITU_Plano_Tarefas_Equipe_Entrega_25_11_2026.pdf: E/M/G tasks, dependências, 
 [https://docs.pytest.org/en/stable/how-to/fixtures.html](https://docs.pytest.org/en/stable/how-to/fixtures.html)
 
 **Proveniência:** os planos e cenários estão alinhados ao escopo declarado e à aprovação relatada pelo grupo. O código e os testes ainda devem ser desenvolvidos e executados. Documentação online pode mudar; reconferir durante a implementação. Esta documentação foi redigida com apoio de IA generativa e precisa de revisão pela equipe antes de ser entregue como parte do projeto.
-
-
-## Casos de Uso e Fluxos - Capitu.IA
-
-### Limites do Sistema (Fora do Escopo)
-- Não realiza recomendações personalizadas por perfil do aluno.
-- Não verifica disponibilidade de exemplares físicos, empréstimos, multas ou reservas.
-- Consultas bibliográficas somente leitura, sem ações externas.
-
-### Fluxos de Interação (Intenções)
-
-1. **buscar_por_titulo**
-   - **Objetivo:** Localizar obras pelo título.
-   - **Ação:** Consulta o título na Open Library e lista candidatos.
-   - **Fallback:** Pede o título se ausente, ou informa ausência na fonte.
-
-2. **buscar_obras_autor**
-   - **Objetivo:** Listar obras atribuídas a um autor.
-   - **Ação:** Consulta obras por autor na Open Library.
-   - **Fallback:** Pede o nome completo se houver homônimos ou ambiguidade.
-
-3. **buscar_por_assunto**
-   - **Objetivo:** Descobrir obras de um tema/gênero.
-   - **Ação:** Consulta o assunto e apresenta obras relacionadas.
-   - **Fallback:** Pede especificação caso o termo não seja encontrado.
-
-4. **consultar_detalhes**
-   - **Objetivo:** Consultar obra/edição identificada.
-   - **Ação:** Resolve a obra na sessão e mostra os campos disponíveis (como ISBN e ano).
-   - **Fallback:** Pede para identificar a obra se o contexto estiver vazio.
