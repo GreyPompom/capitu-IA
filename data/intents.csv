@@ -1,41 +1,81 @@
-texto,intencao,entidade,campo_solicitado,grupo_variacao,origem
-Você encontra Dom Casmurro?,buscar_por_titulo,Dom Casmurro,,G01-Encontrar,Autoral Millena
-Estou procurando A Hora da Estrela.,buscar_por_titulo,A Hora da Estrela,,G02-Procurar,Autoral Millena
-Teria o livro 1984 no sistema?,buscar_por_titulo,1984,,G03-TerLivro,Autoral Millena
-Queria ler Capitães da Areia,buscar_por_titulo,Capitães da Areia,,G04-QuererLer,Autoral Millena
-Busca pra mim O Senhor dos Anéis,buscar_por_titulo,O Senhor dos Anéis,,G05-Buscar,Autoral Millena
-Vocês têm a obra O Alquimista?,buscar_por_titulo,O Alquimista,,G03-TerLivro,Autoral Millena
-Quero achar Cem Anos de Solidão,buscar_por_titulo,Cem Anos de Solidão,,G04-QuererLer,Autoral Millena
-Você acha Orgulho e Preconceito?,buscar_por_titulo,Orgulho e Preconceito,,G01-Encontrar,Autoral Millena
-Tô caçando o livro Vidas Secas,buscar_por_titulo,Vidas Secas,,G02-Procurar,Autoral Millena
-Pesquisa o título Admirável Mundo Novo,buscar_por_titulo,Admirável Mundo Novo,,G05-Buscar,Autoral Millena
-Quais livros Machado de Assis escreveu?,buscar_obras_autor,Machado de Assis,,G06-QuaisEscreveu,Autoral Millena
-Tem obras de George Orwell?,buscar_obras_autor,George Orwell,,G07-TemObras,Autoral Millena
-Mostra livros da Clarice Lispector,buscar_obras_autor,Clarice Lispector,,G08-MostraLivros,Autoral Millena
-Quero ler algo do Jorge Amado,buscar_obras_autor,Jorge Amado,,G09-LerAlgo,Autoral Millena
-Quais são os livros do Tolkien?,buscar_obras_autor,Tolkien,,G06-QuaisEscreveu,Autoral Millena
-Tem alguma coisa escrita por Agatha Christie?,buscar_obras_autor,Agatha Christie,,G07-TemObras,Autoral Millena
-Lista as obras do Stephen King,buscar_obras_autor,Stephen King,,G10-ListaObras,Autoral Millena
-O que vocês têm da J.K. Rowling?,buscar_obras_autor,J.K. Rowling,,G11-OQueTem,Autoral Millena
-Livros do autor Érico Veríssimo,buscar_obras_autor,Érico Veríssimo,,G12-LivrosAutor,Autoral Millena
-Busca as publicações de Isaac Asimov,buscar_obras_autor,Isaac Asimov,,G10-ListaObras,Autoral Millena
-Quero livros sobre inteligência artificial.,buscar_por_assunto,inteligência artificial,,G13-LivrosSobre,Autoral Millena
-Mostre livros de ficção científica.,buscar_por_assunto,ficção científica,,G14-MostreAssunto,Autoral Millena
-Tem livros de história do Brasil?,buscar_por_assunto,história do Brasil,,G15-TemAssunto,Autoral Millena
-Queria indicações de fantasia,buscar_por_assunto,fantasia,,G16-Indicacoes,Autoral Millena
-Busca obras sobre astronomia,buscar_por_assunto,astronomia,,G17-BuscaSobre,Autoral Millena
-Queria ler livros de terror,buscar_por_assunto,terror,,G18-LerAssunto,Autoral Millena
-Tem algo sobre filosofia?,buscar_por_assunto,filosofia,,G15-TemAssunto,Autoral Millena
-Quero ver livros de poesia brasileira,buscar_por_assunto,poesia brasileira,,G19-VerAssunto,Autoral Millena
-Mostre romances clássicos,buscar_por_assunto,romances clássicos,,G14-MostreAssunto,Autoral Millena
-Material sobre engenharia de software,buscar_por_assunto,engenharia de software,,G20-MaterialSobre,Autoral Millena
-Quem escreveu Dom Casmurro?,consultar_detalhes,Dom Casmurro,autor,G21-QuemEscreveu,Autoral Millena
-Qual é o ano dessa edição?,consultar_detalhes,dessa edição,ano,G22-QualAno,Autoral Millena
-Pode mostrar os detalhes do segundo livro?,consultar_detalhes,segundo livro,detalhes,G23-MostrarDetalhes,Autoral Millena
-Quem é o autor de 1984?,consultar_detalhes,1984,autor,G21-QuemEscreveu,Autoral Millena
-Me dá o ISBN desse livro,consultar_detalhes,desse livro,ISBN,G24-MeDaCampo,Autoral Millena
-Qual a editora do primeiro livro?,consultar_detalhes,primeiro livro,editora,G25-QualCampo,Autoral Millena
-De que ano é essa obra?,consultar_detalhes,essa obra,ano,G22-QualAno,Autoral Millena
-Pode me dar mais detalhes sobre A Hora da Estrela?,consultar_detalhes,A Hora da Estrela,detalhes,G23-MostrarDetalhes,Autoral Millena
-Qual o resumo do livro 3?,consultar_detalhes,livro 3,resumo,G25-QualCampo,Autoral Millena
-Quem publicou isso?,consultar_detalhes,isso,editora,G26-QuemPublicou,Autoral Millena
+id,texto,intencao,entidade,campo_solicitado,grupo_variacao,origem
+M01-001,Você encontra Dom Casmurro?,buscar_por_titulo,Dom Casmurro,,G01-Encontrar,Autoral Millena
+M01-002,Estou procurando A Hora da Estrela.,buscar_por_titulo,A Hora da Estrela,,G02-Procurar,Autoral Millena
+M01-003,Teria o livro 1984 no sistema?,buscar_por_titulo,1984,,G03-TerLivro,Autoral Millena
+M01-004,Queria ler Capitães da Areia,buscar_por_titulo,Capitães da Areia,,G04-QuererLer,Autoral Millena
+M01-005,Busca pra mim O Senhor dos Anéis,buscar_por_titulo,O Senhor dos Anéis,,G05-Buscar,Autoral Millena
+M01-006,Vocês têm a obra O Alquimista?,buscar_por_titulo,O Alquimista,,G03-TerLivro,Autoral Millena
+M01-007,Quero achar Cem Anos de Solidão,buscar_por_titulo,Cem Anos de Solidão,,G04-QuererLer,Autoral Millena
+M01-008,Você acha Orgulho e Preconceito?,buscar_por_titulo,Orgulho e Preconceito,,G01-Encontrar,Autoral Millena
+M01-009,Tô caçando o livro Vidas Secas,buscar_por_titulo,Vidas Secas,,G02-Procurar,Autoral Millena
+M01-010,Pesquisa o título Admirável Mundo Novo,buscar_por_titulo,Admirável Mundo Novo,,G05-Buscar,Autoral Millena
+M01-011,Quais livros Machado de Assis escreveu?,buscar_obras_autor,Machado de Assis,,G06-QuaisEscreveu,Autoral Millena
+M01-012,Tem obras de George Orwell?,buscar_obras_autor,George Orwell,,G07-TemObras,Autoral Millena
+M01-013,Mostra livros da Clarice Lispector,buscar_obras_autor,Clarice Lispector,,G08-MostraLivros,Autoral Millena
+M01-014,Quero ler algo do Jorge Amado,buscar_obras_autor,Jorge Amado,,G09-LerAlgo,Autoral Millena
+M01-015,Quais são os livros do Tolkien?,buscar_obras_autor,Tolkien,,G06-QuaisEscreveu,Autoral Millena
+M01-016,Tem alguma coisa escrita por Agatha Christie?,buscar_obras_autor,Agatha Christie,,G07-TemObras,Autoral Millena
+M01-017,Lista as obras do Stephen King,buscar_obras_autor,Stephen King,,G10-ListaObras,Autoral Millena
+M01-018,O que vocês têm da J.K. Rowling?,buscar_obras_autor,J.K. Rowling,,G11-OQueTem,Autoral Millena
+M01-019,Livros do autor Érico Veríssimo,buscar_obras_autor,Érico Veríssimo,,G12-LivrosAutor,Autoral Millena
+M01-020,Busca as publicações de Isaac Asimov,buscar_obras_autor,Isaac Asimov,,G10-ListaObras,Autoral Millena
+M01-021,Quero livros sobre inteligência artificial.,buscar_por_assunto,inteligência artificial,,G13-LivrosSobre,Autoral Millena
+M01-022,Mostre livros de ficção científica.,buscar_por_assunto,ficção científica,,G14-MostreAssunto,Autoral Millena
+M01-023,Tem livros de história do Brasil?,buscar_por_assunto,história do Brasil,,G15-TemAssunto,Autoral Millena
+M01-024,Queria indicações de fantasia,buscar_por_assunto,fantasia,,G16-Indicacoes,Autoral Millena
+M01-025,Busca obras sobre astronomia,buscar_por_assunto,astronomia,,G17-BuscaSobre,Autoral Millena
+M01-026,Queria ler livros de terror,buscar_por_assunto,terror,,G18-LerAssunto,Autoral Millena
+M01-027,Tem algo sobre filosofia?,buscar_por_assunto,filosofia,,G15-TemAssunto,Autoral Millena
+M01-028,Quero ver livros de poesia brasileira,buscar_por_assunto,poesia brasileira,,G19-VerAssunto,Autoral Millena
+M01-029,Mostre romances clássicos,buscar_por_assunto,romances clássicos,,G14-MostreAssunto,Autoral Millena
+M01-030,Material sobre engenharia de software,buscar_por_assunto,engenharia de software,,G20-MaterialSobre,Autoral Millena
+M01-031,Quem escreveu Dom Casmurro?,consultar_detalhes,Dom Casmurro,autor,G21-QuemEscreveu,Autoral Millena
+M01-032,Qual é o ano dessa edição?,consultar_detalhes,dessa edição,ano,G22-QualAno,Autoral Millena
+M01-033,Pode mostrar os detalhes do segundo livro?,consultar_detalhes,segundo livro,detalhes,G23-MostrarDetalhes,Autoral Millena
+M01-034,Quem é o autor de 1984?,consultar_detalhes,1984,autor,G21-QuemEscreveu,Autoral Millena
+M01-035,Me dá o ISBN desse livro,consultar_detalhes,desse livro,ISBN,G24-MeDaCampo,Autoral Millena
+M01-036,Qual a editora do primeiro livro?,consultar_detalhes,primeiro livro,editora,G25-QualCampo,Autoral Millena
+M01-037,De que ano é essa obra?,consultar_detalhes,essa obra,ano,G22-QualAno,Autoral Millena
+M01-038,Pode me dar mais detalhes sobre A Hora da Estrela?,consultar_detalhes,A Hora da Estrela,detalhes,G23-MostrarDetalhes,Autoral Millena
+M01-039,Qual o resumo do livro 3?,consultar_detalhes,livro 3,resumo,G25-QualCampo,Autoral Millena
+M01-040,Quem publicou isso?,consultar_detalhes,isso,editora,G26-QuemPublicou,Autoral Millena
+G01-001,O título que anotei foi “Ensaio sobre a Cegueira”; consegue localizar a obra?,buscar_por_titulo,Ensaio sobre a Cegueira,,titulo-anotado,Autoral Maria Eduarda
+G01-002,"Na pesquisa por nome, use “O Cortiço”.",buscar_por_titulo,O Cortiço,,titulo-instrucao,Autoral Maria Eduarda
+G01-003,Recebi a indicação de “Quarto de Despejo” e preciso encontrar esse título.,buscar_por_titulo,Quarto de Despejo,,titulo-indicacao,Autoral Maria Eduarda
+G01-004,“A Metamorfose” é o nome do livro que preciso localizar.,buscar_por_titulo,A Metamorfose,,titulo-declaracao,Autoral Maria Eduarda
+G01-005,Digitei “O Alienista” como título; pode fazer a consulta?,buscar_por_titulo,O Alienista,,titulo-instrucao,Autoral Maria Eduarda
+G01-006,Minha próxima leitura já está escolhida: “Jane Eyre”. Localize esse livro.,buscar_por_titulo,Jane Eyre,,titulo-leitura,Autoral Maria Eduarda
+G01-007,"Se a busca for pelo nome “A Revolução dos Bichos”, aparece algum registro?",buscar_por_titulo,A Revolução dos Bichos,,titulo-condicional,Autoral Maria Eduarda
+G01-008,Preciso localizar uma obra chamada “O Nome da Rosa”.,buscar_por_titulo,O Nome da Rosa,,titulo-declaracao,Autoral Maria Eduarda
+G01-009,"Na minha lista de leitura consta “Fahrenheit 451”; encontre a entrada desse livro.",buscar_por_titulo,Fahrenheit 451,,titulo-lista,Autoral Maria Eduarda
+G01-010,"É pelo título “Grande Sertão: Veredas” que eu gostaria de pesquisar.",buscar_por_titulo,Grande Sertão: Veredas,,titulo-instrucao,Autoral Maria Eduarda
+G01-011,"Usando Conceição Evaristo como autora da busca, quais títulos aparecem?",buscar_obras_autor,Conceição Evaristo,,autor-criterio,Autoral Maria Eduarda
+G01-012,Gostaria de consultar a relação de obras assinadas por José Saramago.,buscar_obras_autor,José Saramago,,autor-relacao,Autoral Maria Eduarda
+G01-013,Meu ponto de partida é a escritora Lygia Fagundes Telles; localize os livros dela.,buscar_obras_autor,Lygia Fagundes Telles,,autor-ponto-partida,Autoral Maria Eduarda
+G01-014,Reúna títulos que tenham Lima Barreto como autor.,buscar_obras_autor,Lima Barreto,,autor-atribuicao,Autoral Maria Eduarda
+G01-015,"Para conhecer a produção de Byung Chul-Han, preciso de uma lista de seus livros.",buscar_obras_autor,Byung Chul-Han,,autor-finalidade,Autoral Maria Eduarda
+G01-016,"A consulta é por autoria: Michel Focault. Quais obras correspondem?",buscar_obras_autor,Michel Focault,,autor-criterio,Autoral Maria Eduarda
+G01-017,Comece pelo nome de Hermann Hesse e retorne os títulos vinculados a ela.,buscar_obras_autor,Hermann Hesse,,autor-instrucao,Autoral Maria Eduarda
+G01-018,"Estou reunindo referências de livros escritos por Carolina Maria de Jesus; pode listar os títulos?",buscar_obras_autor,Carolina Maria de Jesus,,autor-finalidade,Autoral Maria Eduarda
+G01-019,"Na relação de autores, o nome que me interessa é Mia Couto. Que livros estão associados a ele?",buscar_obras_autor,Mia Couto,,autor-associacao,Autoral Maria Eduarda
+G01-020,Monte uma relação dos títulos cuja autoria seja de Jane Austen.,buscar_obras_autor,Jane Austen,,autor-atribuicao,Autoral Maria Eduarda
+G01-021,"Para uma pesquisa sobre biodiversidade, preciso localizar livros que tratem desse tema.",buscar_por_assunto,biodiversidade,,assunto-finalidade,Autoral Maria Eduarda
+G01-022,Use tecnologia como assunto da consulta.,buscar_por_assunto,tecnologia,,assunto-criterio,Autoral Maria Eduarda
+G01-023,Meu tema de estudo é urbanismo; que obras abordam essa área?,buscar_por_assunto,urbanismo,,assunto-estudo,Autoral Maria Eduarda
+G01-024,O conteúdo que me interessa é mitologia grega. Quais títulos tratam disso?,buscar_por_assunto,mitologia grega,,assunto-conteudo,Autoral Maria Eduarda
+G01-025,Reúna referências de livros cujo assunto seja fotografia.,buscar_por_assunto,fotografia,,assunto-referencias,Autoral Maria Eduarda
+G01-026,"Em vez de um título específico, vou pesquisar pelo tema: filosofia.",buscar_por_assunto,filosofia,,assunto-criterio,Autoral Maria Eduarda
+G01-027,Estou preparando um trabalho de sociologia e preciso de livros sobre esse assunto.,buscar_por_assunto,sociologia,,assunto-finalidade,Autoral Maria Eduarda
+G01-028,Que títulos aparecem quando a pesquisa é feita por literatura brasileira?,buscar_por_assunto,literatura brasileira,,assunto-consulta,Autoral Maria Eduarda
+G01-029,A área que quero explorar nos livros é história da arte; localize obras sobre ela.,buscar_por_assunto,história da arte,,assunto-estudo,Autoral Maria Eduarda
+G01-030,Preciso de uma relação de obras que abordem acessibilidade.,buscar_por_assunto,acessibilidade,,assunto-referencias,Autoral Maria Eduarda
+G01-031,A autoria de “O Cortiço” está registrada como sendo de quem?,consultar_detalhes,O Cortiço,autor,detalhes-autoria,Autoral Maria Eduarda
+G01-032,Informe a data de primeira publicação de “A Metamorfose”.,consultar_detalhes,A Metamorfose,ano_primeira_publicacao,detalhes-primeira-publicacao,Autoral Maria Eduarda
+G01-033,Gostaria de ler a descrição cadastrada para “Quarto de Despejo”.,consultar_detalhes,Quarto de Despejo,descricao,detalhes-descricao,Autoral Maria Eduarda
+G01-034,"Sobre “O Nome da Rosa”, apresente as informações bibliográficas disponíveis.",consultar_detalhes,O Nome da Rosa,detalhes,detalhes-conjunto,Autoral Maria Eduarda
+G01-035,"Na ficha de “Fahrenheit 451”, a quem é atribuída a autoria?",consultar_detalhes,Fahrenheit 451,autor,detalhes-autoria,Autoral Maria Eduarda
+G01-036,"Depois de selecionar uma obra, consigo ver todos os dados dela?",consultar_detalhes,obra selecionada,detalhes,detalhes-contexto,Autoral Maria Eduarda
+G01-037,"Do item 2 da lista, gostaria de consultar a descrição disponível.",consultar_detalhes,índice 2,descricao,detalhes-selecao,Autoral Maria Eduarda
+G01-038,"Sobre a obra que acabei de escolher, informe o ano da primeira publicação.",consultar_detalhes,obra selecionada,ano_primeira_publicacao,detalhes-contexto,Autoral Maria Eduarda
+G01-039,"No terceiro resultado, a autoria está atribuída a qual pessoa?",consultar_detalhes,índice 3,autor,detalhes-selecao,Autoral Maria Eduarda
+G01-040,"Para “Ensaio sobre a Cegueira”, exiba o conjunto de dados bibliográficos que a fonte fornecer.",consultar_detalhes,Ensaio sobre a Cegueira,detalhes,detalhes-conjunto,Autoral Maria Eduarda
