@@ -7,6 +7,25 @@ function scrollToBottom() {
     chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
+function showLoading() {
+    const id = "loading-" + Date.now();
+    const loadingDiv = document.createElement("div");
+    loadingDiv.className = "message bot-message";
+    loadingDiv.id = id;
+    loadingDiv.innerHTML = `
+        <div class="loading-avatar"></div>
+        <div class="message-content" style="color: #888; font-style: italic;">Consultando acervo...</div>
+    `;
+    chatHistory.appendChild(loadingDiv);
+    scrollToBottom();
+    return id;
+}
+
+function removeElement(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+}
+
 function handleSend() {
     const text = userInput.value.trim();
 
@@ -23,6 +42,8 @@ function handleSend() {
     
     userInput.value = "";
     scrollToBottom();
+
+    const loadId = showLoading();
 }
 
 sendBtn.addEventListener("click", handleSend);
