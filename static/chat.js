@@ -10,6 +10,12 @@ function scrollToBottom() {
 function handleSend() {
     const text = userInput.value.trim();
 
+    if (!text) {
+        inputContainer.classList.add("error");
+        setTimeout(() => inputContainer.classList.remove("error"), 400);
+        return;
+    }
+
     const msgDiv = document.createElement("div");
     msgDiv.className = "message user-message";
     msgDiv.textContent = text;
