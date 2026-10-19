@@ -109,3 +109,33 @@ body {
     flex-direction: column;
     gap: 24px;
 }
+
+.message {
+    display: flex;
+    max-width: 75%;
+}
+.bot-message { align-self: flex-start; }
+.bot-message .avatar {
+    min-width: 36px;
+    height: 36px;
+    background-color: #182946;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.bot-message .message-content { color: #333; font-size: 15px; line-height: 1.5; padding-top: 8px; }
+
+.user-message {
+    align-self: flex-end;
+    background-color: #182946;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px 12px 0 12px;
+    font-size: 15px;
+    line-height: 1.5;
+}
