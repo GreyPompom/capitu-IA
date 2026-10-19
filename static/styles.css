@@ -18,8 +18,9 @@ body {
 
 .sidebar {
     width: 280px;
-    background-color: #182946;
-    color: white;
+    background-color: #ffffff;
+    border-right: 1px solid #eaeaea;
+    color: #333333;
     display: flex;
     flex-direction: column;
     padding: 24px;
@@ -32,24 +33,25 @@ body {
 
 .new-chat-btn {
     width: 100%;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: #751b1d;
+    border: none;
     color: white;
     padding: 12px 16px;
-    border-radius: 6px;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     margin-bottom: 40px;
     font-size: 14px;
+    font-weight: 600;
 }
 
 .menu-title {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
+    color: #a87b51;
     margin-bottom: 16px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .sidebar-menu ul {
@@ -62,21 +64,22 @@ body {
     padding: 12px 0;
     font-size: 14px;
     cursor: pointer;
-    color: #e0e0e0;
+    color:#444444;
 }
 
-.sidebar-menu li .icon { margin-right: 12px; font-size: 16px; }
+.sidebar-menu li .icon { margin-right: 12px; font-size: 16px; color: #751b1d; }
 .sidebar-menu li .arrow { margin-left: auto; color: rgba(255, 255, 255, 0.4); }
 
 .sidebar-footer {
     margin-top: auto;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #fdf2f2;
+    border: 1px solid #f8d7d7;
     padding: 16px;
     border-radius: 6px;
 }
 
-.disclaimer-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
-.disclaimer-text { font-size: 12px; color: rgba(255, 255, 255, 0.6); line-height: 1.5; }
+.disclaimer-title { font-size: 13px; font-weight: 700; color: #751b1d; margin-bottom: 8px; }
+.disclaimer-text { font-size: 12px; color:#666666; line-height: 1.5; }
 
 .chat-area {
     flex: 1;
@@ -86,28 +89,33 @@ body {
 }
 
 .chat-header {
-    background-color: #182946;
-    color: white;
+    background-color: #ffffff;
+    border-bottom: 1px solid #751b1d;
+    color: #333333;
     padding: 16px 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.chat-header h1 { font-size: 14px; font-weight: 600; }
-.chat-header h2 { font-size: 12px; font-weight: 400; color: rgba(255, 255, 255, 0.7); margin-top: 4px; }
+.chat-header h1 { font-size: 14px; font-weight: 700; color: #751b1d; }
+.chat-header h2 { font-size: 12px; font-weight: 400; color: #777777; margin-top: 4px; }
 
-.status { font-size: 13px; display: flex; align-items: center; color: #e0e0e0; }
-.status-dot { width: 8px; height: 8px; background-color: #4CAF50; border-radius: 50%; margin-right: 8px; }
+.status { font-size: 13px; display: flex; align-items: center; color: #555555; }
+.status-dot { width: 8px; height: 8px; background-color: #751b1d; border-radius: 50%; margin-right: 8px; }
 
 .chat-history {
     flex: 1;
     padding: 32px 40px;
     overflow-y: auto;
-    background-color: #fafafa;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     gap: 24px;
+    background-image: url('images/Fundo-Chat.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: contain;
 }
 
 .message {
