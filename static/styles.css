@@ -136,16 +136,26 @@ body {
     font-weight: bold;
     font-size: 14px;
 }
-.bot-message .message-content { color: #333; font-size: 15px; line-height: 1.5; padding-top: 8px; }
+.bot-message .message-content {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 14px 18px;
+    border-radius: 0 12px 12px 12px;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-size: 15px;
+    line-height: 1.5;
+  }
 
 .user-message {
     align-self: flex-end;
-    background-color: #182946;
+    background-color: #751b1d;
     color: white;
     padding: 14px 20px;
     border-radius: 12px 12px 0 12px;
     font-size: 15px;
     line-height: 1.5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .input-section {
