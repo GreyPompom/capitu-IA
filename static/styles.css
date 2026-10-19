@@ -126,7 +126,7 @@ body {
 .bot-message .avatar {
     min-width: 36px;
     height: 36px;
-    background-color: #182946;
+    background-color: #751b1d;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -173,7 +173,7 @@ body {
 }
 
 .input-container button {
-    background-color: #182946;
+    background-color: #751b1d;
     color: white;
     font-weight: 600;
     border: none;
