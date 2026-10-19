@@ -17,5 +17,5 @@ G02-AMB-03,ambiguo,"Romance",awaiting_clarification,"Perguntar se é o gênero/a
 G02-AMB-04,ambiguo,"Me fala sobre A Hora da Estrela.",awaiting_clarification,"Perguntar se deseja localizar a obra ou consultar um detalhe bibliográfico","O pedido pode ser busca por título ou consulta de detalhes."
 G02-AMB-05,ambiguo,"Quem escreveu o segundo?",awaiting_clarification,"Pedir que indique a obra; só usar referência ordinal se houver resultados ativos na sessão","Sem contexto de sessão, 'o segundo' não identifica uma obra."
 G02-AMB-06,ambiguo,"Qual o ano dele?",awaiting_clarification,"Perguntar a qual obra/edição se refere","Referente pronominal sem obra identificável."
-G02-AMB-07,ambiguo,"Quero algo de Camões.",awaiting_clarification,"Perguntar se deseja listar obras do autor ou buscar por outro critério","O autor é inferível, mas a ação bibliográfica pretendida não está clara."
+G02-AMB-07,ambiguo,"Camões e Os Lusíadas",awaiting_clarification,"Perguntar se deseja listar obras de Camões ou consultar detalhes de Os Lusíadas","A frase menciona um autor e uma obra, mas não explicita qual ação bibliográfica deseja."
 G02-AMB-08,ambiguo,"O livro do autor de Dom Casmurro",awaiting_clarification,"Perguntar se quer obras de Machado de Assis ou detalhes sobre Dom Casmurro","A referência pode apontar para o autor ou para a obra mencionada, sem ação definida."
