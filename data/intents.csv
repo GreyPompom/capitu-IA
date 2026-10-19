@@ -54,8 +54,8 @@ G01-012,Gostaria de consultar a relação de obras assinadas por José Saramago.
 G01-013,Meu ponto de partida é a escritora Lygia Fagundes Telles; localize os livros dela.,buscar_obras_autor,Lygia Fagundes Telles,,autor-ponto-partida,Autoral Maria Eduarda
 G01-014,Reúna títulos que tenham Lima Barreto como autor.,buscar_obras_autor,Lima Barreto,,autor-atribuicao,Autoral Maria Eduarda
 G01-015,"Para conhecer a produção de Byung Chul-Han, preciso de uma lista de seus livros.",buscar_obras_autor,Byung Chul-Han,,autor-finalidade,Autoral Maria Eduarda
-G01-016,"A consulta é por autoria: Michel Focault. Quais obras correspondem?",buscar_obras_autor,Michel Focault,,autor-criterio,Autoral Maria Eduarda
-G01-017,Comece pelo nome de Hermann Hesse e retorne os títulos vinculados a ela.,buscar_obras_autor,Hermann Hesse,,autor-instrucao,Autoral Maria Eduarda
+G01-016,"A consulta é por autoria: Michel Foucault. Quais obras correspondem?",buscar_obras_autor,Michel Foucault,,autor-criterio,Autoral Maria Eduarda
+G01-017,Comece pelo nome de Hermann Hesse e retorne os títulos vinculados a ele.,buscar_obras_autor,Hermann Hesse,,autor-instrucao,Autoral Maria Eduarda
 G01-018,"Estou reunindo referências de livros escritos por Carolina Maria de Jesus; pode listar os títulos?",buscar_obras_autor,Carolina Maria de Jesus,,autor-finalidade,Autoral Maria Eduarda
 G01-019,"Na relação de autores, o nome que me interessa é Mia Couto. Que livros estão associados a ele?",buscar_obras_autor,Mia Couto,,autor-associacao,Autoral Maria Eduarda
 G01-020,Monte uma relação dos títulos cuja autoria seja de Jane Austen.,buscar_obras_autor,Jane Austen,,autor-atribuicao,Autoral Maria Eduarda
