@@ -1,18 +1,65 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAPITU | Biblioteca</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <script src="/static/chat.js" defer></script>
-  </head>
-  <body>
-    <main>
-      <h1>CAPITU</h1>
-      <p id="app-status" role="status">
-        Estrutura local disponível. A interface de conversa será implementada na M02.
-      </p>
-    </main>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capitu.IA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="images/Capitu.ia-Logo.png" alt="Logo Capitu" class="logo">
+                <button class="new-chat-btn">Nova conversa <span>+</span></button>
+            </div>
+
+            <div class="sidebar-menu">
+                <p class="menu-title">O QUE POSSO FAZER</p>
+                <ul>
+                    <li><span class="icon">🔍</span> Buscar por título <span class="arrow">></span></li>
+                    <li><span class="icon">👤</span> Obras de um autor <span class="arrow">></span></li>
+                    <li><span class="icon">📚</span> Explorar por assunto <span class="arrow">></span></li>
+                    <li><span class="icon">ℹ️</span> Consultar detalhes <span class="arrow">></span></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <p class="disclaimer-title">Sobre esta versão</p>
+                <p class="disclaimer-text">Descoberta bibliográfica simulada. Não realiza empréstimos, reservas ou consultas ao acervo institucional.</p>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="header-titles">
+                    <h1>BIBLIOTECA UNIVERSITÁRIA</h1>
+                    <h2>Assistente de descoberta bibliográfica</h2>
+                </div>
+                <div class="status">
+                    <span class="status-dot"></span> Capitu está disponível
+                </div>
+            </header>
+
+            <div class="chat-history" id="chat-history">
+                <div class="message bot-message">
+                    <div class="avatar">C</div>
+                    <div class="message-content">
+                        <p><strong>Olá, sou a Capitu.</strong></p>
+                        <p>Ajudo você a encontrar livros e referências para seus estudos.<br>Por onde começamos?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <div class="input-container" id="input-container">
+                    <input type="text" id="user-input" placeholder="Busque por título, autor, assunto ou gênero...">
+                    <button id="send-btn">Enviar</button>
+                </div>
+                <p class="footer-disclaimer">A Capitu oferece referências simuladas e pode cometer imprecisões. Confira fontes acadêmicas.</p>
+            </div>
+        </main>
+    </div>
+    <script src="chat.js"></script>
+</body>
 </html>
