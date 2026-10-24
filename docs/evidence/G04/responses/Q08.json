@@ -1,0 +1,109 @@
+{
+  "numFound": 2798,
+  "start": 0,
+  "numFoundExact": true,
+  "num_found": 2798,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "subject:filosofia",
+  "offset": null,
+  "docs": [
+    {
+      "author_name": [
+        "Simon Blackburn"
+      ],
+      "first_publish_year": 1999,
+      "key": "/works/OL1807609W",
+      "language": [
+        "eng",
+        "spa"
+      ],
+      "title": "Think",
+      "subject": [
+        "Filosofía",
+        "Philosophy",
+        "Philosophy, introductions",
+        "Introductions"
+      ]
+    },
+    {
+      "author_name": [
+        "Friedrich Nietzsche"
+      ],
+      "first_publish_year": 1883,
+      "key": "/works/OL98130W",
+      "language": [
+        "ita",
+        "jpn",
+        "gre",
+        "yid",
+        "eng",
+        "und",
+        "dan",
+        "rus",
+        "fre",
+        "spa",
+        "pol",
+        "epo",
+        "ukr",
+        "por",
+        "ger"
+      ],
+      "title": "Also sprach Zarathustra",
+      "subject": [
+        "Classic Literature",
+        "Fiction",
+        "Filosofie",
+        "Filosofía",
+        "German Philosophy",
+        "German language",
+        "Philosophy",
+        "Superhombre (Concepto filosófico)",
+        "Superman",
+        "Superman (Philosophical concept)",
+        "Classic",
+        "Filosofia contemporanea",
+        "Nietzche, friedrich wilhelm",
+        "Nietzsche, friedrich wilhelm, 1844-1900",
+        "German language, conversation and phrase books",
+        "Philosophy, german",
+        "Also sprach Zarathustra (Nietzsche, Friedrich Wilhelm)",
+        "Filosofía alemana",
+        "Antropologia filozoficzna",
+        "Filozofia",
+        "Filosofi a.",
+        "Zoroaster",
+        "German language materials",
+        "B3313.a43 e5 1978",
+        "Modern Philosophy",
+        "Politics and government",
+        "Philosophy, modern",
+        "Translations into English"
+      ]
+    },
+    {
+      "author_name": [
+        "Stephen Hawking"
+      ],
+      "first_publish_year": 2002,
+      "key": "/works/OL1892616W",
+      "language": [
+        "chi",
+        "spa",
+        "eng"
+      ],
+      "title": "The theory of everything",
+      "subject": [
+        "Science",
+        "Philosophy",
+        "Cosmology",
+        "Filosofía",
+        "Unificatietheorie",
+        "Cosmología",
+        "Kosmologie",
+        "Physics",
+        "Ciencia",
+        "Science, philosophy"
+      ]
+    }
+  ]
+}

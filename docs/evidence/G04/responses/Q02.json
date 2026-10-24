@@ -1,0 +1,40 @@
+{
+  "numFound": 27,
+  "start": 0,
+  "numFoundExact": true,
+  "num_found": 27,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "",
+  "offset": null,
+  "docs": [
+    {
+      "author_name": [
+        "Azevedo, Aluizio"
+      ],
+      "edition_count": 32,
+      "first_publish_year": 1925,
+      "key": "/works/OL7058886W",
+      "language": [
+        "por",
+        "eng"
+      ],
+      "title": "O Cortiço"
+    },
+    {
+      "author_name": [
+        "Aluisio Azevedo"
+      ],
+      "edition_count": 0,
+      "key": "/works/OL12110487W",
+      "title": "O cortiço"
+    },
+    {
+      "author_name": [
+        "Aluísio Azevedo"
+      ],
+      "edition_count": 0,
+      "key": "/works/OL10342454W",
+      "title": "O cortiço"
+    }
+  ]
+}

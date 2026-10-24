@@ -1,0 +1,38 @@
+{
+  "numFound": 28,
+  "start": 0,
+  "numFoundExact": true,
+  "num_found": 28,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "",
+  "offset": null,
+  "docs": [
+    {
+      "author_name": [
+        "Franz Kafka"
+      ],
+      "edition_count": 3,
+      "first_publish_year": 2017,
+      "key": "/works/OL28594550W",
+      "title": "A metamorfose"
+    },
+    {
+      "author_name": [
+        "Franz Kafka"
+      ],
+      "edition_count": 1,
+      "first_publish_year": 2016,
+      "key": "/works/OL16983847W",
+      "language": [
+        "por"
+      ],
+      "title": "A metamorfose"
+    },
+    {
+      "edition_count": 1,
+      "first_publish_year": 2002,
+      "key": "/works/OL40442628W",
+      "title": "A Metamorfose"
+    }
+  ]
+}

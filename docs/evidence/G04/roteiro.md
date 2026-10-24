@@ -2,9 +2,9 @@
 
 ## Objetivo
 
-Verificar a cobertura da Open Library para consultas bibliográficas da
-CAPITU, registrando resultados reais, idiomas, campos disponíveis e
-limitações para apoiar a E08.
+Verificar a cobertura da Open Library para consultas bibliográficas da CAPITU, registrando resultados reais, idiomas, campos disponíveis e limitações para apoiar a E08.
+
+Status: 13 consultas executadas; resultados registrados em resultados.md.
 
 ## Procedimento
 
@@ -12,11 +12,9 @@ limitações para apoiar a E08.
 2. Aguardar pelo menos cinco segundos entre as consultas.
 3. Limitar as buscas a três registros, sem coleta em massa ou paginação.
 4. Salvar cada resposta JSON original em `responses/QXX.json`.
-5. Registrar os resultados em `resultados.md`, incluindo data, horário,
-   URL, status HTTP observado, contagens, IDs, campos e idiomas.
+5. Registrar os resultados em `resultados.md`, incluindo data, horário, URL, status HTTP observado, contagens, IDs, campos e idiomas.
 6. Examinar todos os registros retornados na página limitada.
-7. Distinguir resultados pertinentes, limitações de cobertura,
-   dados ausentes e falhas técnicas.
+7. Distinguir resultados pertinentes, limitações de cobertura, dados ausentes e falhas técnicas.
 8. Não alterar respostas reais nem inventar informações ausentes.
 
 O intervalo de cinco segundos é uma escolha desta sondagem.
@@ -36,8 +34,7 @@ poderão ser realizadas, se necessárias, com justificativa registrada.
 | API-05 | Campo ausente | Inspecionar as respostas, especialmente os detalhes Q11/Q12 | Campo relevante ausente, nulo ou vazio e impacto para o CAPITU |
 
 API-05 pode utilizar uma resposta já obtida nos demais roteiros.
-Se não houver um exemplo adequado, selecionar uma consulta adicional
-e registrar a justificativa, respeitando o máximo de 15 consultas.
+Se não houver um exemplo adequado, selecionar uma consulta adicional e registrar a justificativa, respeitando o máximo de 15 consultas.
 
 ## Consultas planejadas
 
@@ -126,8 +123,7 @@ https://openlibrary.org/search.json?q=subject%3A%22literatura%20brasileira%22&li
 
 - Roteiros: API-04 e inspeção para API-05.
 - Origem: obra utilizada no G01 e na G03.
-- Verificação: examinar os campos da obra, especialmente autoria,
-  descrição e primeira publicação, quando disponíveis.
+- Verificação: examinar os campos da obra, especialmente autoria, descrição e primeira publicação, quando disponíveis.
 
 https://openlibrary.org/works/OL1810404W.json
 
@@ -135,8 +131,7 @@ https://openlibrary.org/works/OL1810404W.json
 
 - Roteiros: API-04 e inspeção para API-05.
 - Origem: edição utilizada na G03.
-- Verificação: examinar referência à obra, data da edição, editora,
-  idioma, páginas e ISBNs, quando disponíveis.
+- Verificação: examinar referência à obra, data da edição, editora, idioma, páginas e ISBNs, quando disponíveis.
 
 https://openlibrary.org/books/OL46864874M.json
 
@@ -144,8 +139,7 @@ https://openlibrary.org/books/OL46864874M.json
 
 - Roteiro: API-01.
 - Origem: G01-009.
-- Verificação: procurar candidatos correspondentes ao título e conferir
-  a autoria de Ray Bradbury.
+- Verificação: procurar candidatos correspondentes ao título e conferi a autoria de Ray Bradbury.
 
 https://openlibrary.org/search.json?title=Fahrenheit%20451&limit=3&fields=key,title,author_name,first_publish_year,language,edition_count
 
