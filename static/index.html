@@ -1,18 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAPITU | Biblioteca</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capitu.IA</title>
     <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/static/images/Capitu.ia-Logo.png" alt="Logo Capitu" class="logo">
+                <button id="new-chat-btn" class="new-chat-btn" type="button">Nova conversa <span aria-hidden="true">+</span></button>
+            </div>
+
+            <div class="sidebar-menu">
+                <p class="menu-title">O QUE POSSO FAZER</p>
+                <ul>
+                    <li><button class="sidebar-action" type="button" data-action="titulo"><span class="icon" aria-hidden="true">🔍</span> Buscar por título <span class="arrow" aria-hidden="true">›</span></button></li>
+                    <li><button class="sidebar-action" type="button" data-action="autor"><span class="icon" aria-hidden="true">👤</span> Obras de um autor <span class="arrow" aria-hidden="true">›</span></button></li>
+                    <li><button class="sidebar-action" type="button" data-action="assunto"><span class="icon" aria-hidden="true">📚</span> Explorar por assunto <span class="arrow" aria-hidden="true">›</span></button></li>
+                    <li><button class="sidebar-action" type="button" data-action="detalhes"><span class="icon" aria-hidden="true">ℹ️</span> Consultar detalhes <span class="arrow" aria-hidden="true">›</span></button></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <p class="disclaimer-title">Sobre esta versão</p>
+                <p class="disclaimer-text">Descoberta bibliográfica simulada. Não realiza empréstimos, reservas ou consultas ao acervo institucional.</p>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="header-titles">
+                    <h1>BIBLIOTECA UNIVERSITÁRIA</h1>
+                    <h2>Assistente de descoberta bibliográfica</h2>
+                </div>
+                <div id="app-status" class="status" role="status" aria-live="polite">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span id="app-status-text">Aguardando conexão</span>
+                </div>
+            </header>
+
+            <div class="chat-history" id="chat-history" role="log" aria-live="polite" aria-relevant="additions text">
+                <div class="message bot-message">
+                    <div class="avatar">C</div>
+                    <div class="message-content">
+                        <p><strong>Olá, sou a Capitu.</strong></p>
+                        <p>Ajudo você a encontrar livros e referências para seus estudos.<br>Por onde começamos?</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="input-section" id="chat-form">
+                <label class="visually-hidden" for="user-input">Mensagem para a Capitu</label>
+                <div class="input-container" id="input-container">
+                    <input type="text" id="user-input" name="message" maxlength="1000" placeholder="Busque por título, autor, assunto ou gênero..." aria-describedby="input-error">
+                    <button id="send-btn" type="submit">Enviar</button>
+                </div>
+                <p id="input-error" class="input-error" role="status" aria-live="polite" hidden></p>
+                <p class="footer-disclaimer">A Capitu oferece referências simuladas e pode cometer imprecisões. Confira fontes acadêmicas.</p>
+            </form>
+        </main>
+    </div>
     <script src="/static/chat.js" defer></script>
-  </head>
-  <body>
-    <main>
-      <h1>CAPITU</h1>
-      <p id="app-status" role="status">
-        Estrutura local disponível. A interface de conversa será implementada na M02.
-      </p>
-    </main>
-  </body>
+</body>
 </html>
