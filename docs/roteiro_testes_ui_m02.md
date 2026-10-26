@@ -2,10 +2,10 @@
 
 **Responsável:** Millena  
 **Data:** Outubro de 2026  
-**Ambiente:** Navegador Web (Local / Backend Simulado - Task E02)
+**Ambiente:** Navegador Web (Servido via FastAPI `/` e `/static/` - Conexão com `POST /api/chat`)
 
 ## 1. Descrição e Objetivo
-Validação visual e funcional dos fluxos básicos da interface do chatbot Capitu.IA, cobrindo os critérios de aceite UI-01 a UI-04 a partir da estrutura criada em `static/` (`index.html`, `styles.css`, `chat.js` e assets visuais em `static/images/`).
+Validação visual e funcional dos fluxos básicos da interface do chatbot Capitu.IA, conectada ao endpoint `POST /api/chat` (Task E02), cobrindo o envio de `message` e `session_id`, bloqueio de duplo envio, segurança contra injeção de HTML, ações da barra lateral e renderização dos estados da API.
 
 ---
 
@@ -15,6 +15,11 @@ Validação visual e funcional dos fluxos básicos da interface do chatbot Capit
 - **Estrutura de Layout:** Barra lateral (`sidebar`) com fundo claro (`#ffffff`), botão de "Nova conversa" em destaque e cartão informativo de rodapé ("Sobre esta versão") em tom suave (`#fdf2f2`).
 - **Assets Visuais:** Logótipo oficial sem fundo (`Capitu.ia-Logo.png`) e imagem decorativa de acervo ao fundo do histórico do chat (`Fundo-Chat.png`).
 - **Responsividade Mobile:** Adicionada regra `@media (max-width: 768px)` para adaptação em telemóveis e ecrãs pequenos, organizando o layout em coluna, ajustando espaçamentos e aumentando a largura dos balões para 90%.
+- **Conexão com Backend:** Envio de requisições `POST /api/chat` via `fetch` assíncrono com cabeçalho `Content-Type: application/json` e payload contendo `message` e `session_id`.
+- **Prevenção contra Injeção de HTML (XSS):** Todo conteúdo textual do usuário e das respostas é inserido via `textContent` e construção manual de nós DOM (`createElement`), impedindo execução de marcas HTML maliciosas.
+- **Prevenção de Envio Duplicado:** O botão de envio e o campo de texto permanecem desabilitados (`disabled`) enquanto a requisição aguarda o retorno do servidor.
+- **Roteamento de Arquivos Estáticos:** Compatibilidade com o FastAPI através dos caminhos absolutos prefixados com `/static/`.
+- **Controles da Sidebar e Cards:** Botão "Nova conversa" reinicia a sessão (`session_id`), atalhos preenchem o input e cliques em cards de livros iniciam consulta de detalhes.
 
 ---
 
@@ -22,13 +27,15 @@ Validação visual e funcional dos fluxos básicos da interface do chatbot Capit
 
 | ID | Comportamento Coberto | Ação / Sequência Executada | Comportamento Esperado | Resultado Obtido | Situação |
 |---|---|---|---|---|---|
-| **UI-01** | Enviar mensagem válida | Digitar "Encontre o livro Torto Arado" e clicar em Enviar (ou Enter). | A mensagem do usuário é adicionada no balão vermelho `#751b1d` e a resposta da Capitu surge em balão branco sob o avatar "C". | Mensagem do usuário alinhada à direita em `#751b1d` e resposta legível em balão destacado. | **Passou** |
-| **UI-02** | Entrada vazia / espaços | Tentar enviar com o campo de texto em branco ou contendo apenas espaços. | O envio é bloqueado, nenhuma mensagem é adicionada e o container do input exibe borda vermelha temporária. | Animação de erro com borda `#dc3545` por 400ms sem alteração no histórico. | **Passou** |
-| **UI-03** | Estado de carregamento | Enviar mensagem e observar o intervalo de resposta simulado. | Exibir indicador "Consultando acervo..." durante o tempo de espera, sendo removido ao chegar a resposta. | Elemento temporário exibido e removido após o delay simulado de 1.2s. | **Passou** |
-| **UI-04** | Exibição de múltiplos resultados | Digitar "Quais são as obras de Machado de Assis?". | Apresentar resposta da Capitu acompanhada dos cards numerados de obras ("01 Dom Casmurro", "02 Memórias Póstumas..."). | Cards estilizados renderizados corretamente dentro do balão da Capitu sem quebrar o layout. | **Passou** |
-| **UI-05** | Layout Responsivo (Mobile) | Redimensionar a janela do navegador para <= 768px ou usar o simulador mobile do DevTools (F12). | O layout adapta-se verticalmente, oculta o menu secundário da sidebar e ajusta os balões e o input ao ecrã reduzido. | Interface responsiva sem barra de rolagem horizontal e mantendo total legibilidade e funcionalidade. | **Passou** |
+| **UI-01** | Envio válido via `POST /api/chat` | Digitar "Encontre livros de Machado de Assis" e enviar. | Requisição enviada com `message` e `session_id`. Resposta e cards do backend renderizados em balão destacado. | Dados retornados da API exibidos corretamente sem uso de `innerHTML`. | **Passou** |
+| **UI-02** | Entrada vazia / espaços | Tentar enviar mensagem com input em branco. | Envio bloqueado, borda vermelha temporária de erro exibida e nenhuma requisição disparada. | Animação de erro em 400ms sem disparo de rede. | **Passou** |
+| **UI-03** | Estado de carregamento e Bloqueio de Envio Duplicado | Enviar mensagem e tentar clicar em Enviar ou teclar Enter durante a busca. | Exibir "Consultando acervo..." e manter input/botão desabilitados (`disabled`) até o fim da requisição. | Envio duplo impedido com sucesso; controles reabilitados no bloco `finally`. | **Passou** |
+| **UI-04** | Exibição de Lista Múltipla, Vazia e Única | Enviar consultas retornando 0, 1 ou múltiplos resultados do backend. | Se houver lista, renderizar cards clicáveis. Se for vazia, exibir mensagem informativa do backend. | Todos os estados de lista processados com estrutura DOM segura. | **Passou** |
+| **UI-05** | Ações da Sidebar e Reinício de Sessão | Clicar em "Nova conversa" e nos atalhos do menu ("Buscar por título", etc.). | "Nova conversa" gera novo `session_id` e limpa o chat. Atalhos preenchem o input com o prefixo correspondente. | Histórico resetado e campo de entrada preenchido ao clicar nos itens. | **Passou** |
+| **UI-06** | Clique em Card de Resultado | Clicar em um card de livro retornado em uma busca. | O título do livro é preenchido no input com comando "Consultar detalhes" e a busca é disparada automaticamente. | Consulta de detalhes executada com sucesso ao clicar no card. | **Passou** |
+| **UI-07** | Layout Responsivo (Mobile) | Redimensionar janela para <= 768px. | Interface adapta-se verticalmente mantendo legibilidade e acessibilidade dos botões. | Layout fluido ajustado sem estouro de rolagem horizontal. | **Passou** |
 
 ---
 
 ## 4. Conclusão e Autoria
-Os testes manuais confirmaram a conformidade da interface com o protótipo do Figma e com o contrato de mensagens. A estrutura modular em `static/` está pronta para ser conectada ao backend real na Task M03.
+A interface em `static/` encontra-se 100% integrada com a API `POST /api/chat` conforme o contrato `docs/contracts/chat-v1.md`, cumprindo todos os requisitos funcionais, estáticos e de segurança da Task M02.
