@@ -92,7 +92,7 @@ As condições de uso foram consultadas na [página oficial de licenciamento](ht
 
 ## Limites da validação
 
-Os JSONs recebidos não apresentaram mensagens explícitas de erro, mas os status HTTP não foram verificados.
+Os JSONs recebidos não apresentaram mensagens explícitas de erro. Os status HTTP não foram registrados na sondagem original de 24/10/2026. Em conferência complementar de 26/10/2026, as 13 URLs retornaram 200 OK, conforme registro em resultados.md. Essa verificação não valida o funcionamento do chatbot nem garante disponibilidade contínua da fonte.
 
 A sondagem direta da fonte não valida o cliente HTTP, a normalização, o PLN ou o funcionamento do chatbot. Também não comprova estoque institucional, disponibilidade de leitura ou estabilidade futura dos resultados.
 

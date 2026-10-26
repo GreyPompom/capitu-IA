@@ -6,7 +6,7 @@
 - Modo: consultas manuais ao vivo, sem coleta em massa.
 - Amostra: 13 consultas — 5 por título, 3 por autor, 3 por assunto e 2 de detalhe.
 - Inspeção: três registros por busca, totalizando 33 ocorrências inspecionadas, além de uma obra e uma edição.
-- Status HTTP: não verificados.
+- Status HTTP: não registrados na execução original; conferência complementar das 13 URLs realizada em 26/10/2026, conforme seção específica.
 - Não foram observadas mensagens explícitas de erro nos JSONs recebidos.
 - URLs, parâmetros e origem das consultas: [roteiro](roteiro.md).
 - Respostas completas preservadas na pasta `responses/`.
@@ -128,10 +128,38 @@ Q12 referencia Q11 em `works[0].key`. A edição informa editora `Atica`, 202 p�
 | API-04 — Detalhe | Q11–Q12 | Executado; relação entre obra e edição confirmada |
 | API-05 — Campo ausente | Q01–Q04 e Q12 | Executado; ausências reais identificadas |
 
+## Conferência complementar dos status HTTP
+
+Em 26/10/2026, as 13 URLs do roteiro foram consultadas novamente, manualmente e com intervalos, para registrar os status HTTP pelo painel Network do navegador, com Disable cache marcado.
+
+Os horários abaixo correspondem ao cabeçalho Date das respostas, convertido de GMT para o horário de Brasília (UTC−3).
+
+| Consulta | Data | Horário de Brasília | Status HTTP |
+| --- | --- | --- | --- |
+| Q01 | 26/10/2026 | 18:08:16 | 200 OK |
+| Q02 | 26/10/2026 | 18:13:11 | 200 OK |
+| Q03 | 26/10/2026 | 18:14:19 | 200 OK |
+| Q04 | 26/10/2026 | 18:15:33 | 200 OK |
+| Q05 | 26/10/2026 | 18:16:07 | 200 OK |
+| Q06 | 26/10/2026 | 18:17:03 | 200 OK |
+| Q07 | 26/10/2026 | 18:17:56 | 200 OK |
+| Q08 | 26/10/2026 | 18:18:26 | 200 OK |
+| Q09 | 26/10/2026 | 18:18:59 | 200 OK |
+| Q10 | 26/10/2026 | 18:19:40 | 200 OK |
+| Q11 | 26/10/2026 | 18:20:06 | 200 OK |
+| Q12 | 26/10/2026 | 18:20:36 | 200 OK |
+| Q13 | 26/10/2026 | 18:21:24 | 200 OK |
+
+Evidências da conferência: prints de Q01-http.png a Q13-http.png na pasta `screenshots/`.
+
+Todas as requisições desta conferência retornaram 200 OK. Isso confirma sucesso HTTP nas chamadas verificadas, sem garantir completude ou correção bibliográfica dos dados.
+
+Os status da execução original de 24/10/2026 não foram registrados e não podem ser recuperados a partir dos JSONs salvos. Os códigos acima pertencem exclusivamente à conferência complementar de 26/10/2026; os JSONs e a análise da sondagem original foram preservados.
+
 ## Limites da análise
 
 A sondagem avalia os metadados recebidos diretamente da Open Library, não o funcionamento do chatbot CAPITU.
 
-Não houve falha técnica explícita nos conteúdos recebidos, mas os status HTTP não foram verificados. Campos ausentes e candidatos pouco pertinentes foram tratados como limitações dos dados ou da recuperação, sem atribuí-los a falhas da aplicação.
+Não houve falha técnica explícita nos conteúdos recebidos, e os status HTTP não foram registrados na sondagem original de 24/10/2026. Em conferência complementar de 26/10/2026, as 13 URLs retornaram 200 OK, conforme a tabela acima. Essa verificação não valida o funcionamento do chatbot nem garante disponibilidade contínua da fonte.. Campos ausentes e candidatos pouco pertinentes foram tratados como limitações dos dados ou da recuperação, sem atribuí-los a falhas da aplicação.
 
 A amostra não comprova cobertura universal em português, correção histórica de todas as datas, disponibilidade de texto integral ou acervo institucional. Registros semelhantes não foram classificados automaticamente como duplicatas.
