@@ -112,7 +112,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    background-image: url('images/Fundo-Chat.png');
+    background-image: url('/static/images/Fundo-Chat.png');
     background-repeat: no-repeat;
     background-position: right center;
     background-size: contain;
@@ -249,3 +249,45 @@ body {
     gap: 16px;
 }
 .loading-avatar { min-width: 36px; height: 36px; background-color: #e0e0e0; border-radius: 50%; }
+
+.books-list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.book-card {
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    padding: 14px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.book-card:hover {
+    background-color: #fcf8f8;
+    border-color: #751b1d;
+}
+
+.book-number {
+    font-size: 16px;
+    color: #a87b51;
+    margin-right: 14px;
+    font-weight: 700;
+}
+
+.book-info strong {
+    display: block;
+    color: #333333;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.book-info span {
+    font-size: 12px;
+    color: #666666;
+}
