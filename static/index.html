@@ -10,17 +10,17 @@
     <div class="app-container">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <img src="images/Capitu.ia-Logo.png" alt="Logo Capitu" class="logo">
-                <button class="new-chat-btn">Nova conversa <span>+</span></button>
+                <img src="/static/images/Capitu.ia-Logo.png" alt="Logo Capitu" class="logo">
+                <button id="new-chat-btn" class="new-chat-btn" type="button">Nova conversa <span aria-hidden="true">+</span></button>
             </div>
 
             <div class="sidebar-menu">
                 <p class="menu-title">O QUE POSSO FAZER</p>
                 <ul>
-                    <li data-action="titulo"><span class="icon">🔍</span> Buscar por título <span class="arrow">></span></li>
-                    <li data-action="autor"><span class="icon">👤</span> Obras de um autor <span class="arrow">></span></li>
-                    <li data-action="assunto"><span class="icon">📚</span> Explorar por assunto <span class="arrow">></span></li>
-                    <li data-action="detalhes"><span class="icon">ℹ️</span> Consultar detalhes <span class="arrow">></span></li>
+                    <li><button class="sidebar-action" type="button" data-action="titulo"><span class="icon" aria-hidden="true">🔍</span> Buscar por título <span class="arrow" aria-hidden="true">›</span></button></li>
+                    <li><button class="sidebar-action" type="button" data-action="autor"><span class="icon" aria-hidden="true">👤</span> Obras de um autor <span class="arrow" aria-hidden="true">›</span></button></li>
+                    <li><button class="sidebar-action" type="button" data-action="assunto"><span class="icon" aria-hidden="true">📚</span> Explorar por assunto <span class="arrow" aria-hidden="true">›</span></button></li>
+                    <li><button class="sidebar-action" type="button" data-action="detalhes"><span class="icon" aria-hidden="true">ℹ️</span> Consultar detalhes <span class="arrow" aria-hidden="true">›</span></button></li>
                 </ul>
             </div>
 
@@ -36,12 +36,13 @@
                     <h1>BIBLIOTECA UNIVERSITÁRIA</h1>
                     <h2>Assistente de descoberta bibliográfica</h2>
                 </div>
-                <div class="status">
-                    <span class="status-dot"></span> Capitu está disponível
+                <div id="app-status" class="status" role="status" aria-live="polite">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span id="app-status-text">Aguardando conexão</span>
                 </div>
             </header>
 
-            <div class="chat-history" id="chat-history">
+            <div class="chat-history" id="chat-history" role="log" aria-live="polite" aria-relevant="additions text">
                 <div class="message bot-message">
                     <div class="avatar">C</div>
                     <div class="message-content">
@@ -51,15 +52,17 @@
                 </div>
             </div>
 
-            <div class="input-section">
+            <form class="input-section" id="chat-form">
+                <label class="visually-hidden" for="user-input">Mensagem para a Capitu</label>
                 <div class="input-container" id="input-container">
-                    <input type="text" id="user-input" placeholder="Busque por título, autor, assunto ou gênero...">
-                    <button id="send-btn">Enviar</button>
+                    <input type="text" id="user-input" name="message" maxlength="1000" placeholder="Busque por título, autor, assunto ou gênero..." aria-describedby="input-error">
+                    <button id="send-btn" type="submit">Enviar</button>
                 </div>
+                <p id="input-error" class="input-error" role="status" aria-live="polite" hidden></p>
                 <p class="footer-disclaimer">A Capitu oferece referências simuladas e pode cometer imprecisões. Confira fontes acadêmicas.</p>
-            </div>
+            </form>
         </main>
     </div>
-    <script src="chat.js"></script>
+    <script src="/static/chat.js" defer></script>
 </body>
 </html>

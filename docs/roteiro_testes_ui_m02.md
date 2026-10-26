@@ -1,41 +1,47 @@
-# Roteiro e Registro de Testes Manuais de UI (Task M02)
+# Roteiro e registro de testes manuais de UI — M02
 
-**Responsável:** Millena  
-**Data:** Outubro de 2026  
-**Ambiente:** Navegador Web (Servido via FastAPI `/` e `/static/` - Conexão com `POST /api/chat`)
+**Responsável pela tarefa:** Millena
+**Ambiente previsto:** aplicação local FastAPI, servindo a interface em `/` e atendendo `POST /api/chat`
+**Contrato:** `docs/contracts/chat-v1.md`
+**Estado deste registro:** roteiro atualizado; resultados e capturas devem ser preenchidos após execução no navegador com o backend E02.
 
-## 1. Descrição e Objetivo
-Validação visual e funcional dos fluxos básicos da interface do chatbot Capitu.IA, conectada ao endpoint `POST /api/chat` (Task E02), cobrindo o envio de `message` e `session_id`, bloqueio de duplo envio, segurança contra injeção de HTML, ações da barra lateral e renderização dos estados da API.
+## Objetivo e contexto
 
----
+Validar que a interface implementada em `static/` segue o contrato do chat, oferece os fluxos definidos no planejamento M02 e permanece utilizável por teclado. O backend E02 devolve dados demonstrativos; esses dados servem para integração de contrato, não comprovam busca real na Open Library nem interpretação por IA.
 
-## 2. Elementos de Design e Identidade Visual Implementados
-- **Paleta de Cores:** Identidade visual baseada na tonalidade vermelha escuro `#751b1d` (aplicada a botões, avatares, balões do usuário e destaques de status).
-- **Contraste e Baloes de Mensagem:** Respostas da Capitu (IA) estilizadas com balões brancos (`#ffffff`), borda leve e sombra suave (`box-shadow`), garantindo legibilidade total sobre a imagem de fundo.
-- **Estrutura de Layout:** Barra lateral (`sidebar`) com fundo claro (`#ffffff`), botão de "Nova conversa" em destaque e cartão informativo de rodapé ("Sobre esta versão") em tom suave (`#fdf2f2`).
-- **Assets Visuais:** Logótipo oficial sem fundo (`Capitu.ia-Logo.png`) e imagem decorativa de acervo ao fundo do histórico do chat (`Fundo-Chat.png`).
-- **Responsividade Mobile:** Adicionada regra `@media (max-width: 768px)` para adaptação em telemóveis e ecrãs pequenos, organizando o layout em coluna, ajustando espaçamentos e aumentando a largura dos balões para 90%.
-- **Conexão com Backend:** Envio de requisições `POST /api/chat` via `fetch` assíncrono com cabeçalho `Content-Type: application/json` e payload contendo `message` e `session_id`.
-- **Prevenção contra Injeção de HTML (XSS):** Todo conteúdo textual do usuário e das respostas é inserido via `textContent` e construção manual de nós DOM (`createElement`), impedindo execução de marcas HTML maliciosas.
-- **Prevenção de Envio Duplicado:** O botão de envio e o campo de texto permanecem desabilitados (`disabled`) enquanto a requisição aguarda o retorno do servidor.
-- **Roteamento de Arquivos Estáticos:** Compatibilidade com o FastAPI através dos caminhos absolutos prefixados com `/static/`.
-- **Controles da Sidebar e Cards:** Botão "Nova conversa" reinicia a sessão (`session_id`), atalhos preenchem o input e cliques em cards de livros iniciam consulta de detalhes.
+## Padrões de validação
 
----
+- Executar os cenários no navegador com o backend local iniciado.
+- Usar a aba Network para conferir método, URL, payload e resposta de `/api/chat`.
+- Comparar campos com `ChatRequest` e `ChatResponse`: `message`, `session_id`, `text`, `state`, `results`; livros usam `title`, `authors`, `subjects` e `first_publish_year`.
+- Registrar cada execução com data, navegador, resultado observado e screenshot em `docs/evidence/`.
+- Marcar “Passou” somente após observar o comportamento. Em caso de falha, anotar evidência, abrir correção e repetir o caso.
+- Usar dados simulados controlados para estados de lista vazia, item único, múltiplos resultados, API indisponível e conteúdo potencialmente malicioso.
 
-## 3. Tabela de Validação dos Casos de Teste
+## Casos de teste
 
-| ID | Comportamento Coberto | Ação / Sequência Executada | Comportamento Esperado | Resultado Obtido | Situação |
+| ID | O que cobre | Procedimento | Esperado | Resultado obtido | Situação |
 |---|---|---|---|---|---|
-| **UI-01** | Envio válido via `POST /api/chat` | Digitar "Encontre livros de Machado de Assis" e enviar. | Requisição enviada com `message` e `session_id`. Resposta e cards do backend renderizados em balão destacado. | Dados retornados da API exibidos corretamente sem uso de `innerHTML`. | **Passou** |
-| **UI-02** | Entrada vazia / espaços | Tentar enviar mensagem com input em branco. | Envio bloqueado, borda vermelha temporária de erro exibida e nenhuma requisição disparada. | Animação de erro em 400ms sem disparo de rede. | **Passou** |
-| **UI-03** | Estado de carregamento e Bloqueio de Envio Duplicado | Enviar mensagem e tentar clicar em Enviar ou teclar Enter durante a busca. | Exibir "Consultando acervo..." e manter input/botão desabilitados (`disabled`) até o fim da requisição. | Envio duplo impedido com sucesso; controles reabilitados no bloco `finally`. | **Passou** |
-| **UI-04** | Exibição de Lista Múltipla, Vazia e Única | Enviar consultas retornando 0, 1 ou múltiplos resultados do backend. | Se houver lista, renderizar cards clicáveis. Se for vazia, exibir mensagem informativa do backend. | Todos os estados de lista processados com estrutura DOM segura. | **Passou** |
-| **UI-05** | Ações da Sidebar e Reinício de Sessão | Clicar em "Nova conversa" e nos atalhos do menu ("Buscar por título", etc.). | "Nova conversa" gera novo `session_id` e limpa o chat. Atalhos preenchem o input com o prefixo correspondente. | Histórico resetado e campo de entrada preenchido ao clicar nos itens. | **Passou** |
-| **UI-06** | Clique em Card de Resultado | Clicar em um card de livro retornado em uma busca. | O título do livro é preenchido no input com comando "Consultar detalhes" e a busca é disparada automaticamente. | Consulta de detalhes executada com sucesso ao clicar no card. | **Passou** |
-| **UI-07** | Layout Responsivo (Mobile) | Redimensionar janela para <= 768px. | Interface adapta-se verticalmente mantendo legibilidade e acessibilidade dos botões. | Layout fluido ajustado sem estouro de rolagem horizontal. | **Passou** |
+| UI-01 | Envio válido e contrato | Enviar uma mensagem e inspecionar a requisição e resposta na aba Network. | Um `POST /api/chat` com `message` e `session_id` nulo no primeiro turno; renderizar `text`, `state` e `results` recebidos. | A preencher na execução manual. | Pendente |
+| UI-02 | Entrada vazia | Enviar campo vazio e depois somente espaços. | Nenhuma requisição; mensagem acessível informa que é necessário digitar. | A preencher na execução manual. | Pendente |
+| UI-03 | Carregamento e envio duplicado | Enviar durante uma resposta lenta e tentar enviar novamente. | Indicador de carregamento aparece; envio e atalhos ficam bloqueados até concluir; uma única requisição é enviada. | A preencher na execução manual. | Pendente |
+| UI-04 | Zero, um e vários resultados | Simular respostas `results` vazia, com um livro e com múltiplos livros. | Exibir texto em todos os estados; cards aparecem apenas quando há resultados e preservam a ordem da API. | A preencher na execução manual. | Pendente |
+| UI-05 | Reuso e reinício de sessão | Enviar duas mensagens; depois iniciar nova conversa e enviar novamente. | Reutilizar o UUID devolvido pelo backend no segundo turno; após reinício enviar `session_id: null`. | A preencher na execução manual. | Pendente |
+| UI-06 | Metadados opcionais | Simular livro com autores/assuntos/ano e outro sem esses campos. | Mostrar apenas metadados presentes, sem texto “undefined”, falha ou quebra do card. | A preencher na execução manual. | Pendente |
+| UI-07 | Ação no card | Acionar um card pelo mouse e pelo teclado. | Campo recebe pedido de detalhes do título e o fluxo envia uma nova solicitação; foco e nome acessível disponíveis. | A preencher na execução manual. | Pendente |
+| UI-08 | Atalhos da barra lateral | Acionar cada atalho por clique e teclado. | O atalho correspondente preenche o campo e move o foco para a entrada. | A preencher na execução manual. | Pendente |
+| UI-09 | Nova conversa | Acionar “Nova conversa” após troca de mensagens. | Histórico é limpo, mensagem de boas-vindas volta e sessão local é descartada. | A preencher na execução manual. | Pendente |
+| UI-10 | API indisponível / erro HTTP | Parar backend ou simular resposta HTTP não bem-sucedida. | Remover carregamento, informar falha em linguagem clara, marcar conexão indisponível e permitir nova tentativa. | A preencher na execução manual. | Pendente |
+| UI-11 | Conteúdo não confiável | Simular texto e título contendo marcação HTML/script. | Conteúdo é mostrado como texto; nenhum elemento ou script externo é executado. | A preencher na execução manual. | Pendente |
+| UI-12 | Teclado e foco | Navegar com Tab e acionar com Enter/Espaço; observar foco. | Ordem previsível, foco visível e controles acionáveis sem mouse. | A preencher na execução manual. | Pendente |
+| UI-13 | Rótulos e status acessíveis | Inspecionar nome do campo, anúncios de carregamento/erro e atualização da conexão. | Campo tem rótulo programático; estados são anunciados por regiões live/status. | A preencher na execução manual. | Pendente |
+| UI-14 | Responsividade | Redimensionar viewport para desktop e largura menor que 768 px. | Layout adapta-se sem rolagem horizontal indevida e mantém controles operáveis. | A preencher na execução manual. | Pendente |
+| UI-15 | Arquivos estáticos | Abrir `/` e verificar CSS, JS e imagens em Network. | Recursos carregam sob `/static/` sem 404 e a página inicial não apresenta erro JavaScript. | A preencher na execução manual. | Pendente |
 
----
+## Evidências a guardar
 
-## 4. Conclusão e Autoria
-A interface em `static/` encontra-se 100% integrada com a API `POST /api/chat` conforme o contrato `docs/contracts/chat-v1.md`, cumprindo todos os requisitos funcionais, estáticos e de segurança da Task M02.
+Para cada cenário executado, preencher o resultado e situação na tabela, salvar screenshot em `docs/evidence/` com nome como `M02-UI-01.png` e registrar divergências em `docs/evaluation/error_analysis.md`. No teste UI-01, guardar também captura da requisição/resposta da aba Network sem dados pessoais.
+
+## Limites da validação
+
+O teste com backend E02 valida a integração da interface com o contrato e os dados simulados. A validação da busca real na Open Library, da classificação de intenções e da experiência final integrada depende das tarefas de backend correspondentes e deve ser registrada quando estiverem disponíveis.
