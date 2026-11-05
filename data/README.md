@@ -17,3 +17,9 @@ Os exemplos são enunciados sintéticos/autoriais para fins acadêmicos. Não de
 ## Curadoria e versionamento
 
 Preserve IDs estáveis, registre autoria/origem, siga `annotation_guide.md` e atualize esta documentação junto com mudanças de formato ou finalidade. Agrupe paráfrases próximas antes de separar treino, validação e teste para reduzir vazamento de dados. Não mova exemplos do conjunto de avaliação para o treino sem criar versão documentada e manter uma avaliação independente.
+
+## E03 — splits e revisão humana
+
+Os exemplos `E03-*` em `intents.csv` são rascunhos criados com assistência de IA e aguardam validação semântica humana. Faça primeiro a anotação cega em `e03_human_validation.csv`; instruções e critérios estão em [`docs/evidence/E03_human_validation.md`](../docs/evidence/E03_human_validation.md). Não use o corpus para avaliação final antes dessa revisão.
+
+Execute `python scripts/prepare_dataset_splits.py` para gerar `splits/reference.csv`, `splits/validation.csv`, `splits/test.csv` e `splits/manifest.json`. A separação é determinística por `grupo_variacao`, com alvo aproximado de 70/15/15. A folha humana existente é preservada quando o script é executado novamente. Somente `reference.csv` pode ser usado para ajustar o TF-IDF; reserve `test.csv` para avaliação final.

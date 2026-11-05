@@ -1,0 +1,19 @@
+id,texto,intencao,entidade,campo_solicitado,grupo_variacao,origem
+E03-005,"Na lista de resultados, quero ver se consta Persépolis.",buscar_por_titulo,Persépolis,,E03-TIT-consultar,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-006,Verifique se há algum registro de O Conto da Aia.,buscar_por_titulo,O Conto da Aia,,E03-TIT-consultar,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-011,Quais títulos foram escritos por Conceição Evaristo?,buscar_obras_autor,Conceição Evaristo,,E03-AUT-listar,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-012,Liste livros de José Saramago.,buscar_obras_autor,José Saramago,,E03-AUT-listar,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-013,Quero conhecer as obras publicadas por Lygia Fagundes Telles.,buscar_obras_autor,Lygia Fagundes Telles,,E03-AUT-conhecer,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-014,O que há de Lima Barreto no acervo bibliográfico?,buscar_obras_autor,Lima Barreto,,E03-AUT-conhecer,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-029,Minha pesquisa é sobre cinema latino-americano; localize livros desse assunto.,buscar_por_assunto,cinema latino-americano,,E03-ASS-pesquisa,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-030,Preciso de leituras que expliquem economia comportamental.,buscar_por_assunto,economia comportamental,,E03-ASS-pesquisa,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-037,Quais ISBNs constam para as edições de O Hobbit?,consultar_detalhes,O Hobbit,ISBN,E03-DET-isbn,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-040,Você consegue informar quantas edições existem de O Nome da Rosa?,consultar_detalhes,O Nome da Rosa,quantidade_edicoes,E03-DET-edicoes,Rascunho assistido por IA; revisão humana pendente (E03)
+G01-002,"Na pesquisa por nome, use “O Cortiço”.",buscar_por_titulo,O Cortiço,,titulo-instrucao,Autoral Maria Eduarda
+G01-005,Digitei “O Alienista” como título; pode fazer a consulta?,buscar_por_titulo,O Alienista,,titulo-instrucao,Autoral Maria Eduarda
+G01-010,É pelo título “Grande Sertão: Veredas” que eu gostaria de pesquisar.,buscar_por_titulo,Grande Sertão: Veredas,,titulo-instrucao,Autoral Maria Eduarda
+G01-037,"Do item 2 da lista, gostaria de consultar a descrição disponível.",consultar_detalhes,índice 2,descricao,detalhes-selecao,Autoral Maria Eduarda
+G01-039,"No terceiro resultado, a autoria está atribuída a qual pessoa?",consultar_detalhes,índice 3,autor,detalhes-selecao,Autoral Maria Eduarda
+M01-021,Quero livros sobre inteligência artificial.,buscar_por_assunto,inteligência artificial,,G13-LivrosSobre,Autoral Millena
+M01-024,Queria indicações de fantasia,buscar_por_assunto,fantasia,,G16-Indicacoes,Autoral Millena
+M01-025,Busca obras sobre astronomia,buscar_por_assunto,astronomia,,G17-BuscaSobre,Autoral Millena

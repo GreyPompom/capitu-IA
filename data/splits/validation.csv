@@ -1,0 +1,19 @@
+id,texto,intencao,entidade,campo_solicitado,grupo_variacao,origem
+E03-025,Estou estudando linguística aplicada e preciso de livros sobre isso.,buscar_por_assunto,linguística aplicada,,E03-ASS-estudo,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-026,Quais obras tratam de culturas indígenas brasileiras?,buscar_por_assunto,culturas indígenas brasileiras,,E03-ASS-estudo,Rascunho assistido por IA; revisão humana pendente (E03)
+E03-035,Que resumo consta para O Nome do Vento?,consultar_detalhes,O Nome do Vento,descricao,E03-DET-descricao,Rascunho assistido por IA; revisão humana pendente (E03)
+G01-004,“A Metamorfose” é o nome do livro que preciso localizar.,buscar_por_titulo,A Metamorfose,,titulo-declaracao,Autoral Maria Eduarda
+G01-008,Preciso localizar uma obra chamada “O Nome da Rosa”.,buscar_por_titulo,O Nome da Rosa,,titulo-declaracao,Autoral Maria Eduarda
+G01-012,Gostaria de consultar a relação de obras assinadas por José Saramago.,buscar_obras_autor,José Saramago,,autor-relacao,Autoral Maria Eduarda
+G01-019,"Na relação de autores, o nome que me interessa é Mia Couto. Que livros estão associados a ele?",buscar_obras_autor,Mia Couto,,autor-associacao,Autoral Maria Eduarda
+G01-024,O conteúdo que me interessa é mitologia grega. Quais títulos tratam disso?,buscar_por_assunto,mitologia grega,,assunto-conteudo,Autoral Maria Eduarda
+M01-003,Teria o livro 1984 no sistema?,buscar_por_titulo,1984,,G03-TerLivro,Autoral Millena
+M01-006,Vocês têm a obra O Alquimista?,buscar_por_titulo,O Alquimista,,G03-TerLivro,Autoral Millena
+M01-012,Tem obras de George Orwell?,buscar_obras_autor,George Orwell,,G07-TemObras,Autoral Millena
+M01-013,Mostra livros da Clarice Lispector,buscar_obras_autor,Clarice Lispector,,G08-MostraLivros,Autoral Millena
+M01-016,Tem alguma coisa escrita por Agatha Christie?,buscar_obras_autor,Agatha Christie,,G07-TemObras,Autoral Millena
+M01-026,Queria ler livros de terror,buscar_por_assunto,terror,,G18-LerAssunto,Autoral Millena
+M01-031,Quem escreveu Dom Casmurro?,consultar_detalhes,Dom Casmurro,autor,G21-QuemEscreveu,Autoral Millena
+M01-034,Quem é o autor de 1984?,consultar_detalhes,1984,autor,G21-QuemEscreveu,Autoral Millena
+M01-036,Qual a editora do primeiro livro?,consultar_detalhes,primeiro livro,editora,G25-QualCampo,Autoral Millena
+M01-039,Qual o resumo do livro 3?,consultar_detalhes,livro 3,resumo,G25-QualCampo,Autoral Millena
