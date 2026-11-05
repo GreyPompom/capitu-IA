@@ -18,6 +18,7 @@ Não são respostas integrais coletadas da API. Contagens e ordem foram definida
 | search_empty.json | Nenhum resultado | Cenário adicional; apoio a T19/T20 |
 | search_missing_fields.json | Campos opcionais ausentes | G01-002/G01-031 com dados reduzidos |
 | edition.json | Edição específica | Cenário adicional de obra versus edição |
+| work.json | Obra específica | Descrição, assuntos e autores por chave para detalhe |
 
 As correspondências indicam usos previstos, não diálogos já testados.
 
