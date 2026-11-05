@@ -1,14 +1,38 @@
 from uuid import UUID, uuid4
 
+import pytest
 from fastapi.testclient import TestClient
 
-from app.main import app
+import app.main as main_module
+from app.schemas import BookSummary, ChatResponse, ConversationState
 
 
-client = TestClient(app)
+@pytest.fixture
+def client(monkeypatch):
+    """Mantém os testes HTTP de contrato isolados da fonte externa real."""
+
+    class ControlledService:
+        def handle(self, request):
+            return ChatResponse(
+                session_id=request.session_id or uuid4(),
+                text="Resposta controlada do contrato E09.",
+                state=ConversationState.ANSWERED,
+                intent=None,
+                results=[
+                    BookSummary(
+                        openlibrary_key="/works/OL1003134W",
+                        title="Dom Casmurro",
+                        authors=["Machado de Assis"],
+                        source_url="https://openlibrary.org/works/OL1003134W",
+                    )
+                ],
+            )
+
+    monkeypatch.setattr(main_module, "chat_service", ControlledService())
+    return TestClient(main_module.app)
 
 
-def test_chat_returns_contract_with_simulated_book_and_preserves_session() -> None:
+def test_chat_returns_contract_with_controlled_book_and_preserves_session(client) -> None:
     session_id = uuid4()
 
     response = client.post(
@@ -23,30 +47,30 @@ def test_chat_returns_contract_with_simulated_book_and_preserves_session() -> No
     assert body["text"]
     assert isinstance(body["results"], list)
     assert len(body["results"]) == 1
-    assert "fictícios" in body["results"][0]["title"]
+    assert body["results"][0]["title"] == "Dom Casmurro"
     assert body["intent"] is None
 
 
-def test_chat_creates_session_when_session_id_is_omitted() -> None:
+def test_chat_creates_session_when_session_id_is_omitted(client) -> None:
     response = client.post("/api/chat", json={"message": "Buscar Dom Casmurro"})
 
     assert response.status_code == 200
     UUID(response.json()["session_id"])
 
 
-def test_chat_rejects_empty_message_with_422() -> None:
+def test_chat_rejects_empty_message_with_422(client) -> None:
     response = client.post("/api/chat", json={"message": "   "})
 
     assert response.status_code == 422
 
 
-def test_chat_rejects_message_over_contract_limit_with_422() -> None:
+def test_chat_rejects_message_over_contract_limit_with_422(client) -> None:
     response = client.post("/api/chat", json={"message": "a" * 1_001})
 
     assert response.status_code == 422
 
 
-def test_chat_rejects_invalid_session_id_with_422() -> None:
+def test_chat_rejects_invalid_session_id_with_422(client) -> None:
     response = client.post(
         "/api/chat",
         json={"message": "Buscar Dom Casmurro", "session_id": "not-a-uuid"},
@@ -55,7 +79,7 @@ def test_chat_rejects_invalid_session_id_with_422() -> None:
     assert response.status_code == 422
 
 
-def test_root_serves_base_html_and_local_asset_references() -> None:
+def test_root_serves_base_html_and_local_asset_references(client) -> None:
     response = client.get("/")
 
     assert response.status_code == 200
@@ -65,7 +89,7 @@ def test_root_serves_base_html_and_local_asset_references() -> None:
     assert "/static/chat.js" in response.text
 
 
-def test_static_assets_are_available_from_same_origin() -> None:
+def test_static_assets_are_available_from_same_origin(client) -> None:
     css = client.get("/static/styles.css")
     javascript = client.get("/static/chat.js")
 

@@ -81,7 +81,7 @@ TITLE_PATTERNS = (
     r"\bregistro\s+de\s+(?P<entity>.+?)(?:[?,.!;]|$)",
     r"\blocalizar\s+(?P<entity>.+?)\s+pelo\s+titulo\b",
     r"\bnome\s+(?P<entity>.+?)\s+no\s+catalogo\b",
-    r"\b(?:encontra|procurando|localizar|localize|achar|ache|encontre|ca[cç]ando|pesquise|pesquisa|verifique)\s+(?:o\s+livro\s+|a\s+obra\s+|o\s+titulo\s+|pelo\s+titulo\s+|o\s+nome\s+)?(?P<entity>.+)$",
+    r"\b(?:encontra|procurando|procure|buscar|busque|localizar|localize|achar|ache|encontre|ca[cç]ando|pesquise|pesquisa|verifique)\s+(?:o\s+livro\s+|a\s+obra\s+|o\s+titulo\s+|pelo\s+titulo\s+|o\s+nome\s+)?(?P<entity>.+)$",
     r"\b(?:livro|obra|titulo|nome)\s+(?:chamad[oa]\s+|que\s+preciso\s+localizar\s+|que\s+anotei\s+foi\s+)?(?P<entity>.+?)(?:[?,.!;]|$)",
     r"\b(?:queria\s+ler|quero\s+achar|estou\s+tentando\s+achar|onde\s+posso\s+achar)\s+(?P<entity>.+?)(?:[?,.!;]|$)",
     r"\b(?:consta|aparece)\s+(?P<entity>.+?)(?:[?,.!;]|$)",
@@ -202,6 +202,8 @@ def _find_entity(original: str, normalized: str, offsets: list[int], patterns: t
         start = offsets[match.start("entity")]
         end = offsets[match.end("entity") - 1] + 1
         candidate = _clean_entity(original[start:end])
+        if candidate.casefold() in {"um livro", "uma obra", "livro", "obra", "titulo"}:
+            continue
         if candidate:
             return candidate
     return None
