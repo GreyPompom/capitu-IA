@@ -15,7 +15,7 @@ A UI precisa integrar-se ao backend antes de a API bibliográfica real e a lógi
 - A resposta de negócio tem sempre `session_id`, `text`, `state`, `intent` opcional e `results` (lista).
 - Quatro intenções de negócio: título, obras por autor, assunto e detalhes. Fora de escopo é decisão de política, não classe de negócio.
 - A validação de entrada retorna HTTP 422; os estados de diálogo/fonte descrevem resultados válidos de negócio.
-- Contexto mínimo usa UUID por sessão e guarda somente pendência e até cinco resultados; não guarda transcript completo.
+- Contexto mínimo usa UUID por sessão e guarda somente pendência, até cinco resultados e uma obra selecionada; não guarda transcript completo.
 - Limites 1000 caracteres por entrada, 2000 por resposta e cinco livros são valores internos provisórios para revisão.
 - Interpretador e serviço externo são módulos separados; score de similaridade não é exposto à UI como probabilidade.
 

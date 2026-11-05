@@ -58,7 +58,7 @@ O exemplo é ilustrativo e não comprova consulta realizada. Campos bibliográfi
 }
 ```
 
-Quando a resposta pedir seleção, `state` será `awaiting_selection` e `results` conterá os candidatos na mesma ordem exibida. A seleção curta (por exemplo, “o segundo”) referencia a lista daquela sessão. Uma nova busca explícita substitui a pendência anterior. Cancelamento limpa a pendência. Contexto é isolado por `session_id`; não armazenamos transcript completo.
+Quando a resposta pedir seleção, `state` será `awaiting_selection` e `results` conterá os candidatos na mesma ordem exibida. A seleção curta (por exemplo, “o segundo”) referencia a lista daquela sessão e guarda a obra escolhida somente no contexto interno do servidor. Uma nova busca explícita substitui a pendência anterior. Cancelamento limpa pendência, lista e obra selecionada. Contexto é isolado por `session_id`; não armazenamos transcript completo.
 
 ### Compatibilidade com o design da interface
 
@@ -118,7 +118,7 @@ O verbo “escrever” não escolhe sozinho a intenção: no primeiro exemplo a 
 
 - Corpo de mensagem: máximo 1000 caracteres.
 - Resposta: texto até 2000 caracteres e no máximo cinco livros por turno.
-- Contexto: intenção/parâmetro pendente e até cinco resultados da sessão; sem transcript completo, autenticação ou persistência entre reinícios no MVP.
+- Contexto: intenção/parâmetro pendente, até cinco resultados e uma obra selecionada da própria sessão; sem transcript completo, autenticação ou persistência entre reinícios no MVP.
 - Similaridade e margem são valores diagnósticos do interpretador, não probabilidades. A resposta pública não expõe score no MVP.
 - Recomendações significam descoberta por assunto, não personalização.
 - ISBN, capas, filtros e recomendação personalizada não entram no MVP como novas funções de busca.
