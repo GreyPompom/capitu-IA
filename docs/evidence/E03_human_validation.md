@@ -1,6 +1,6 @@
 # E03 — revisão humana cega do corpus
 
-**Status:** pendente de validação de Emely. Os 40 exemplos E03 são rascunhos preparados com assistência de IA e estão identificados dessa forma em `data/intents.csv`.
+**Status:** concluída por Emely em 05/11/2026. Os 40 exemplos E03 foram revisados antes da comparação com os rótulos propostos.
 
 ## Como fazer a validação
 
@@ -20,4 +20,4 @@ O arquivo `data/splits/manifest.json` registra a contagem, o hash do dataset e a
 
 | Data | Exemplos revisados | Rótulos concordantes | Divergências | Decisões/arquivo atualizado |
 |---|---:|---:|---:|---|
-| Pendente | — | — | — | — |
+| 05/11/2026 | 40 | 40/40 intenções; 40/40 entidades | 16 diferenças de nomenclatura no campo solicitado | Nenhuma alteração em `intents.csv`; decisões registradas em `docs/evidence/E03.md`. |
