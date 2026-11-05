@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from app.chat_service import CapituChatService
 from app.schemas import BookDetails, BookSummary, ChatRequest, ConversationState, Intent
+from services.open_library import OpenLibraryUnavailableError
 
 
 def book(key: str, title: str, authors: list[str]) -> BookSummary:
@@ -123,3 +124,17 @@ def test_multiple_results_then_selection_then_details_uses_same_session() -> Non
     assert selected.state is ConversationState.ANSWERED
     assert detail.intent is Intent.BOOK_DETAILS
     assert ("details", "/works/OL103123W") in catalog.calls
+
+
+def test_transient_catalog_failure_becomes_source_unavailable() -> None:
+    service, catalog = make_service()
+
+    def unavailable(_: str) -> list[BookSummary]:
+        raise OpenLibraryUnavailableError("falha controlada")
+
+    catalog.search_by_title = unavailable
+    response = service.handle(ChatRequest(message="Procure Dom Casmurro"))
+
+    assert response.state is ConversationState.SOURCE_UNAVAILABLE
+    assert response.results == []
+    assert "indisponível" in response.text
