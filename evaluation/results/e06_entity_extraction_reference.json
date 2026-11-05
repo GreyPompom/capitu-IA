@@ -1,0 +1,13 @@
+{
+  "dataset": "C:\\Projetos\\Unisul\\capitu-ia-e03\\data\\splits\\reference.csv",
+  "test_split_used": false,
+  "direct_entity_exact_match": {
+    "correct": 77,
+    "total": 77
+  },
+  "context_reference_needing_session": {
+    "correctly_pending": 7,
+    "total": 7
+  },
+  "failures": []
+}
