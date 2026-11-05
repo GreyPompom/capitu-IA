@@ -29,7 +29,8 @@ class IntentIndexConfig:
     ngram_range: tuple[int, int] = (1, 2)
     sublinear_tf: bool = True
     norm: str = "l2"
-    aggregation: str = "maximum cosine similarity per intent"
+    aggregation_top_k: int = 3
+    aggregation: str = "mean cosine similarity of the top 3 examples per intent"
 
 
 @dataclass(frozen=True)
@@ -42,12 +43,13 @@ class ReferenceExample:
 
 
 class IntentSimilarityIndex:
-    """Representa mensagens por TF-IDF e agrega o melhor cosseno por intenção.
+    """Representa mensagens por TF-IDF e agrega os melhores cossenos por intenção.
 
     Cada frase da partição de referência funciona como protótipo. Para uma nova
-    mensagem, o índice calcula o cosseno com todos os protótipos e conserva, para
-    cada intenção, a maior similaridade. O score é similaridade cosseno, não uma
-    probabilidade. Limiar, margem, abstenção e esclarecimento são decisões da E05.
+    mensagem, o índice calcula o cosseno com todos os protótipos e tira a média
+    dos três maiores scores de cada intenção. O score é similaridade cosseno,
+    não uma probabilidade. Limiar, margem, abstenção e esclarecimento são
+    decisões da E05.
     """
 
     def __init__(self, config: IntentIndexConfig | None = None) -> None:
@@ -137,9 +139,15 @@ class IntentSimilarityIndex:
 
         message_vector = self.vectorizer.transform([message])
         similarities = cosine_similarity(message_vector, self.reference_matrix).ravel()
-        scores = {intent: 0.0 for intent in Intent}
+        scores_by_intent: dict[Intent, list[float]] = {intent: [] for intent in Intent}
         for example, similarity in zip(self.reference_examples, similarities, strict=True):
-            scores[example.intent] = max(scores[example.intent], float(similarity))
+            scores_by_intent[example.intent].append(float(similarity))
+
+        scores = {
+            intent: sum(sorted(intent_scores, reverse=True)[: self.config.aggregation_top_k])
+            / min(len(intent_scores), self.config.aggregation_top_k)
+            for intent, intent_scores in scores_by_intent.items()
+        }
 
         ordered = sorted(scores.items(), key=lambda item: (-item[1], item[0].value))
         return [
