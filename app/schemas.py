@@ -146,3 +146,4 @@ class ConversationSession(ContractModel):
     pending_intent: Intent | None = None
     pending_parameter: EntitySlot | None = None
     last_results: list[BookSummary] = Field(default_factory=list, max_length=5)
+    selected_book: BookSummary | None = None
