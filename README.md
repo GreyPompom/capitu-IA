@@ -1,6 +1,6 @@
 # CAPITU IA
 
-Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. O backend FastAPI valida o contrato E01 e disponibiliza uma resposta demonstrativa local; a interpretação de intenções e a consulta real à Open Library serão implementadas nas próximas tarefas.
+Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. O backend FastAPI valida o contrato E01 e disponibiliza uma resposta demonstrativa local; o índice TF-IDF de intenções da E04 está implementado, mas ainda será integrado ao fluxo de diálogo e à Open Library nas próximas tarefas.
 
 ## Documentação
 
@@ -18,7 +18,7 @@ Consulte [`docs/README.md`](docs/README.md) para os documentos de planejamento e
 
 ## Estado
 
-Planejamento aprovado pelo professor conforme informado pela equipe. E01 define o contrato v1 e os schemas Pydantic. E02 entrega o servidor local, `POST /api/chat`, página estática-base e testes HTTP. A resposta da E02 contém um livro fictício explicitamente identificado como simulação; ainda não há PLN nem chamada à Open Library.
+Planejamento aprovado pelo professor conforme informado pela equipe. E01 define o contrato v1 e os schemas Pydantic. E02 entrega o servidor local, `POST /api/chat`, página estática-base e testes HTTP. E03 curou o corpus e separou referência, validação e teste sem vazamento. E04 implementa normalização, TF-IDF, similaridade cosseno e ranking de até três intenções a partir de `data/splits/reference.csv`. A resposta HTTP continua simulada até a integração posterior; não há chamada à Open Library neste estágio.
 
 ## Executar localmente
 

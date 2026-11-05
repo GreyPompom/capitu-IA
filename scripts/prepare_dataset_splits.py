@@ -216,6 +216,24 @@ def _write_human_review(rows: list[dict[str, str]]) -> None:
     _write_csv(HUMAN_REVIEW_PATH, REVIEW_COLUMNS, review_rows)
 
 
+def _human_review_status(rows: list[dict[str, str]]) -> str:
+    """Resume somente o preenchimento da folha humana; não substitui a evidência."""
+
+    if not HUMAN_REVIEW_PATH.exists():
+        return "pending; complete data/e03_human_validation.csv before treating labels as finalized"
+    with HUMAN_REVIEW_PATH.open(encoding="utf-8-sig", newline="") as review_file:
+        review_rows = list(csv.DictReader(review_file))
+    expected_ids = {row["id"] for row in rows if row["id"].startswith("E03-")}
+    required = ("intencao_humana", "entidade_humana", "precisa_contexto_humano")
+    completed = (
+        {row.get("id", "") for row in review_rows} == expected_ids
+        and all(all(row.get(column, "").strip() for column in required) for row in review_rows)
+    )
+    if completed:
+        return "completed; human review recorded in data/e03_human_validation.csv"
+    return "pending; complete data/e03_human_validation.csv before treating labels as finalized"
+
+
 def main() -> None:
     rows = _read_dataset()
     splits = create_splits(rows)
@@ -243,7 +261,7 @@ def main() -> None:
         "source_sha256": source_hash,
         "method": "Deterministic split by group_variacao, stratified by intent; target 70/15/15.",
         "seed": SEED,
-        "human_blind_review": "pending; complete data/e03_human_validation.csv before treating labels as finalized",
+        "human_blind_review": _human_review_status(rows),
         "test_policy": "Do not use test.csv for fitting TF-IDF, choosing thresholds, or tuning rules.",
         "counts": counts,
         "negative_evaluation_data": "data/Fora_Do_Escopo_Ambiguo.csv (kept outside intent training splits)",
