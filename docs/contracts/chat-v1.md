@@ -1,8 +1,8 @@
 # Contrato HTTP do chat CAPITU v1
 
-**Status:** proposta E01 pronta para revisão por Millena e Miguel.<br>
+**Status:** contrato v1 implementado no backend E09; revisão de integração da UI continua pendente.<br>
 **Data:** 08/10/2026.<br>
-**Implementação HTTP:** E02.<br>
+**Implementação HTTP:** E02, integrada ao fluxo bibliográfico na E09.<br>
 **Schemas:** [`app/schemas.py`](../../app/schemas.py).
 
 ## Endpoint

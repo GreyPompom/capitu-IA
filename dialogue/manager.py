@@ -7,6 +7,7 @@ import re
 from uuid import UUID
 
 from app.schemas import (
+    BookDetails,
     BookSummary,
     ConversationSession,
     ConversationState,
@@ -122,6 +123,33 @@ class DialogueManager:
             intent=intent,
             entities=entities,
         )
+
+    def record_detail_result(
+        self,
+        session_id: UUID,
+        details: BookDetails,
+    ) -> DialogueOutcome:
+        """Conclui um detalhe preservando a obra retornada como seleção atual."""
+
+        summary = BookSummary.model_validate(details.model_dump(include=set(BookSummary.model_fields)))
+        session = self.store.get_or_create(session_id).model_copy(
+            update={
+                "state": ConversationState.ANSWERED,
+                "pending_intent": None,
+                "pending_parameter": None,
+                "last_results": [summary],
+                "selected_book": summary,
+            }
+        )
+        return self._save_outcome(session, "Detalhes bibliográficos recebidos.", intent=Intent.BOOK_DETAILS, selected_book=summary)
+
+    def record_source_unavailable(self, session_id: UUID) -> DialogueOutcome:
+        """Marca falha externa sem inventar resposta nem apagar a seleção ativa."""
+
+        session = self.store.get_or_create(session_id).model_copy(
+            update={"state": ConversationState.SOURCE_UNAVAILABLE, "pending_intent": None, "pending_parameter": None}
+        )
+        return self._save_outcome(session, "A fonte bibliográfica está indisponível no momento.")
 
     def _handle_accepted(
         self,
