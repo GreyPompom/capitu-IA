@@ -1,0 +1,62 @@
+{
+  "numFound": 726,
+  "start": 0,
+  "numFoundExact": true,
+  "num_found": 726,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "",
+  "offset": null,
+  "docs": [
+    {
+      "author_name": [
+        "José Saramago"
+      ],
+      "edition_count": 40,
+      "first_publish_year": 1995,
+      "key": "/works/OL27420W",
+      "language": [
+        "spa",
+        "fre",
+        "por",
+        "kor",
+        "ger",
+        "tur",
+        "eng"
+      ],
+      "title": "Ensaio Sobre a Cegueira"
+    },
+    {
+      "author_name": [
+        "José Saramago"
+      ],
+      "edition_count": 18,
+      "first_publish_year": 2004,
+      "key": "/works/OL27416W",
+      "language": [
+        "spa",
+        "pol",
+        "ita",
+        "fre",
+        "tur",
+        "eng",
+        "ger",
+        "por"
+      ],
+      "title": "Ensaio sobre a lucidez"
+    },
+    {
+      "author_name": [
+        "José Saramago"
+      ],
+      "edition_count": 10,
+      "first_publish_year": 1982,
+      "key": "/works/OL27414W",
+      "language": [
+        "spa",
+        "por",
+        "eng"
+      ],
+      "title": "Memorial do Convento"
+    }
+  ]
+}

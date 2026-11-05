@@ -1,0 +1,58 @@
+{
+  "numFound": 322,
+  "start": 0,
+  "numFoundExact": true,
+  "num_found": 322,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "subject:\"literatura brasileira\"",
+  "offset": null,
+  "docs": [
+    {
+      "author_name": [
+        "Carlos Drummond de Andrade"
+      ],
+      "first_publish_year": 2001,
+      "key": "/works/OL28757276W",
+      "language": [
+        "por"
+      ],
+      "title": "Alguma poesia",
+      "subject": [
+        "Brazilian poetry",
+        "Poésie brésilienne",
+        "Literatura brasileira",
+        "Poesia"
+      ]
+    },
+    {
+      "author_name": [
+        "Lygia Bojunga Nunes"
+      ],
+      "first_publish_year": 1976,
+      "key": "/works/OL1012076W",
+      "language": [
+        "por"
+      ],
+      "title": "A bolsa amarela",
+      "subject": [
+        "Literatura brasileira"
+      ]
+    },
+    {
+      "author_name": [
+        "Lygia Fagundes Telles"
+      ],
+      "first_publish_year": 1995,
+      "key": "/works/OL1010357W",
+      "language": [
+        "fre",
+        "por"
+      ],
+      "title": "La nuit obscure et moi",
+      "subject": [
+        "Romance brasileiro",
+        "Literatura brasileira"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "numFound": 17,
+  "start": 0,
+  "numFoundExact": true,
+  "num_found": 17,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "",
+  "offset": null,
+  "docs": [
+    {
+      "author_name": [
+        "Maria da Conceição Evaristo de Brito"
+      ],
+      "edition_count": 2,
+      "first_publish_year": 2018,
+      "key": "/works/OL32365577W",
+      "language": [
+        "por"
+      ],
+      "title": "Canção para ninar menino grande"
+    },
+    {
+      "author_name": [
+        "Maria da Conceição Evaristo de Brito"
+      ],
+      "edition_count": 1,
+      "first_publish_year": 2011,
+      "key": "/works/OL32813011W",
+      "language": [
+        "por"
+      ],
+      "title": "Insubmissas lágrimas de mulheres (contos)"
+    },
+    {
+      "author_name": [
+        "Conceição Evaristo"
+      ],
+      "edition_count": 1,
+      "first_publish_year": 2014,
+      "key": "/works/OL24315440W",
+      "language": [
+        "por"
+      ],
+      "title": "Olhos D'Água"
+    }
+  ]
+}
