@@ -1,11 +1,11 @@
 {
   "dataset_version": "0.2.0",
-  "generated_on": "2026-10-23",
+  "generated_on": "2026-11-05",
   "source": "data/intents.csv",
   "source_sha256": "0cc4d62cf461322ca987a70d9a44c63a1b2d12c7df654ff386f071ad9cd61af1",
   "method": "Deterministic split by group_variacao, stratified by intent; target 70/15/15.",
   "seed": 20261023,
-  "human_blind_review": "pending; complete data/e03_human_validation.csv before treating labels as finalized",
+  "human_blind_review": "completed; human review recorded in data/e03_human_validation.csv",
   "test_policy": "Do not use test.csv for fitting TF-IDF, choosing thresholds, or tuning rules.",
   "counts": {
     "reference": {
