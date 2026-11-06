@@ -19,4 +19,4 @@ A CAPITU ajuda na descoberta bibliográfica usando dados públicos. Não represe
 
 ## Contrato executável
 
-[`app/schemas.py`](../app/schemas.py) define os modelos Pydantic v2 para mensagens, pedidos, interpretação, entidades, livros, resposta e contexto de sessão. `app/main.py` delega `POST /api/chat` ao `CapituChatService`, que conecta interpretação, diálogo, Open Library e templates de resposta. O endpoint serve também a página-base e os assets em `/static/`. Retentativas, limitação compartilhada e cache ficam para a E10.
+[`app/schemas.py`](../app/schemas.py) define os modelos Pydantic v2 para mensagens, pedidos, interpretação, entidades, livros, resposta e contexto de sessão. `app/main.py` delega `POST /api/chat` ao `CapituChatService`, que conecta interpretação, diálogo, Open Library e templates de resposta. O endpoint serve também a página-base e os assets em `/static/`. O adaptador da Open Library aplica cache TTL em memória, espaçamento compartilhado e no máximo uma retentativa para falhas transitórias.

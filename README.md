@@ -18,7 +18,7 @@ Consulte [`docs/README.md`](docs/README.md) para os documentos de planejamento e
 
 ## Estado
 
-Planejamento aprovado pelo professor conforme informado pela equipe. E01 define o contrato v1 e os schemas Pydantic. E02 entrega o servidor local, `POST /api/chat`, página estática-base e testes HTTP. E03 curou o corpus e separou referência, validação e teste sem vazamento. E04 implementa normalização, TF-IDF e similaridade cosseno. E05 adiciona política de limiar, ambiguidade e fora de escopo. E06 extrai parâmetros; E07 mantém contexto mínimo; E08 implementa cliente e normalização da Open Library. E09 integra essas camadas no endpoint para as quatro intenções, mantendo respostas, sessões e candidatos no contrato v1. Robustez de chamadas fica para a E10.
+Planejamento aprovado pelo professor conforme informado pela equipe. E01 define o contrato v1 e os schemas Pydantic. E02 entrega o servidor local, `POST /api/chat`, página estática-base e testes HTTP. E03 curou o corpus e separou referência, validação e teste sem vazamento. E04 implementa normalização, TF-IDF e similaridade cosseno. E05 adiciona política de limiar, ambiguidade e fora de escopo. E06 extrai parâmetros; E07 mantém contexto mínimo; E08 implementa cliente e normalização da Open Library. E09 integra essas camadas no endpoint para as quatro intenções. E10 adiciona cache TTL, ritmo compartilhado e uma única retentativa controlada para falhas transitórias da fonte.
 
 ## Executar localmente
 
