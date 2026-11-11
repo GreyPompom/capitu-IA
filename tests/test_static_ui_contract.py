@@ -13,8 +13,11 @@ def test_ui_uses_the_contract_route_and_session_fields() -> None:
     assert "currentSessionId = null" in CHAT_JS
 
 
-def test_card_uses_a_detail_prompt_that_preserves_the_title() -> None:
-    assert 'userInput.value = `Detalhes de “${title}”`' in CHAT_JS
+def test_card_uses_selection_for_ambiguous_results_and_details_otherwise() -> None:
+    assert 'state === "awaiting_selection"' in CHAT_JS
+    assert '"o segundo"' in CHAT_JS
+    assert 'userInput.value = state === "awaiting_selection"' in CHAT_JS
+    assert ': `Detalhes de “${title}”`' in CHAT_JS
 
 
 def test_http_and_network_failures_have_distinct_messages() -> None:

@@ -43,7 +43,8 @@ class FakeCatalog:
 
     def get_details(self, openlibrary_key: str, *, fallback_authors: tuple[str, ...] = ()) -> BookDetails:
         self.calls.append(("details", openlibrary_key))
-        return details(openlibrary_key, "Dom Casmurro", list(fallback_authors) or ["Machado de Assis"])
+        title = "Segundo" if openlibrary_key == "/works/OL103123W" else "Dom Casmurro"
+        return details(openlibrary_key, title, list(fallback_authors) or ["Machado de Assis"])
 
 
 def make_service() -> tuple[CapituChatService, FakeCatalog]:
@@ -144,8 +145,32 @@ def test_multiple_results_then_selection_then_details_uses_same_session() -> Non
 
     assert initial.state is ConversationState.AWAITING_SELECTION
     assert selected.state is ConversationState.ANSWERED
+    assert [book.title for book in selected.results] == ["Segundo"]
     assert detail.intent is Intent.BOOK_DETAILS
     assert ("details", "/works/OL103123W") in catalog.calls
+
+
+def test_detail_candidates_can_be_selected_without_repeating_the_title() -> None:
+    service, catalog = make_service()
+    catalog.title_results = [
+        book("/works/OL1003134W", "Primeiro", ["Autor 1"]),
+        book("/works/OL103123W", "Segundo", ["Autor 2"]),
+    ]
+    session_id = uuid4()
+
+    initial = service.handle(ChatRequest(message="Consultar detalhes do livro: Memórias Póstumas de Brás Cubas", session_id=session_id))
+    selected = service.handle(ChatRequest(message="o segundo", session_id=session_id))
+    detail = service.handle(ChatRequest(message="Me dê um resumo", session_id=session_id))
+
+    assert initial.state is ConversationState.AWAITING_SELECTION
+    assert selected.state is ConversationState.ANSWERED
+    assert [book.title for book in selected.results] == ["Segundo"]
+    assert detail.state is ConversationState.ANSWERED
+    assert detail.results[0].title == "Segundo"
+    assert catalog.calls == [
+        ("title", "Memórias Póstumas de Brás Cubas"),
+        ("details", "/works/OL103123W"),
+    ]
 
 
 def test_transient_catalog_failure_becomes_source_unavailable() -> None:

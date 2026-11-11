@@ -230,7 +230,12 @@ class DialogueManager:
             )
 
         selected = session.last_results[selection - 1]
-        session = session.model_copy(update={"state": ConversationState.ANSWERED, "selected_book": selected})
+        # A lista completa continua necessária somente até a seleção. Depois
+        # disso, preservar apenas a obra escolhida evita que a UI pareça
+        # repetir os candidatos e mantém o contexto mínimo da sessão.
+        session = session.model_copy(
+            update={"state": ConversationState.ANSWERED, "selected_book": selected, "last_results": [selected]}
+        )
         return self._save_outcome(
             session,
             f"Você selecionou ‘{selected.title}’. O que deseja saber sobre esta obra?",

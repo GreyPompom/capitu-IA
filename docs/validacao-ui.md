@@ -23,7 +23,7 @@ Executar com a aplicação local, registrar data, commit, navegador, payload e s
 | --- | --- | --- | --- |
 | M03-UI-01 | Enviar uma busca por título e olhar Network. | `POST /api/chat`; primeiro payload com `session_id: null`; texto, estado e resultados renderizados. | Pendente de validação humana |
 | M03-UI-02 | Enviar uma segunda mensagem na mesma conversa, depois clicar em Nova conversa e enviar uma terceira. | Segundo payload reutiliza o UUID; após reinício o payload volta a usar `session_id: null`. | Pendente de validação humana |
-| M03-UI-03 | Clicar em cartão de resultado por mouse e teclado. | A UI envia `Detalhes de “<título>”` pela mesma rota, preserva a sessão e não recebe pedido redundante de título. Se houver vários candidatos, apresenta seleção. | Pendente de validação humana |
+| M03-UI-03 | Clicar em cartão de resultado por mouse e teclado. | Com vários candidatos, a UI envia a posição correspondente, como `o segundo`, pela mesma rota; a resposta confirma a obra escolhida e mostra somente ela. Com um único resultado, envia `Detalhes de “<título>”`. | Pendente de validação humana |
 | M03-UI-04 | Forçar resposta HTTP não-2xx e, separadamente, parar o servidor para provocar falha de rede. | HTTP mostra a mensagem de solicitação recusada; rede mostra a mensagem de comunicação indisponível; em ambos o loading termina e o envio é reabilitado. | Pendente de validação humana |
 
 ## Limites

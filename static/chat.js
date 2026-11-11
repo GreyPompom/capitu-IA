@@ -51,7 +51,7 @@ function addBotMessage(text, results = [], state = "answered") {
     if (Array.isArray(results) && results.length > 0) {
         const list = document.createElement("div");
         list.className = "books-list";
-        results.forEach((book, index) => list.appendChild(createBookCard(book, index)));
+        results.forEach((book, index) => list.appendChild(createBookCard(book, index, state)));
         content.appendChild(list);
     }
 
@@ -67,7 +67,7 @@ function appendMetadata(container, label, values) {
     container.appendChild(item);
 }
 
-function createBookCard(book, index) {
+function createBookCard(book, index, state) {
     const title = typeof book.title === "string" && book.title.trim()
         ? book.title
         : "Título não informado";
@@ -98,7 +98,10 @@ function createBookCard(book, index) {
     card.append(number, info);
     card.addEventListener("click", () => {
         if (isSending || title === "Título não informado") return;
-        userInput.value = `Detalhes de “${title}”`;
+        const selectionCommands = ["o primeiro", "o segundo", "o terceiro", "o quarto", "o quinto"];
+        userInput.value = state === "awaiting_selection"
+            ? selectionCommands[index]
+            : `Detalhes de “${title}”`;
         chatForm.requestSubmit();
     });
     return card;
