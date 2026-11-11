@@ -51,6 +51,11 @@ def detail_text(details: BookDetails, requested_field: str | None) -> str:
                 "edition_count": "Edições",
             }
             return f"{labels.get(requested_field, 'Informação')} de ‘{details.title}’: {value}. Fonte: Open Library."
+        if requested_field == "first_publish_year" and details.publication_date:
+            return (
+                f"A Open Library não forneceu a primeira publicação de ‘{details.title}’, "
+                f"mas informa a data de publicação disponível: {details.publication_date}. Fonte: Open Library."
+            )
         return f"A Open Library não forneceu esse campo para ‘{details.title}’. Fonte: Open Library."
 
     summary = [f"Título: {details.title}"]

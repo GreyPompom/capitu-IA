@@ -92,6 +92,11 @@ class CapituChatService:
             selected = matches[0]
 
         details = self.catalog.get_details(selected.openlibrary_key, fallback_authors=tuple(selected.authors))
+        # A busca pode trazer o ano da primeira publicação enquanto o payload
+        # detalhado da mesma obra não o inclui. Reaproveitamos somente o dado
+        # já fornecido pela fonte para a obra selecionada; não inferimos ano.
+        if details.first_publish_year is None and selected.first_publish_year is not None:
+            details = details.model_copy(update={"first_publish_year": selected.first_publish_year})
         recorded = self.dialogue.record_detail_result(session_id, details)
         return _response(
             recorded,
