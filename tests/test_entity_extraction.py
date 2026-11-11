@@ -24,6 +24,15 @@ class EntityExtractionTests(unittest.TestCase):
         self.assertEqual(result.entities.author, "Machado de Assis")
         self.assertFalse(result.missing_required)
 
+    def test_author_list_request_does_not_include_the_command_in_author_name(self) -> None:
+        result = extract_entities(
+            "Obras do autor: me liste as obras de machado de assis",
+            Intent.SEARCH_AUTHOR_WORKS,
+        )
+
+        self.assertEqual(result.entities.author, "machado de assis")
+        self.assertFalse(result.needs_clarification)
+
     def test_author_list_is_not_confused_with_title_author_question(self) -> None:
         author_result = extract_entities("Mostre livros da Clarice Lispector", Intent.SEARCH_AUTHOR_WORKS)
         details_result = extract_entities("Quem escreveu Dom Casmurro?", Intent.BOOK_DETAILS)
@@ -42,6 +51,53 @@ class EntityExtractionTests(unittest.TestCase):
 
         self.assertEqual(result.entities.title, "A Bolsa Amarela")
         self.assertEqual(result.entities.requested_field, "publisher")
+
+    def test_details_command_from_card_extracts_title(self) -> None:
+        result = extract_entities("Consultar detalhes do livro: Dom Casmurro", Intent.BOOK_DETAILS)
+
+        self.assertEqual(result.entities.title, "Dom Casmurro")
+        self.assertFalse(result.needs_clarification)
+
+    def test_detail_request_for_summary_extracts_title_and_description_field(self) -> None:
+        result = extract_entities("quero ler o livro O pequeno principe, me de um resumo", Intent.BOOK_DETAILS)
+
+        self.assertEqual(result.entities.title, "O pequeno principe")
+        self.assertEqual(result.entities.requested_field, "description")
+        self.assertFalse(result.needs_clarification)
+
+    def test_summary_about_selected_work_does_not_treat_context_as_a_title(self) -> None:
+        result = extract_entities("me dê um resumo sobre a obra", Intent.BOOK_DETAILS)
+
+        self.assertIsNone(result.entities.title)
+        self.assertEqual(result.entities.requested_field, "description")
+        self.assertEqual(result.missing_required, (EntitySlot.TITLE,))
+
+    def test_summary_request_extracts_title_and_marks_interpretive_question(self) -> None:
+        result = extract_entities(
+            "quero um resumo sobre o livro O pequeno principe, quem era a rosa?",
+            Intent.BOOK_DETAILS,
+        )
+
+        self.assertEqual(result.entities.title, "O pequeno principe")
+        self.assertEqual(result.entities.requested_field, "description")
+        self.assertTrue(result.entities.has_interpretive_content_question)
+
+    def test_all_details_of_selected_book_keeps_title_in_context(self) -> None:
+        result = extract_entities("quero todas as informações sobre esse livro", Intent.BOOK_DETAILS)
+
+        self.assertIsNone(result.entities.title)
+        self.assertEqual(result.entities.requested_field, "all")
+        self.assertEqual(result.missing_required, (EntitySlot.TITLE,))
+
+    def test_all_details_direct_request_extracts_title_without_book_prefix(self) -> None:
+        result = extract_entities(
+            "quero que me de todas as informações q tiver sobre o livro o pequeno principe",
+            Intent.BOOK_DETAILS,
+        )
+
+        self.assertEqual(result.entities.title, "o pequeno principe")
+        self.assertEqual(result.entities.requested_field, "all")
+        self.assertFalse(result.needs_clarification)
 
     def test_isbn_is_optional_but_normalized_when_explicit(self) -> None:
         result = extract_entities("Quais dados do ISBN 978-85-359-0277-5?", Intent.BOOK_DETAILS)

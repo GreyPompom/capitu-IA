@@ -8,6 +8,14 @@ const newChatBtn = document.getElementById("new-chat-btn");
 const appStatusText = document.getElementById("app-status-text");
 const sidebarActions = document.querySelectorAll(".sidebar-action");
 
+class ChatHttpError extends Error {
+    constructor(status) {
+        super(`HTTP ${status}`);
+        this.name = "ChatHttpError";
+        this.status = status;
+    }
+}
+
 // O servidor cria a sessão no primeiro turno e devolve seu UUID no contrato.
 let currentSessionId = null;
 let isSending = false;
@@ -43,7 +51,7 @@ function addBotMessage(text, results = [], state = "answered") {
     if (Array.isArray(results) && results.length > 0) {
         const list = document.createElement("div");
         list.className = "books-list";
-        results.forEach((book, index) => list.appendChild(createBookCard(book, index)));
+        results.forEach((book, index) => list.appendChild(createBookCard(book, index, state)));
         content.appendChild(list);
     }
 
@@ -59,7 +67,7 @@ function appendMetadata(container, label, values) {
     container.appendChild(item);
 }
 
-function createBookCard(book, index) {
+function createBookCard(book, index, state) {
     const title = typeof book.title === "string" && book.title.trim()
         ? book.title
         : "Título não informado";
@@ -90,7 +98,10 @@ function createBookCard(book, index) {
     card.append(number, info);
     card.addEventListener("click", () => {
         if (isSending || title === "Título não informado") return;
-        userInput.value = `Consultar detalhes do livro: ${title}`;
+        const selectionCommands = ["o primeiro", "o segundo", "o terceiro", "o quarto", "o quinto"];
+        userInput.value = state === "awaiting_selection"
+            ? selectionCommands[index]
+            : `Detalhes de “${title}”`;
         chatForm.requestSubmit();
     });
     return card;
@@ -156,7 +167,7 @@ async function handleSend(event) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: text, session_id: currentSessionId }),
         });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (!response.ok) throw new ChatHttpError(response.status);
 
         const data = await response.json();
         if (!isChatResponse(data)) throw new Error("Resposta incompatível com o contrato chat-v1");
@@ -167,7 +178,10 @@ async function handleSend(event) {
     } catch (error) {
         console.error("Falha em POST /api/chat:", error);
         appStatusText.textContent = "Servidor indisponível";
-        addBotMessage("Não foi possível comunicar com o servidor. Tente novamente em instantes.", [], "source_unavailable");
+        const message = error instanceof ChatHttpError
+            ? "O servidor não aceitou esta solicitação. Revise a mensagem e tente novamente."
+            : "Não foi possível comunicar com o servidor. Tente novamente em instantes.";
+        addBotMessage(message, [], "source_unavailable");
     } finally {
         loadingMessage.remove();
         setSending(false);

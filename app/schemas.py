@@ -85,6 +85,7 @@ class ExtractedEntities(ContractModel):
     isbn: str | None = Field(default=None, max_length=20)
     year: int | None = Field(default=None, ge=0, le=9_999)
     requested_field: str | None = Field(default=None, max_length=80)
+    has_interpretive_content_question: bool = False
 
 
 class IntentCandidate(ContractModel):
