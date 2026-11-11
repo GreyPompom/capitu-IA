@@ -211,6 +211,19 @@ def test_year_question_reuses_first_publication_year_from_selected_result() -> N
     assert "1881" in response.text
 
 
+def test_short_author_question_uses_selected_book_context() -> None:
+    service, catalog = make_service()
+    session_id = uuid4()
+
+    service.handle(ChatRequest(message="Procure Dom Casmurro", session_id=session_id))
+    response = service.handle(ChatRequest(message="Qual autor?", session_id=session_id))
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert "Machado de Assis" in response.text
+    assert catalog.calls == [("title", "Dom Casmurro"), ("details", "/works/OL1003134W")]
+
+
 def test_transient_catalog_failure_becomes_source_unavailable() -> None:
     service, catalog = make_service()
 

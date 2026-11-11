@@ -60,7 +60,7 @@ def interpret_message(
 def _high_precision_intent(normalized: str) -> Intent | None:
     """Reconhece comandos inequívocos; casos genéricos continuam no TF-IDF."""
 
-    if re.search(r"\b(?:quem\s+escreveu|quem\s+e\s+o\s+autor|isbn|editora|descricao|resumo|detalhes|quantas\s+edicoes|de\s+que\s+ano)\b", normalized):
+    if re.search(r"\b(?:quem\s+escreveu|quem\s+e\s+o\s+autor|qual\s+(?:e\s+)?(?:o\s+)?autor|isbn|editora|descricao|resumo|detalhes|quantas\s+edicoes|de\s+que\s+ano)\b", normalized):
         return Intent.BOOK_DETAILS
     if re.search(r"\b(?:livros|obras|titulos|publicacoes)\b.*\b(?:escreveu|assinad|autoria)\b", normalized):
         return Intent.SEARCH_AUTHOR_WORKS
