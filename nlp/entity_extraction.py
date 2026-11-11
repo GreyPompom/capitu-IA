@@ -88,6 +88,8 @@ TITLE_PATTERNS = (
 )
 
 DETAIL_TITLE_PATTERNS = (
+    r"\b(?:consultar\s+)?detalhes(?:\s+do\s+livro)?\s*:?\s*(?P<entity>.+?)(?:[?.!;]|$)",
+    r"\b(?:quero|queria|gostaria\s+de)\s+ler\s+(?:o\s+livro\s+)?(?P<entity>.+?)(?:,\s*(?:me\s+d[ea]|mostre|quero)\s+(?:um\s+)?(?:resumo|descricao)|[?.!;]|$)",
     r"\b(?:quem\s+escreveu|quem\s+e\s+o\s+autor\s+de|autoria\s+de|autor\s+de|a\s+quem\s+e\s+atribuida\s+a\s+autoria\s+de)\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\bisbn(?:s)?\s+constam\s+para\s+as\s+edicoes\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:sobre|para|ficha\s+de)\s+(?P<entity>.+?)(?:,|;|\.|\?|!|$)",

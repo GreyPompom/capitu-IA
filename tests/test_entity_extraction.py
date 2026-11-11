@@ -43,6 +43,19 @@ class EntityExtractionTests(unittest.TestCase):
         self.assertEqual(result.entities.title, "A Bolsa Amarela")
         self.assertEqual(result.entities.requested_field, "publisher")
 
+    def test_details_command_from_card_extracts_title(self) -> None:
+        result = extract_entities("Consultar detalhes do livro: Dom Casmurro", Intent.BOOK_DETAILS)
+
+        self.assertEqual(result.entities.title, "Dom Casmurro")
+        self.assertFalse(result.needs_clarification)
+
+    def test_detail_request_for_summary_extracts_title_and_description_field(self) -> None:
+        result = extract_entities("quero ler o livro O pequeno principe, me de um resumo", Intent.BOOK_DETAILS)
+
+        self.assertEqual(result.entities.title, "O pequeno principe")
+        self.assertEqual(result.entities.requested_field, "description")
+        self.assertFalse(result.needs_clarification)
+
     def test_isbn_is_optional_but_normalized_when_explicit(self) -> None:
         result = extract_entities("Quais dados do ISBN 978-85-359-0277-5?", Intent.BOOK_DETAILS)
 

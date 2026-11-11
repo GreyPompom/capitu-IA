@@ -95,6 +95,28 @@ def test_detail_search_uses_title_then_detail_and_returns_requested_field() -> N
     assert "Fonte: Open Library" in response.text
 
 
+def test_card_detail_command_runs_full_controlled_detail_flow() -> None:
+    service, catalog = make_service()
+
+    response = service.handle(ChatRequest(message="Consultar detalhes do livro: Dom Casmurro"))
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert catalog.calls == [("title", "Dom Casmurro"), ("details", "/works/OL1003134W")]
+    assert response.results[0].title == "Dom Casmurro"
+
+
+def test_summary_request_runs_controlled_detail_flow() -> None:
+    service, catalog = make_service()
+
+    response = service.handle(ChatRequest(message="quero ler o livro O pequeno principe, me de um resumo"))
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert catalog.calls == [("title", "O pequeno principe"), ("details", "/works/OL1003134W")]
+    assert "Descrição" in response.text
+
+
 def test_missing_title_asks_without_catalog_call_then_accepts_short_answer() -> None:
     service, catalog = make_service()
     session_id = uuid4()
