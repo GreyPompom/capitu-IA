@@ -56,6 +56,13 @@ class EntityExtractionTests(unittest.TestCase):
         self.assertEqual(result.entities.requested_field, "description")
         self.assertFalse(result.needs_clarification)
 
+    def test_summary_about_selected_work_does_not_treat_context_as_a_title(self) -> None:
+        result = extract_entities("me dê um resumo sobre a obra", Intent.BOOK_DETAILS)
+
+        self.assertIsNone(result.entities.title)
+        self.assertEqual(result.entities.requested_field, "description")
+        self.assertEqual(result.missing_required, (EntitySlot.TITLE,))
+
     def test_isbn_is_optional_but_normalized_when_explicit(self) -> None:
         result = extract_entities("Quais dados do ISBN 978-85-359-0277-5?", Intent.BOOK_DETAILS)
 

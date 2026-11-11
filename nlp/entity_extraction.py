@@ -101,7 +101,7 @@ DETAIL_TITLE_PATTERNS = (
     r"\bedicoes\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
 )
 
-CONTEXT_REFERENCE_PATTERN = re.compile(r"\b(?:essa\s+obra|desse\s+livro|dessa\s+edicao|primeiro\s+livro|segundo\s+livro|livro\s+\d+|item\s+\d+|terceiro\s+resultado|isso|obra\s+que\s+acabei|selecionar\s+uma\s+obra)\b")
+CONTEXT_REFERENCE_PATTERN = re.compile(r"\b(?:essa\s+obra|(?:sobre\s+)?a\s+obra|desse\s+livro|dessa\s+edicao|primeiro\s+livro|segundo\s+livro|livro\s+\d+|item\s+\d+|terceiro\s+resultado|isso|obra\s+que\s+acabei|selecionar\s+uma\s+obra)\b")
 
 REQUESTED_FIELD_PATTERNS = (
     ("isbn", r"\bisbn(?:s)?\b"),

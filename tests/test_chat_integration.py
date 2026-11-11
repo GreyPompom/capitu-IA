@@ -173,6 +173,19 @@ def test_detail_candidates_can_be_selected_without_repeating_the_title() -> None
     ]
 
 
+def test_summary_about_selected_work_uses_context_without_new_title_search() -> None:
+    service, catalog = make_service()
+    session_id = uuid4()
+
+    service.handle(ChatRequest(message="Procure Dom Casmurro", session_id=session_id))
+    response = service.handle(ChatRequest(message="me dê um resumo sobre a obra", session_id=session_id))
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert response.results[0].title == "Dom Casmurro"
+    assert catalog.calls == [("title", "Dom Casmurro"), ("details", "/works/OL1003134W")]
+
+
 def test_transient_catalog_failure_becomes_source_unavailable() -> None:
     service, catalog = make_service()
 
