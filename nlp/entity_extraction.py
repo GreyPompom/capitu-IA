@@ -18,6 +18,7 @@ QUOTED_TEXT = re.compile(r"[\"“”'](?P<entity>[^\"“”']+)[\"“”']")
 ISBN_PATTERN = re.compile(r"\b(?:ISBN(?:-1[03])?\s*[:#]?\s*)?(?P<isbn>97[89][\d\s-]{10,17}|\d[\d\s-]{8,15}[\dXx])\b")
 
 AUTHOR_PATTERNS = (
+    r"\b(?:liste|listar|mostre|mostrar|quero|queria|me\s+liste)\s+(?:as\s+)?(?:obras|livros|titulos|publicacoes)\s+(?:de|do|da)\s+(?P<entity>.+?)(?:[.;?!]|$)",
     r"\blivros\s+(?P<entity>.+?)\s+escreveu\b",
     r"\busando\s+(?P<entity>.+?)\s+como\s+autora?\b",
     r"\btitulos\s+que\s+tenham\s+(?P<entity>.+?)\s+como\s+autor\b",

@@ -24,6 +24,15 @@ class EntityExtractionTests(unittest.TestCase):
         self.assertEqual(result.entities.author, "Machado de Assis")
         self.assertFalse(result.missing_required)
 
+    def test_author_list_request_does_not_include_the_command_in_author_name(self) -> None:
+        result = extract_entities(
+            "Obras do autor: me liste as obras de machado de assis",
+            Intent.SEARCH_AUTHOR_WORKS,
+        )
+
+        self.assertEqual(result.entities.author, "machado de assis")
+        self.assertFalse(result.needs_clarification)
+
     def test_author_list_is_not_confused_with_title_author_question(self) -> None:
         author_result = extract_entities("Mostre livros da Clarice Lispector", Intent.SEARCH_AUTHOR_WORKS)
         details_result = extract_entities("Quem escreveu Dom Casmurro?", Intent.BOOK_DETAILS)

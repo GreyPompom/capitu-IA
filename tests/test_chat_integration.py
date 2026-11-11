@@ -76,6 +76,16 @@ def test_author_search_is_not_treated_as_author_biography() -> None:
     assert catalog.calls == [("author", "Machado de Assis")]
 
 
+def test_author_list_command_uses_only_the_author_name() -> None:
+    service, catalog = make_service()
+
+    response = service.handle(ChatRequest(message="Obras do autor: me liste as obras de machado de assis"))
+
+    assert response.intent is Intent.SEARCH_AUTHOR_WORKS
+    assert response.state is ConversationState.ANSWERED
+    assert catalog.calls == [("author", "machado de assis")]
+
+
 def test_subject_search_runs_with_extracted_subject() -> None:
     service, catalog = make_service()
 
