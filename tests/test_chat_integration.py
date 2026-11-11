@@ -212,6 +212,29 @@ def test_summary_about_selected_work_uses_context_without_new_title_search() -> 
     assert catalog.calls == [("title", "Dom Casmurro"), ("details", "/works/OL1003134W")]
 
 
+def test_all_details_of_selected_book_returns_available_mapped_fields() -> None:
+    service, catalog = make_service()
+    catalog.title_results = [
+        book("/works/OL1003134W", "Dom Casmurro", ["Machado de Assis"]).model_copy(
+            update={"edition_count": 8, "isbn": ["9780000000000"], "subjects": ["Romance"]}
+        )
+    ]
+    session_id = uuid4()
+
+    service.handle(ChatRequest(message="Procure Dom Casmurro", session_id=session_id))
+    response = service.handle(ChatRequest(message="quero todas as informações sobre esse livro", session_id=session_id))
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert "Título: Dom Casmurro" in response.text
+    assert "Autoria: Machado de Assis" in response.text
+    assert "Primeira publicação: 1899" in response.text
+    assert "Número de edições: 8" in response.text
+    assert "ISBN: 9780000000000" in response.text
+    assert "Assuntos: Romance" in response.text
+    assert catalog.calls == [("title", "Dom Casmurro"), ("details", "/works/OL1003134W")]
+
+
 def test_year_question_reuses_first_publication_year_from_selected_result() -> None:
     service, catalog = make_service()
     catalog.title_results = [catalog.title_results[0].model_copy(update={"first_publish_year": 1881})]

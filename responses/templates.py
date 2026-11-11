@@ -35,6 +35,7 @@ def detail_text(
     """Mostra somente o campo pedido que a fonte realmente forneceu."""
 
     values = {
+        "all": _all_details_text(details),
         "author": _joined(details.authors),
         "first_publish_year": str(details.first_publish_year) if details.first_publish_year is not None else None,
         "isbn": _joined(details.isbn),
@@ -89,6 +90,43 @@ def source_unavailable_text() -> str:
 
 def _joined(values: list[str]) -> str | None:
     return ", ".join(values) if values else None
+
+
+def _all_details_text(details: BookDetails) -> str:
+    """Apresenta todos os metadados bibliográficos disponíveis no modelo.
+
+    Relações técnicas internas, como chaves de obra e de autor, permanecem no
+    modelo para integração, mas não são apresentadas como informação ao leitor.
+    """
+
+    fields = [f"Título: {details.title}"]
+    if details.authors:
+        fields.append(f"Autoria: {_joined(details.authors)}")
+    if details.first_publish_year is not None:
+        fields.append(f"Primeira publicação: {details.first_publish_year}")
+    if details.publication_date:
+        fields.append(f"Data de publicação disponível: {details.publication_date}")
+    if details.description:
+        fields.append(f"Descrição: {_truncate_description(details.description)}")
+    if details.subjects:
+        fields.append(f"Assuntos: {_joined(details.subjects)}")
+    if details.publishers:
+        fields.append(f"Editora(s): {_joined(details.publishers)}")
+    if details.isbn:
+        fields.append(f"ISBN: {_joined(details.isbn)}")
+    if details.edition_count is not None:
+        fields.append(f"Número de edições: {details.edition_count}")
+    if details.page_count is not None:
+        fields.append(f"Número de páginas: {details.page_count}")
+    return ". ".join(fields)
+
+
+def _truncate_description(value: str, *, limit: int = 900) -> str:
+    """Mantém a resposta no limite do contrato sem ocultar sua origem."""
+
+    if len(value) <= limit:
+        return value
+    return value[: limit - 1].rstrip() + "…"
 
 
 def _with_content_scope_notice(text: str, has_interpretive_content_question: bool) -> str:

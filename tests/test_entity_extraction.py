@@ -82,6 +82,13 @@ class EntityExtractionTests(unittest.TestCase):
         self.assertEqual(result.entities.requested_field, "description")
         self.assertTrue(result.entities.has_interpretive_content_question)
 
+    def test_all_details_of_selected_book_keeps_title_in_context(self) -> None:
+        result = extract_entities("quero todas as informações sobre esse livro", Intent.BOOK_DETAILS)
+
+        self.assertIsNone(result.entities.title)
+        self.assertEqual(result.entities.requested_field, "all")
+        self.assertEqual(result.missing_required, (EntitySlot.TITLE,))
+
     def test_isbn_is_optional_but_normalized_when_explicit(self) -> None:
         result = extract_entities("Quais dados do ISBN 978-85-359-0277-5?", Intent.BOOK_DETAILS)
 

@@ -97,6 +97,17 @@ class CapituChatService:
         # já fornecido pela fonte para a obra selecionada; não inferimos ano.
         if details.first_publish_year is None and selected.first_publish_year is not None:
             details = details.model_copy(update={"first_publish_year": selected.first_publish_year})
+        # O endpoint de detalhe de uma obra pode omitir campos que já vieram
+        # no resultado de busca da mesma obra. Reaproveitamos apenas dados
+        # recebidos da Open Library para a seleção atual, sem inferi-los.
+        details = details.model_copy(
+            update={
+                "edition_count": details.edition_count if details.edition_count is not None else selected.edition_count,
+                "isbn": details.isbn or selected.isbn,
+                "subjects": details.subjects or selected.subjects,
+                "cover_url": details.cover_url or selected.cover_url,
+            }
+        )
         recorded = self.dialogue.record_detail_result(session_id, details)
         return _response(
             recorded,

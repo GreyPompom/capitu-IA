@@ -31,3 +31,23 @@ def test_description_can_explain_interpretive_content_is_out_of_scope() -> None:
 
     assert "Descrição bibliográfica disponível." in text
     assert "não respondo perguntas interpretativas" in text
+
+
+def test_all_details_shows_every_available_bibliographic_field() -> None:
+    text = detail_text(
+        make_details(
+            authors=["Autora"],
+            first_publish_year=2001,
+            publication_date="2002",
+            description="Descrição disponível.",
+            subjects=["Assunto"],
+            publishers=["Editora"],
+            isbn=["9780000000000"],
+            edition_count=3,
+            page_count=250,
+        ),
+        "all",
+    )
+
+    for expected in ("Título", "Autoria", "Primeira publicação", "Descrição", "Assuntos", "Editora", "ISBN", "Número de edições", "Número de páginas"):
+        assert expected in text

@@ -103,12 +103,13 @@ DETAIL_TITLE_PATTERNS = (
     r"\bedicoes\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
 )
 
-CONTEXT_REFERENCE_PATTERN = re.compile(r"\b(?:essa\s+obra|(?:sobre\s+)?a\s+obra|desse\s+livro|dessa\s+edicao|primeiro\s+livro|segundo\s+livro|livro\s+\d+|item\s+\d+|terceiro\s+resultado|isso|obra\s+que\s+acabei|selecionar\s+uma\s+obra)\b")
+CONTEXT_REFERENCE_PATTERN = re.compile(r"\b(?:essa\s+obra|(?:sobre\s+)?a\s+obra|esse\s+livro|este\s+livro|desse\s+livro|dessa\s+edicao|essa\s+edicao|primeiro\s+livro|segundo\s+livro|livro\s+\d+|item\s+\d+|terceiro\s+resultado|isso|obra\s+que\s+acabei|selecionar\s+uma\s+obra)\b")
 INTERPRETIVE_CONTENT_QUESTION_PATTERN = re.compile(
     r"\b(?:quem\s+era|quem\s+e(?!\s+o\s+autor)|por\s+que|o\s+que\s+aconteceu|o\s+que\s+significa|qual\s+o\s+significado)\b"
 )
 
 REQUESTED_FIELD_PATTERNS = (
+    ("all", r"\b(?:todas?\s+as\s+informacoes|todos?\s+os\s+dados|detalhes\s+completos|tudo\s+sobre)\b"),
     ("isbn", r"\bisbn(?:s)?\b"),
     ("edition_count", r"\bquantas\s+edicoes\b|\bnumero\s+de\s+edicoes\b|\bquantas\s+versoes\b"),
     ("publisher", r"\beditora\b|\bquem\s+publicou\b|\bpublicadora\b"),
