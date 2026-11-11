@@ -90,6 +90,7 @@ TITLE_PATTERNS = (
 DETAIL_TITLE_PATTERNS = (
     r"\b(?:consultar\s+)?detalhes(?:\s+do\s+livro)?\s*:?\s*(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:quero|queria|gostaria\s+de)\s+ler\s+(?:o\s+livro\s+)?(?P<entity>.+?)(?:,\s*(?:me\s+d[ea]|mostre|quero)\s+(?:um\s+)?(?:resumo|descricao)|[?.!;]|$)",
+    r"\b(?:quero|queria|gostaria\s+de|mostre)\s+(?:um\s+)?(?:resumo|sinopse|descricao)\s+(?:sobre\s+)?(?:o\s+livro\s+|a\s+obra\s+)?(?P<entity>.+?)(?:,\s*(?:quem|qual|como|por\s+que|o\s+que)\b|[?.!;]|$)",
     r"\b(?:quem\s+escreveu|quem\s+e\s+o\s+autor\s+de|autoria\s+de|autor\s+de|a\s+quem\s+e\s+atribuida\s+a\s+autoria\s+de)\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\bisbn(?:s)?\s+constam\s+para\s+as\s+edicoes\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:sobre|para|ficha\s+de)\s+(?P<entity>.+?)(?:,|;|\.|\?|!|$)",
@@ -102,6 +103,9 @@ DETAIL_TITLE_PATTERNS = (
 )
 
 CONTEXT_REFERENCE_PATTERN = re.compile(r"\b(?:essa\s+obra|(?:sobre\s+)?a\s+obra|desse\s+livro|dessa\s+edicao|primeiro\s+livro|segundo\s+livro|livro\s+\d+|item\s+\d+|terceiro\s+resultado|isso|obra\s+que\s+acabei|selecionar\s+uma\s+obra)\b")
+INTERPRETIVE_CONTENT_QUESTION_PATTERN = re.compile(
+    r"\b(?:quem\s+era|quem\s+e(?!\s+o\s+autor)|por\s+que|o\s+que\s+aconteceu|o\s+que\s+significa|qual\s+o\s+significado)\b"
+)
 
 REQUESTED_FIELD_PATTERNS = (
     ("isbn", r"\bisbn(?:s)?\b"),
@@ -163,7 +167,14 @@ def extract_entities(message: str, intent: Intent) -> EntityExtraction:
     else:  # pragma: no cover - proteção para expansão futura do enum
         raise ValueError(f"Intenção não suportada para extração: {intent}")
 
-    entities = ExtractedEntities(title=title, author=author, subject=subject, isbn=isbn, requested_field=requested_field)
+    entities = ExtractedEntities(
+        title=title,
+        author=author,
+        subject=subject,
+        isbn=isbn,
+        requested_field=requested_field,
+        has_interpretive_content_question=bool(INTERPRETIVE_CONTENT_QUESTION_PATTERN.search(normalized)),
+    )
     return EntityExtraction(entities=entities, missing_required=_missing_required(intent, entities), conflicts=tuple(conflicts))
 
 

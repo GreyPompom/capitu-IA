@@ -100,7 +100,11 @@ class CapituChatService:
         recorded = self.dialogue.record_detail_result(session_id, details)
         return _response(
             recorded,
-            text=detail_text(details, outcome.entities.requested_field),
+            text=detail_text(
+                details,
+                outcome.entities.requested_field,
+                has_interpretive_content_question=outcome.entities.has_interpretive_content_question,
+            ),
             intent=Intent.BOOK_DETAILS,
             results=[details],
         )

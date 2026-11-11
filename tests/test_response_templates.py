@@ -20,3 +20,14 @@ def test_year_request_uses_available_edition_date_without_claiming_first_publica
     assert "não forneceu a primeira publicação" in text
     assert "1957" in text
     assert "data de publicação disponível" in text
+
+
+def test_description_can_explain_interpretive_content_is_out_of_scope() -> None:
+    text = detail_text(
+        make_details(description="Descrição bibliográfica disponível."),
+        "description",
+        has_interpretive_content_question=True,
+    )
+
+    assert "Descrição bibliográfica disponível." in text
+    assert "não respondo perguntas interpretativas" in text

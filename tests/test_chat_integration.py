@@ -120,6 +120,20 @@ def test_summary_request_runs_controlled_detail_flow() -> None:
     assert "Descrição" in response.text
 
 
+def test_summary_with_interpretive_question_returns_description_and_scope_notice() -> None:
+    service, catalog = make_service()
+
+    response = service.handle(
+        ChatRequest(message="quero um resumo sobre o livro O pequeno principe, quem era a rosa?")
+    )
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert "Registro controlado para teste." in response.text
+    assert "não respondo perguntas interpretativas" in response.text
+    assert catalog.calls == [("title", "O pequeno principe"), ("details", "/works/OL1003134W")]
+
+
 def test_missing_title_asks_without_catalog_call_then_accepts_short_answer() -> None:
     service, catalog = make_service()
     session_id = uuid4()

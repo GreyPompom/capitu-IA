@@ -26,7 +26,12 @@ def search_text(intent: Intent, entities: ExtractedEntities, results: list[BookS
     return f"Encontrei {len(results)} referência(s) para {label} ‘{subject or 'informado'}’ na Open Library."
 
 
-def detail_text(details: BookDetails, requested_field: str | None) -> str:
+def detail_text(
+    details: BookDetails,
+    requested_field: str | None,
+    *,
+    has_interpretive_content_question: bool = False,
+) -> str:
     """Mostra somente o campo pedido que a fonte realmente forneceu."""
 
     values = {
@@ -50,13 +55,20 @@ def detail_text(details: BookDetails, requested_field: str | None) -> str:
                 "subjects": "Assuntos",
                 "edition_count": "Edições",
             }
-            return f"{labels.get(requested_field, 'Informação')} de ‘{details.title}’: {value}. Fonte: Open Library."
-        if requested_field == "first_publish_year" and details.publication_date:
-            return (
-                f"A Open Library não forneceu a primeira publicação de ‘{details.title}’, "
-                f"mas informa a data de publicação disponível: {details.publication_date}. Fonte: Open Library."
+            return _with_content_scope_notice(
+                f"{labels.get(requested_field, 'Informação')} de ‘{details.title}’: {value}. Fonte: Open Library.",
+                has_interpretive_content_question,
             )
-        return f"A Open Library não forneceu esse campo para ‘{details.title}’. Fonte: Open Library."
+        if requested_field == "first_publish_year" and details.publication_date:
+            return _with_content_scope_notice(
+                f"A Open Library não forneceu a primeira publicação de ‘{details.title}’, "
+                f"mas informa a data de publicação disponível: {details.publication_date}. Fonte: Open Library.",
+                has_interpretive_content_question,
+            )
+        return _with_content_scope_notice(
+            f"A Open Library não forneceu esse campo para ‘{details.title}’. Fonte: Open Library.",
+            has_interpretive_content_question,
+        )
 
     summary = [f"Título: {details.title}"]
     if details.authors:
@@ -65,7 +77,10 @@ def detail_text(details: BookDetails, requested_field: str | None) -> str:
         summary.append(f"Primeira publicação: {details.first_publish_year}")
     if details.description:
         summary.append(f"Descrição: {details.description}")
-    return ". ".join(summary) + ". Fonte: Open Library."
+    return _with_content_scope_notice(
+        ". ".join(summary) + ". Fonte: Open Library.",
+        has_interpretive_content_question,
+    )
 
 
 def source_unavailable_text() -> str:
@@ -74,3 +89,12 @@ def source_unavailable_text() -> str:
 
 def _joined(values: list[str]) -> str | None:
     return ", ".join(values) if values else None
+
+
+def _with_content_scope_notice(text: str, has_interpretive_content_question: bool) -> str:
+    if not has_interpretive_content_question:
+        return text
+    return (
+        f"{text} Posso apresentar metadados e a descrição fornecida pela fonte, "
+        "mas não respondo perguntas interpretativas sobre personagens ou enredo."
+    )
