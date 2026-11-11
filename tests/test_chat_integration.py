@@ -235,6 +235,18 @@ def test_all_details_of_selected_book_returns_available_mapped_fields() -> None:
     assert catalog.calls == [("title", "Dom Casmurro"), ("details", "/works/OL1003134W")]
 
 
+def test_all_details_direct_request_searches_only_extracted_title() -> None:
+    service, catalog = make_service()
+
+    response = service.handle(
+        ChatRequest(message="quero que me de todas as informações q tiver sobre o livro o pequeno principe")
+    )
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert catalog.calls == [("title", "o pequeno principe"), ("details", "/works/OL1003134W")]
+
+
 def test_year_question_reuses_first_publication_year_from_selected_result() -> None:
     service, catalog = make_service()
     catalog.title_results = [catalog.title_results[0].model_copy(update={"first_publish_year": 1881})]

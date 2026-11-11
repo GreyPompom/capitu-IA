@@ -89,6 +89,16 @@ class EntityExtractionTests(unittest.TestCase):
         self.assertEqual(result.entities.requested_field, "all")
         self.assertEqual(result.missing_required, (EntitySlot.TITLE,))
 
+    def test_all_details_direct_request_extracts_title_without_book_prefix(self) -> None:
+        result = extract_entities(
+            "quero que me de todas as informações q tiver sobre o livro o pequeno principe",
+            Intent.BOOK_DETAILS,
+        )
+
+        self.assertEqual(result.entities.title, "o pequeno principe")
+        self.assertEqual(result.entities.requested_field, "all")
+        self.assertFalse(result.needs_clarification)
+
     def test_isbn_is_optional_but_normalized_when_explicit(self) -> None:
         result = extract_entities("Quais dados do ISBN 978-85-359-0277-5?", Intent.BOOK_DETAILS)
 

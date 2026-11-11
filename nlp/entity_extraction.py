@@ -91,6 +91,7 @@ TITLE_PATTERNS = (
 DETAIL_TITLE_PATTERNS = (
     r"\b(?:consultar\s+)?detalhes(?:\s+do\s+livro)?\s*:?\s*(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:quero|queria|gostaria\s+de)\s+ler\s+(?:o\s+livro\s+)?(?P<entity>.+?)(?:,\s*(?:me\s+d[ea]|mostre|quero)\s+(?:um\s+)?(?:resumo|descricao)|[?.!;]|$)",
+    r"\b(?:todas?\s+as\s+informacoes|todos?\s+os\s+dados|detalhes\s+completos)(?:\s+(?:q(?:ue)?\s+)?(?:tiver|houver))?\s+(?:sobre\s+)?(?:o\s+livro\s+|a\s+obra\s+)?(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:quero|queria|gostaria\s+de|mostre)\s+(?:um\s+)?(?:resumo|sinopse|descricao)\s+(?:sobre\s+)?(?:o\s+livro\s+|a\s+obra\s+)?(?P<entity>.+?)(?:,\s*(?:quem|qual|como|por\s+que|o\s+que)\b|[?.!;]|$)",
     r"\b(?:quem\s+escreveu|quem\s+e\s+o\s+autor\s+de|autoria\s+de|autor\s+de|a\s+quem\s+e\s+atribuida\s+a\s+autoria\s+de)\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\bisbn(?:s)?\s+constam\s+para\s+as\s+edicoes\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
