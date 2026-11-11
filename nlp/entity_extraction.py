@@ -105,12 +105,12 @@ CONTEXT_REFERENCE_PATTERN = re.compile(r"\b(?:essa\s+obra|(?:sobre\s+)?a\s+obra|
 
 REQUESTED_FIELD_PATTERNS = (
     ("isbn", r"\bisbn(?:s)?\b"),
-    ("edition_count", r"\bquantas\s+edicoes\b|\bnumero\s+de\s+edicoes\b"),
-    ("publisher", r"\beditora\b|\bquem\s+publicou\b"),
-    ("description", r"\bdescricao\b|\bresumo\b"),
-    ("subjects", r"\bde\s+que\s+assunto\b|\bde\s+que\s+trata\b"),
-    ("first_publish_year", r"\bano\b|\bdata\b|\bpublicad[oa]\b|\bprimeira\s+edicao\b"),
-    ("author", r"\bautor\b|\bautoria\b|\bquem\s+escreveu\b|\bqual\s+escritor[aa]?\s+escreveu\b"),
+    ("edition_count", r"\bquantas\s+edicoes\b|\bnumero\s+de\s+edicoes\b|\bquantas\s+versoes\b"),
+    ("publisher", r"\beditora\b|\bquem\s+publicou\b|\bpublicadora\b"),
+    ("description", r"\bdescricao\b|\bresumo\b|\bsinopse\b|\bsobre\s+o\s+que\s+e\b"),
+    ("subjects", r"\bde\s+que\s+assunto\b|\bde\s+que\s+trata\b|\bquais\s+(?:sao\s+)?os\s+assuntos\b"),
+    ("first_publish_year", r"\bano\b|\bdata\b|\bquando\b|\blancad[oa]\b|\bpublicad[oa]\b|\bprimeira\s+edicao\b"),
+    ("author", r"\bautor(?:ia)?\b|\bescritor(?:a)?\b|\bquem\s+escreveu\b|\bquem\s+criou\b"),
 )
 
 

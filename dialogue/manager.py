@@ -18,7 +18,7 @@ from app.schemas import (
     IntentInterpretation,
 )
 from dialogue.context import ConversationStore
-from nlp.entity_extraction import EntityExtraction
+from nlp.entity_extraction import EntityExtraction, extract_entities
 from nlp.preprocessing import normalize_text
 
 
@@ -81,6 +81,15 @@ class DialogueManager:
         selection = _selection_number(normalized)
         if selection is not None and session.last_results:
             return self._handle_selection(session, selection)
+
+        contextual_detail = _contextual_detail_extraction(session, message)
+        if contextual_detail is not None:
+            contextual_interpretation = IntentInterpretation(
+                decision=IntentDecision.ACCEPTED,
+                intent=Intent.BOOK_DETAILS,
+                entities=contextual_detail.entities,
+            )
+            return self._handle_accepted(session, contextual_interpretation, contextual_detail)
 
         if session.pending_intent and session.pending_parameter:
             return self._handle_pending_answer(session, message)
@@ -285,6 +294,22 @@ def _selection_number(normalized: str) -> int | None:
 
 def _clean_fragment(message: str) -> str:
     return " ".join(message.strip().strip("\"“”'.,;:?!").split())
+
+
+def _contextual_detail_extraction(session: ConversationSession, message: str) -> EntityExtraction | None:
+    """Reconhece campos bibliográficos curtos para a obra já selecionada.
+
+    O TF-IDF continua decidindo novas buscas. Esta regra só atua quando há
+    seleção na própria sessão, não há título explícito e a pessoa pede um
+    campo bibliográfico conhecido, como autoria, ano ou sinopse.
+    """
+
+    if session.selected_book is None:
+        return None
+    extraction = extract_entities(message, Intent.BOOK_DETAILS)
+    if extraction.entities.title is not None or extraction.entities.requested_field is None or extraction.conflicts:
+        return None
+    return extraction
 
 
 def _missing_prompt(parameter: EntitySlot) -> str:

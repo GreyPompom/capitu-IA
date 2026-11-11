@@ -2,6 +2,8 @@
 
 from uuid import uuid4
 
+import pytest
+
 from app.chat_service import CapituChatService
 from app.schemas import BookDetails, BookSummary, ChatRequest, ConversationState, Intent
 from services.open_library import OpenLibraryUnavailableError
@@ -221,6 +223,29 @@ def test_short_author_question_uses_selected_book_context() -> None:
     assert response.intent is Intent.BOOK_DETAILS
     assert response.state is ConversationState.ANSWERED
     assert "Machado de Assis" in response.text
+    assert catalog.calls == [("title", "Dom Casmurro"), ("details", "/works/OL1003134W")]
+
+
+@pytest.mark.parametrize(
+    ("message", "expected_fragment"),
+    [
+        ("Quem é o escritor?", "Machado de Assis"),
+        ("Quando foi lançado?", "1899"),
+        ("Mostre a sinopse", "Registro controlado para teste."),
+        ("Qual editora?", "não forneceu esse campo"),
+        ("Quais são os assuntos?", "não forneceu esse campo"),
+    ],
+)
+def test_contextual_detail_field_variants_use_selected_book(message: str, expected_fragment: str) -> None:
+    service, catalog = make_service()
+    session_id = uuid4()
+
+    service.handle(ChatRequest(message="Procure Dom Casmurro", session_id=session_id))
+    response = service.handle(ChatRequest(message=message, session_id=session_id))
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert expected_fragment in response.text
     assert catalog.calls == [("title", "Dom Casmurro"), ("details", "/works/OL1003134W")]
 
 
