@@ -74,11 +74,14 @@ def evaluate() -> dict[str, object]:
     positive_rows = _rows(TEST_SPLIT)
     expected: list[str] = []
     predicted: list[str] = []
+    all_expected: list[str] = []
+    all_predicted: list[str] = []
     entity_expected: list[str] = []
     entity_observed: list[str] = []
     field_expected: list[str] = []
     field_observed: list[str] = []
     contextual_parameter_rows: list[str] = []
+    contextual_intent_rows: list[dict[str, object]] = []
     predictions: list[dict[str, object]] = []
 
     for row in positive_rows:
@@ -90,12 +93,23 @@ def evaluate() -> dict[str, object]:
             if interpretation.decision is IntentDecision.ACCEPTED and interpretation.intent is not None
             else FALLBACK_LABEL
         )
-        expected.append(intent.value)
-        predicted.append(observed_intent)
-
         extraction = extract_entities(row["texto"], intent).entities
         entity = row.get("entidade", "")
         is_contextual = intent is Intent.BOOK_DETAILS and entity.casefold().startswith(("indice", "índice"))
+        all_expected.append(intent.value)
+        all_predicted.append(observed_intent)
+        if is_contextual:
+            contextual_intent_rows.append(
+                {
+                    "id": row["id"],
+                    "expected_without_context": "fallback",
+                    "predicted_intent": observed_intent,
+                    "decision": interpretation.decision.value,
+                }
+            )
+        else:
+            expected.append(intent.value)
+            predicted.append(observed_intent)
         if entity and not is_contextual:
             entity_expected.append(_normalized(entity))
             entity_observed.append(_normalized(getattr(extraction, _slot(intent))))
@@ -149,9 +163,11 @@ def evaluate() -> dict[str, object]:
         "test_source_sha256": _sha256(TEST_SPLIT),
         "test_split_used_for_training": False,
         "intent_metrics": calculate_intent_metrics(expected, predicted),
+        "all_test_rows_intent_metrics_post_correction": calculate_intent_metrics(all_expected, all_predicted),
         "entity_exact_match": exact_match_rate(entity_expected, entity_observed),
         "requested_field_exact_match": exact_match_rate(field_expected, field_observed),
         "contextual_parameter_rows_excluded_from_direct_entity_metric": contextual_parameter_rows,
+        "contextual_rows_excluded_from_standalone_intent_metric": contextual_intent_rows,
         "negative_behavior": {
             "total": len(negative_rows),
             "correct": negative_correct,

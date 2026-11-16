@@ -8,52 +8,147 @@
   "test_source_sha256": "2b95922178f1a09820aa24475aaa49f1fb1d761cf3a53c1b27d5ba279928ead8",
   "test_split_used_for_training": false,
   "intent_metrics": {
-    "total": 18,
-    "correct": 8,
-    "accuracy": 0.4444444444444444,
-    "fallback_count": 10,
-    "fallback_rate": 0.5555555555555556,
+    "total": 16,
+    "correct": 15,
+    "accuracy": 0.9375,
+    "fallback_count": 1,
+    "fallback_rate": 0.0625,
     "classification_report": {
       "buscar_por_titulo": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
         "support": 5.0
       },
       "buscar_obras_autor": {
         "precision": 1.0,
-        "recall": 0.5,
-        "f1-score": 0.6666666666666666,
+        "recall": 0.75,
+        "f1-score": 0.8571428571428571,
         "support": 4.0
       },
       "buscar_por_assunto": {
         "precision": 1.0,
-        "recall": 0.8,
-        "f1-score": 0.8888888888888888,
+        "recall": 1.0,
+        "f1-score": 1.0,
         "support": 5.0
       },
       "consultar_detalhes": {
         "precision": 1.0,
-        "recall": 0.5,
-        "f1-score": 0.6666666666666666,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 2.0
+      },
+      "micro avg": {
+        "precision": 1.0,
+        "recall": 0.9375,
+        "f1-score": 0.967741935483871,
+        "support": 16.0
+      },
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 0.9375,
+        "f1-score": 0.9642857142857143,
+        "support": 16.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 0.9375,
+        "f1-score": 0.9642857142857143,
+        "support": 16.0
+      }
+    },
+    "confusion_matrix_labels": [
+      "buscar_por_titulo",
+      "buscar_obras_autor",
+      "buscar_por_assunto",
+      "consultar_detalhes",
+      "fallback"
+    ],
+    "confusion_matrix": [
+      [
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "all_test_rows_intent_metrics_post_correction": {
+    "total": 18,
+    "correct": 16,
+    "accuracy": 0.8888888888888888,
+    "fallback_count": 2,
+    "fallback_rate": 0.1111111111111111,
+    "classification_report": {
+      "buscar_por_titulo": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "buscar_obras_autor": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1-score": 0.8571428571428571,
+        "support": 4.0
+      },
+      "buscar_por_assunto": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "consultar_detalhes": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1-score": 0.8571428571428571,
         "support": 4.0
       },
       "micro avg": {
         "precision": 1.0,
-        "recall": 0.4444444444444444,
-        "f1-score": 0.6153846153846154,
+        "recall": 0.8888888888888888,
+        "f1-score": 0.9411764705882353,
         "support": 18.0
       },
       "macro avg": {
-        "precision": 0.75,
-        "recall": 0.45,
-        "f1-score": 0.5555555555555555,
+        "precision": 1.0,
+        "recall": 0.875,
+        "f1-score": 0.9285714285714286,
         "support": 18.0
       },
       "weighted avg": {
-        "precision": 0.7222222222222222,
-        "recall": 0.4444444444444444,
-        "f1-score": 0.5432098765432098,
+        "precision": 1.0,
+        "recall": 0.8888888888888888,
+        "f1-score": 0.9365079365079365,
         "support": 18.0
       }
     },
@@ -66,32 +161,32 @@
     ],
     "confusion_matrix": [
       [
+        5,
         0,
         0,
         0,
-        0,
-        5
+        0
       ],
       [
         0,
-        2,
+        3,
         0,
-        0,
-        2
-      ],
-      [
-        0,
-        0,
-        4,
         0,
         1
       ],
       [
         0,
         0,
+        5,
         0,
-        2,
-        2
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        1
       ],
       [
         0,
@@ -115,6 +210,20 @@
   "contextual_parameter_rows_excluded_from_direct_entity_metric": [
     "G01-037",
     "G01-039"
+  ],
+  "contextual_rows_excluded_from_standalone_intent_metric": [
+    {
+      "id": "G01-037",
+      "expected_without_context": "fallback",
+      "predicted_intent": "consultar_detalhes",
+      "decision": "accepted"
+    },
+    {
+      "id": "G01-039",
+      "expected_without_context": "fallback",
+      "predicted_intent": "fallback",
+      "decision": "ambiguous"
+    }
   ],
   "negative_behavior": {
     "total": 20,
@@ -267,18 +376,18 @@
     {
       "id": "E03-005",
       "expected_intent": "buscar_por_titulo",
-      "predicted_intent": "fallback",
-      "decision": "rejected",
+      "predicted_intent": "buscar_por_titulo",
+      "decision": "accepted",
       "similarity_score": 0.16158020371433662,
-      "margin": 0.008183944698326145
+      "margin": null
     },
     {
       "id": "E03-006",
       "expected_intent": "buscar_por_titulo",
-      "predicted_intent": "fallback",
-      "decision": "rejected",
+      "predicted_intent": "buscar_por_titulo",
+      "decision": "accepted",
       "similarity_score": 0.16541065651405093,
-      "margin": 0.0898015077254825
+      "margin": null
     },
     {
       "id": "E03-011",
@@ -299,10 +408,10 @@
     {
       "id": "E03-013",
       "expected_intent": "buscar_obras_autor",
-      "predicted_intent": "fallback",
-      "decision": "rejected",
+      "predicted_intent": "buscar_obras_autor",
+      "decision": "accepted",
       "similarity_score": 0.22934007917545088,
-      "margin": 0.15022738535335342
+      "margin": null
     },
     {
       "id": "E03-014",
@@ -331,10 +440,10 @@
     {
       "id": "E03-037",
       "expected_intent": "consultar_detalhes",
-      "predicted_intent": "fallback",
-      "decision": "rejected",
-      "similarity_score": 0.1732527681293964,
-      "margin": 0.03750702130204281
+      "predicted_intent": "consultar_detalhes",
+      "decision": "accepted",
+      "similarity_score": 0.1357457468273536,
+      "margin": null
     },
     {
       "id": "E03-040",
@@ -347,26 +456,26 @@
     {
       "id": "G01-002",
       "expected_intent": "buscar_por_titulo",
-      "predicted_intent": "fallback",
-      "decision": "rejected",
-      "similarity_score": 0.12120488741717426,
-      "margin": 0.01578519137170241
+      "predicted_intent": "buscar_por_titulo",
+      "decision": "accepted",
+      "similarity_score": 0.10541969604547186,
+      "margin": null
     },
     {
       "id": "G01-005",
       "expected_intent": "buscar_por_titulo",
-      "predicted_intent": "fallback",
-      "decision": "rejected",
+      "predicted_intent": "buscar_por_titulo",
+      "decision": "accepted",
       "similarity_score": 0.23835883854599257,
-      "margin": 0.1401716910661199
+      "margin": null
     },
     {
       "id": "G01-010",
       "expected_intent": "buscar_por_titulo",
-      "predicted_intent": "fallback",
-      "decision": "rejected",
+      "predicted_intent": "buscar_por_titulo",
+      "decision": "accepted",
       "similarity_score": 0.20475988189803085,
-      "margin": 0.06670405234603852
+      "margin": null
     },
     {
       "id": "G01-037",
@@ -395,10 +504,10 @@
     {
       "id": "M01-024",
       "expected_intent": "buscar_por_assunto",
-      "predicted_intent": "fallback",
-      "decision": "ambiguous",
-      "similarity_score": 0.14547059605255852,
-      "margin": 0.08596738755056696
+      "predicted_intent": "buscar_por_assunto",
+      "decision": "accepted",
+      "similarity_score": null,
+      "margin": null
     },
     {
       "id": "M01-025",
