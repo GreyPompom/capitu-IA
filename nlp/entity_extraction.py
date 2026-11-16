@@ -47,6 +47,7 @@ AUTHOR_PATTERNS = (
 )
 
 SUBJECT_PATTERNS = (
+    r"\b(?:alguma\s+)?leitura\s+a\s+respeito\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\bpesquisa\s+sobre\s+(?P<entity>.+?)(?:,\s+preciso|[?.!;]|$)",
     r"\buse\s+(?P<entity>.+?)\s+como\s+assunto\b",
     r"\bmeu\s+tema\s+de\s+estudo\s+e(?:h)?\s+(?P<entity>.+?)(?:[?.!;]|$)",
@@ -63,6 +64,7 @@ SUBJECT_PATTERNS = (
     r"\blivros\s+que\s+abordem\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\breferencias\s+bibliograficas\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\bsobre\s+(?P<entity>.+?)(?:[?.!;]|$)",
+    r"\b(?:me\s+)?mostre\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:livros|obras|leituras|referencias)\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:indicacoes|material)\s+(?:de|sobre)\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:tema|assunto)\s+(?:de\s+(?:estudo|pesquisa)\s+)?(?:e|eh|é|seja)\s+(?P<entity>.+?)(?:[?.!;]|$)",
@@ -74,6 +76,7 @@ SUBJECT_PATTERNS = (
 )
 
 TITLE_PATTERNS = (
+    r"\bestou\s+atras\s+de\s+um\s+livro\s+chamado\s+(?P<entity>.+?)(?:[?,.!;]|$)",
     r"\bbusca\s+pra\s+mim\s+(?P<entity>.+?)(?:[?,.!;]|$)",
     r"\bvoce\s+acha\s+(?P<entity>.+?)(?:[?,.!;]|$)",
     r"\buse\s+(?P<entity>.+?)\s+como\s+titulo\b",
@@ -89,6 +92,7 @@ TITLE_PATTERNS = (
 )
 
 DETAIL_TITLE_PATTERNS = (
+    r"\bquero\s+saber\s+mais\s+sobre\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:consultar\s+)?detalhes(?:\s+do\s+livro)?\s*:?\s*(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:quero|queria|gostaria\s+de)\s+ler\s+(?:o\s+livro\s+)?(?P<entity>.+?)(?:,\s*(?:me\s+d[ea]|mostre|quero)\s+(?:um\s+)?(?:resumo|descricao)|[?.!;]|$)",
     r"\b(?:todas?\s+as\s+informacoes|todos?\s+os\s+dados|detalhes\s+completos)(?:\s+(?:q(?:ue)?\s+)?(?:tiver|houver))?\s+(?:sobre\s+)?(?:o\s+livro\s+|a\s+obra\s+)?(?P<entity>.+?)(?:[?.!;]|$)",
@@ -157,6 +161,8 @@ def extract_entities(message: str, intent: Intent) -> EntityExtraction:
         title = quotes[0] if quotes else _find_entity(original, normalized, offsets, TITLE_PATTERNS)
     elif intent is Intent.SEARCH_AUTHOR_WORKS:
         author = _find_entity(original, normalized, offsets, AUTHOR_PATTERNS)
+        if _is_generic_author(author):
+            author = None
         if _contains_composite_filter(normalized):
             conflicts.append("author_and_subject")
     elif intent is Intent.SEARCH_SUBJECT:
@@ -254,6 +260,13 @@ def _subject_fallback(original: str) -> str | None:
 
 def _contains_composite_filter(normalized: str) -> bool:
     return bool(re.search(r"\b(?:livros|obras|titulos)\s+(?:de|do|da)\b.*\bsobre\b", normalized))
+
+
+def _is_generic_author(value: str | None) -> bool:
+    return value is not None and value.casefold() in {
+        "autor", "autora", "um autor", "uma autora", "algum autor", "alguma autora",
+        "um escritor", "uma escritora",
+    }
 
 
 def _missing_required(intent: Intent, entities: ExtractedEntities) -> tuple[EntitySlot, ...]:

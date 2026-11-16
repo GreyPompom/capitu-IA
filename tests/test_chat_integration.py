@@ -76,6 +76,46 @@ def test_author_search_is_not_treated_as_author_biography() -> None:
     assert catalog.calls == [("author", "Machado de Assis")]
 
 
+@pytest.mark.parametrize(
+    ("message", "expected_intent", "expected_call"),
+    [
+        ("Estou atrás de um livro chamado 1984", Intent.SEARCH_TITLE, ("title", "1984")),
+        ("Mostre obras de Clarice Lispector", Intent.SEARCH_AUTHOR_WORKS, ("author", "Clarice Lispector")),
+        ("Me mostre ficção científica", Intent.SEARCH_SUBJECT, ("subject", "ficção científica")),
+        ("Alguma leitura a respeito de astronomia?", Intent.SEARCH_SUBJECT, ("subject", "astronomia")),
+        ("Obras de Zyx Autor 8472", Intent.SEARCH_AUTHOR_WORKS, ("author", "Zyx Autor 8472")),
+    ],
+)
+def test_g05_search_variations_use_exact_catalog_parameter(message, expected_intent, expected_call) -> None:
+    service, catalog = make_service()
+
+    response = service.handle(ChatRequest(message=message))
+
+    assert response.intent is expected_intent
+    assert response.state is ConversationState.ANSWERED
+    assert catalog.calls == [expected_call]
+
+
+def test_g05_generic_author_request_clarifies_without_catalog_call() -> None:
+    service, catalog = make_service()
+
+    response = service.handle(ChatRequest(message="Mostre livros de um autor"))
+
+    assert response.intent is Intent.SEARCH_AUTHOR_WORKS
+    assert response.state is ConversationState.AWAITING_CLARIFICATION
+    assert catalog.calls == []
+
+
+def test_g05_detail_variation_searches_then_loads_details() -> None:
+    service, catalog = make_service()
+
+    response = service.handle(ChatRequest(message="Quero saber mais sobre A Hora da Estrela"))
+
+    assert response.intent is Intent.BOOK_DETAILS
+    assert response.state is ConversationState.ANSWERED
+    assert catalog.calls == [("title", "A Hora da Estrela"), ("details", "/works/OL1003134W")]
+
+
 def test_author_list_command_uses_only_the_author_name() -> None:
     service, catalog = make_service()
 

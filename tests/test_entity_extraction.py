@@ -46,6 +46,21 @@ class EntityExtractionTests(unittest.TestCase):
 
         self.assertEqual(result.entities.subject, "inteligência artificial")
 
+    def test_g05_title_author_subject_and_detail_variations_extract_exact_entities(self) -> None:
+        title = extract_entities("Estou atrás de um livro chamado 1984", Intent.SEARCH_TITLE)
+        author = extract_entities("Mostre obras de Clarice Lispector", Intent.SEARCH_AUTHOR_WORKS)
+        subject = extract_entities("Me mostre ficção científica", Intent.SEARCH_SUBJECT)
+        subject_variant = extract_entities("Alguma leitura a respeito de astronomia?", Intent.SEARCH_SUBJECT)
+        details = extract_entities("Quero saber mais sobre A Hora da Estrela", Intent.BOOK_DETAILS)
+        missing_author = extract_entities("Mostre livros de um autor", Intent.SEARCH_AUTHOR_WORKS)
+
+        self.assertEqual(title.entities.title, "1984")
+        self.assertEqual(author.entities.author, "Clarice Lispector")
+        self.assertEqual(subject.entities.subject, "ficção científica")
+        self.assertEqual(subject_variant.entities.subject, "astronomia")
+        self.assertEqual(details.entities.title, "A Hora da Estrela")
+        self.assertEqual(missing_author.missing_required, (EntitySlot.AUTHOR,))
+
     def test_details_extracts_requested_field_and_title(self) -> None:
         result = extract_entities("Qual editora publicou A Bolsa Amarela?", Intent.BOOK_DETAILS)
 
