@@ -60,16 +60,18 @@ def interpret_message(
 def _high_precision_intent(normalized: str) -> Intent | None:
     """Reconhece comandos inequívocos; casos genéricos continuam no TF-IDF."""
 
-    if re.search(r"\b(?:quem\s+escreveu|quem\s+e\s+o\s+autor|qual\s+(?:e\s+)?(?:o\s+)?autor|isbn|editora|descricao|resumo|detalhes|quantas\s+edicoes|de\s+que\s+ano|todas?\s+as\s+informacoes|todos?\s+os\s+dados|tudo\s+sobre|quero\s+saber\s+mais\s+sobre)\b", normalized):
+    if re.search(r"\b(?:quem\s+escreveu|quem\s+e\s+o\s+autor|qual\s+(?:e\s+)?(?:o\s+)?autor|isbns?|editora|descricao|resumo|detalhes|quantas\s+edicoes|de\s+que\s+ano|todas?\s+as\s+informacoes|todos?\s+os\s+dados|tudo\s+sobre|quero\s+saber\s+mais\s+sobre)\b", normalized):
         return Intent.BOOK_DETAILS
+    if re.search(r"\b(?:obras|livros)\s+(?:publicadas|assinadas)\s+por\b", normalized):
+        return Intent.SEARCH_AUTHOR_WORKS
     if re.search(r"\b(?:obras|titulos|publicacoes|bibliografia)\s+(?:do|da|de)\s+\S", normalized):
         return Intent.SEARCH_AUTHOR_WORKS
     if re.search(r"\b(?:liste|listar|mostre|mostrar)\s+(?:as\s+)?(?:obras|livros|titulos|publicacoes)\s+(?:de|do|da)\b", normalized):
         return Intent.SEARCH_AUTHOR_WORKS
     if re.search(r"\b(?:livros|obras|titulos|publicacoes)\b.*\b(?:escreveu|assinad|autoria)\b", normalized):
         return Intent.SEARCH_AUTHOR_WORKS
-    if re.search(r"\b(?:livros|obras|leituras)\s+sobre\b|\b(?:assunto|tema)\b|\bficcao\s+cientifica\b|\b(?:alguma\s+)?leitura\s+a\s+respeito\s+de\b", normalized):
+    if re.search(r"\b(?:livros|obras|leituras)\s+sobre\b|\b(?:assunto|tema)\b|\bficcao\s+cientifica\b|\b(?:alguma\s+)?leitura\s+a\s+respeito\s+de\b|\bindicacoes\s+de\b", normalized):
         return Intent.SEARCH_SUBJECT
-    if re.search(r"\b(?:procure|procurar|buscar|busque|localize|localizar|encontre|encontrar|ache|achar|estou\s+atras\s+de\s+um\s+livro\s+chamado)\b", normalized):
+    if re.search(r"\b(?:procure|procurar|buscar|busque|localize|localizar|encontre|encontrar|ache|achar|estou\s+atras\s+de\s+um\s+livro\s+chamado|consta|registro\s+de|pesquisa\s+por\s+nome|digitei|pelo\s+titulo)\b", normalized):
         return Intent.SEARCH_TITLE
     return None
