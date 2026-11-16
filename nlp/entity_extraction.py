@@ -18,6 +18,7 @@ QUOTED_TEXT = re.compile(r"[\"“”'](?P<entity>[^\"“”']+)[\"“”']")
 ISBN_PATTERN = re.compile(r"\b(?:ISBN(?:-1[03])?\s*[:#]?\s*)?(?P<isbn>97[89][\d\s-]{10,17}|\d[\d\s-]{8,15}[\dXx])\b")
 
 AUTHOR_PATTERNS = (
+    r"\b(?:liste|listar|mostre|mostrar|quero|queria|me\s+liste)\s+(?:as\s+)?(?:obras|livros|titulos|publicacoes)\s+(?:de|do|da)\s+(?P<entity>.+?)(?:[.;?!]|$)",
     r"\blivros\s+(?P<entity>.+?)\s+escreveu\b",
     r"\busando\s+(?P<entity>.+?)\s+como\s+autora?\b",
     r"\btitulos\s+que\s+tenham\s+(?P<entity>.+?)\s+como\s+autor\b",
@@ -88,6 +89,10 @@ TITLE_PATTERNS = (
 )
 
 DETAIL_TITLE_PATTERNS = (
+    r"\b(?:consultar\s+)?detalhes(?:\s+do\s+livro)?\s*:?\s*(?P<entity>.+?)(?:[?.!;]|$)",
+    r"\b(?:quero|queria|gostaria\s+de)\s+ler\s+(?:o\s+livro\s+)?(?P<entity>.+?)(?:,\s*(?:me\s+d[ea]|mostre|quero)\s+(?:um\s+)?(?:resumo|descricao)|[?.!;]|$)",
+    r"\b(?:todas?\s+as\s+informacoes|todos?\s+os\s+dados|detalhes\s+completos)(?:\s+(?:q(?:ue)?\s+)?(?:tiver|houver))?\s+(?:sobre\s+)?(?:o\s+livro\s+|a\s+obra\s+)?(?P<entity>.+?)(?:[?.!;]|$)",
+    r"\b(?:quero|queria|gostaria\s+de|mostre)\s+(?:um\s+)?(?:resumo|sinopse|descricao)\s+(?:sobre\s+)?(?:o\s+livro\s+|a\s+obra\s+)?(?P<entity>.+?)(?:,\s*(?:quem|qual|como|por\s+que|o\s+que)\b|[?.!;]|$)",
     r"\b(?:quem\s+escreveu|quem\s+e\s+o\s+autor\s+de|autoria\s+de|autor\s+de|a\s+quem\s+e\s+atribuida\s+a\s+autoria\s+de)\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\bisbn(?:s)?\s+constam\s+para\s+as\s+edicoes\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
     r"\b(?:sobre|para|ficha\s+de)\s+(?P<entity>.+?)(?:,|;|\.|\?|!|$)",
@@ -99,16 +104,20 @@ DETAIL_TITLE_PATTERNS = (
     r"\bedicoes\s+de\s+(?P<entity>.+?)(?:[?.!;]|$)",
 )
 
-CONTEXT_REFERENCE_PATTERN = re.compile(r"\b(?:essa\s+obra|desse\s+livro|dessa\s+edicao|primeiro\s+livro|segundo\s+livro|livro\s+\d+|item\s+\d+|terceiro\s+resultado|isso|obra\s+que\s+acabei|selecionar\s+uma\s+obra)\b")
+CONTEXT_REFERENCE_PATTERN = re.compile(r"\b(?:essa\s+obra|(?:sobre\s+)?a\s+obra|esse\s+livro|este\s+livro|desse\s+livro|dessa\s+edicao|essa\s+edicao|primeiro\s+livro|segundo\s+livro|livro\s+\d+|item\s+\d+|terceiro\s+resultado|isso|obra\s+que\s+acabei|selecionar\s+uma\s+obra)\b")
+INTERPRETIVE_CONTENT_QUESTION_PATTERN = re.compile(
+    r"\b(?:quem\s+era|quem\s+e(?!\s+o\s+autor)|por\s+que|o\s+que\s+aconteceu|o\s+que\s+significa|qual\s+o\s+significado)\b"
+)
 
 REQUESTED_FIELD_PATTERNS = (
+    ("all", r"\b(?:todas?\s+as\s+informacoes|todos?\s+os\s+dados|detalhes\s+completos|tudo\s+sobre)\b"),
     ("isbn", r"\bisbn(?:s)?\b"),
-    ("edition_count", r"\bquantas\s+edicoes\b|\bnumero\s+de\s+edicoes\b"),
-    ("publisher", r"\beditora\b|\bquem\s+publicou\b"),
-    ("description", r"\bdescricao\b|\bresumo\b"),
-    ("subjects", r"\bde\s+que\s+assunto\b|\bde\s+que\s+trata\b"),
-    ("first_publish_year", r"\bano\b|\bdata\b|\bpublicad[oa]\b|\bprimeira\s+edicao\b"),
-    ("author", r"\bautor\b|\bautoria\b|\bquem\s+escreveu\b|\bqual\s+escritor[aa]?\s+escreveu\b"),
+    ("edition_count", r"\bquantas\s+edicoes\b|\bnumero\s+de\s+edicoes\b|\bquantas\s+versoes\b"),
+    ("publisher", r"\beditora\b|\bquem\s+publicou\b|\bpublicadora\b"),
+    ("description", r"\bdescricao\b|\bresumo\b|\bsinopse\b|\bsobre\s+o\s+que\s+e\b"),
+    ("subjects", r"\bde\s+que\s+assunto\b|\bde\s+que\s+trata\b|\bquais\s+(?:sao\s+)?os\s+assuntos\b"),
+    ("first_publish_year", r"\bano\b|\bdata\b|\bquando\b|\blancad[oa]\b|\bpublicad[oa]\b|\bprimeira\s+edicao\b"),
+    ("author", r"\bautor(?:ia)?\b|\bescritor(?:a)?\b|\bquem\s+escreveu\b|\bquem\s+criou\b"),
 )
 
 
@@ -161,7 +170,14 @@ def extract_entities(message: str, intent: Intent) -> EntityExtraction:
     else:  # pragma: no cover - proteção para expansão futura do enum
         raise ValueError(f"Intenção não suportada para extração: {intent}")
 
-    entities = ExtractedEntities(title=title, author=author, subject=subject, isbn=isbn, requested_field=requested_field)
+    entities = ExtractedEntities(
+        title=title,
+        author=author,
+        subject=subject,
+        isbn=isbn,
+        requested_field=requested_field,
+        has_interpretive_content_question=bool(INTERPRETIVE_CONTENT_QUESTION_PATTERN.search(normalized)),
+    )
     return EntityExtraction(entities=entities, missing_required=_missing_required(intent, entities), conflicts=tuple(conflicts))
 
 
