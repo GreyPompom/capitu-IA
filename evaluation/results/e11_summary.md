@@ -11,7 +11,7 @@ Após correções de padrões gerais de linguagem (título, obras de autor, assu
 
 | Medida | Resultado | Meta interna mínima |
 | --- | ---: | ---: |
-| Accuracy geral | **88,89% (16/18)** | 75% |
+| Accuracy geral | **88,89% (16/18)** | 75% (mínimo aceitável) |
 | Macro precision | **100,00%** | 75% |
 | Macro recall | **87,50%** | 75% |
 | Macro F1 | **92,86%** | 75% |
@@ -43,8 +43,8 @@ Linhas = intenção esperada; colunas = saída prevista. `fallback` inclui rejei
 
 ## Rastreabilidade e limitação metodológica
 
-A linha de base anterior — **44,44% (8/18)** de accuracy, Macro F1 **55,56%** e fallback **55,56%** — está preservada no commit `a47b898`, antes das correções. Ela revelou formulações que precisavam ser atendidas e orientou os ajustes posteriores.
+A linha de base anterior — **44,44% (8/18)** de accuracy, Macro F1 **55,56%** e fallback **55,56%** — está preservada no commit `a47b898`, antes das correções. Ela revelou formulações que precisavam ser atendidas e orientou os ajustes posteriores. A equipe considera **75% o mínimo aceitável** para as métricas positivas e até 25% para fallback; a regressão atual satisfaz ambos os critérios.
 
-Por esse motivo, o resultado desta página é uma **reavaliação de desenvolvimento/regressão**, não uma estimativa independente definitiva de generalização: o conjunto de 18 exemplos já foi visto durante a análise. Antes da entrega, Millena ou Miguel deve criar e executar o roteiro em [`docs/evidence/E11_blind_evaluation_request.md`](../../docs/evidence/E11_blind_evaluation_request.md), sem consultar `test.csv`, as previsões ou as regras. Só esse novo conjunto cego poderá ser apresentado como validação final independente.
+Por esse motivo, o resultado desta página é uma **reavaliação de desenvolvimento/regressão**, não uma estimativa independente definitiva de generalização: o conjunto de 18 exemplos já foi visto durante a análise. Como reforço para a defesa, recomendamos que Millena ou Miguel escreva perguntas novas sem consultar `test.csv`, as previsões ou as regras, e que Emely execute o sistema antes de conhecer as perguntas. Esse é o significado de “validação cega”; ela reforça a evidência, mas não anula a regressão já concluída. O roteiro está em [`docs/evidence/E11_blind_evaluation_request.md`](../../docs/evidence/E11_blind_evaluation_request.md).
 
 O resultado estruturado contém hashes dos splits, previsões individuais, matriz de confusão e denominadores: [`e11_intent_metrics.json`](e11_intent_metrics.json).

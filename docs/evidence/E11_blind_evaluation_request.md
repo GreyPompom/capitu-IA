@@ -2,19 +2,21 @@
 
 ## Objetivo
 
-Confirmar se a CAPITU mantém pelo menos 75% nas métricas de classificação sem reutilizar as frases que orientaram as regras de desenvolvimento.
+Confirmar, com perguntas que a pessoa responsável pela implementação ainda não viu, que a CAPITU mantém o mínimo aceitável de 75% nas métricas de classificação.
+
+Em termos simples: Miguel ou Millena escreve perguntas novas; Emely roda a CAPITU; só depois vocês comparam a resposta com o resultado esperado. Assim, ninguém consegue ajustar o código especificamente para essas perguntas antes do teste.
 
 ## Quem executa
 
-Millena ou Miguel, de preferência quem **não** alterou `nlp/interpretation.py`, `data/splits/test.csv` nem leu `evaluation/results/e11_intent_metrics.json`.
+Millena ou Miguel, de preferência quem **não** alterou `nlp/interpretation.py`. A pessoa que prepara as perguntas não deve consultar `data/splits/test.csv`, as previsões nem as regras antes de escrevê-las.
 
 ## Como preparar o conjunto
 
-1. Criar 24 mensagens naturais e inéditas: 6 para cada intenção (`buscar_por_titulo`, `buscar_obras_autor`, `buscar_por_assunto`, `consultar_detalhes`).
+1. Criar 24 mensagens naturais e inéditas: 6 para cada intenção (`buscar_por_titulo`, `buscar_obras_autor`, `buscar_por_assunto`, `consultar_detalhes`). Esse total dá exemplos suficientes para observar cada fluxo, sem transformar o teste em uma tarefa longa.
 2. Criar adicionalmente 8 mensagens: 4 fora do escopo e 4 ambíguas, com estado esperado correspondente.
 3. Incluir formulações curtas, longas, sem acento, com sinônimos e pelo menos dois erros de digitação moderados.
-4. Registrar somente a mensagem, a intenção/estado esperado, a entidade e, quando aplicável, o campo solicitado. Não consultar `data/splits/test.csv`, `data/splits/reference.csv`, regras, resultados ou previsões para montar as frases.
-5. Entregar a planilha para Emely executar. Não alterar os rótulos depois de ver a resposta do sistema.
+4. Registrar somente a mensagem, a intenção/estado esperado, a entidade e, quando aplicável, o campo solicitado. Não consultar `data/splits/test.csv`, regras, resultados ou previsões para montar as frases.
+5. Entregar a planilha para Emely executar. Não alterar os rótulos depois de ver a resposta do sistema. Esta etapa é recomendada para reforçar a defesa; não invalida a regressão já registrada.
 
 ## Modelo de registro
 
