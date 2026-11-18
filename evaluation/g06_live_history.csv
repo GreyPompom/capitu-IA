@@ -1,0 +1,8 @@
+id,entrada,esperado,obtido,estado,versao,data,evidencia
+T03,"Estou atrás de um livro chamado 1984","Buscar título 1984","Abstenção; nenhuma chamada ao catálogo",awaiting_clarification,"3c7e74a + working tree",2026-11-10,"G05:evaluation/g05_acceptance.csv"
+T06,"Mostre obras de Clarice Lispector","Buscar obras de Clarice Lispector","Abstenção; nenhuma chamada ao catálogo",awaiting_clarification,"3c7e74a + working tree",2026-11-10,"G05:evaluation/g05_acceptance.csv"
+T09,"Me mostre ficção científica","Buscar assunto ficção científica","Consultou assunto com comando completo: Me mostre ficção científica",no_results,"3c7e74a + working tree",2026-11-10,"G05:evaluation/g05_acceptance.csv; HTTP 200"
+T10,"Alguma leitura a respeito de astronomia?","Buscar assunto astronomia","Abstenção; nenhuma chamada ao catálogo",awaiting_clarification,"3c7e74a + working tree",2026-11-10,"G05:evaluation/g05_acceptance.csv"
+T12,"Quero saber mais sobre A Hora da Estrela","Consultar detalhes de A Hora da Estrela","Abstenção; nenhuma chamada ao catálogo",awaiting_clarification,"3c7e74a + working tree",2026-11-10,"G05:evaluation/g05_acceptance.csv"
+T16,"Mostre livros de um autor","Pedir nome do autor sem consultar o catálogo","Consultou assunto 'um autor'; respondeu com resultado",answered,"3c7e74a + working tree",2026-11-10,"G05:evaluation/g05_acceptance.csv; HTTP 200"
+T20,"Obras de Zyx Autor 8472","Buscar autor; lista vazia controlada","Abstenção; nenhuma chamada ao catálogo",awaiting_clarification,"3c7e74a + working tree",2026-11-10,"G05:evaluation/g05_acceptance.csv"
