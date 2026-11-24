@@ -1,42 +1,60 @@
-# Análise de erros
+# E12 — Diagnóstico técnico de falhas reais
 
-Este arquivo preserva falhas observadas e distingue o diagnóstico histórico da
-situação após correção. Resultados de fonte externa não são tratados como
-evidência de inexistência bibliográfica.
+Esta análise usa falhas efetivamente registradas em G05, G06 e M05. Ela
+distingue o comportamento histórico da situação após cada correção; não usa a
+variação da Open Library como prova de inexistência de uma obra.
 
-## REG-001 — Título não extraído em pedido de resumo
+## E12-01 — Paráfrase de título rejeitada
 
 | Campo | Registro |
 | --- | --- |
-| Observação | 11/11/2026 — `quero ler o livro O pequeno principe, me de um resumo`. |
-| Falha original | `consultar_detalhes` foi identificado, mas o título ficou nulo e o diálogo pediu esclarecimento. |
-| Camada | Extração de entidades. |
-| Correção | Padrão específico para “quero ler o livro [título], me dê um resumo”, sem quebrar referências de contexto. |
-| Regressão | `test_detail_request_for_summary_extracts_title_and_description_field` e `test_summary_request_runs_controlled_detail_flow`. |
-| Situação | **Corrigida e validada na M03 em 16/11/2026.** |
+| Evidência original | G05 T03, em 10/11/2026: `Estou atrás de um livro chamado 1984`. |
+| Esperado | Intenção `buscar_por_titulo`, entidade `1984` e busca controlada por título. |
+| Obtido originalmente | `awaiting_clarification`, sem intenção aceita e sem chamada ao catálogo. |
+| Causa técnica | A formulação não tinha sinal de alta precisão no interpretador e não possuía padrão específico de extração de título. |
+| Impacto | Uma forma natural de busca por obra não chegava à Open Library. |
+| Correção aplicada | Regra geral para `estou atrás de um livro chamado` em `nlp/interpretation.py` e `TITLE_PATTERNS` em `nlp/entity_extraction.py`. |
+| Regressão | `test_g05_search_variations_use_exact_catalog_parameter` e `test_g05_title_author_subject_and_detail_variations_extract_exact_entities`. |
+| Comparação honesta | Falhou na G05 histórica; passou 3/3 na G06 controlada e integra o resultado G05 fixture 24/24. |
 
-## Falhas iniciais da G05 — execução de 10/11/2026
+## E12-02 — Comando incluído indevidamente no assunto
 
-A primeira execução de `scripts/run_g05_acceptance.py` registrou 17 aprovações e 7 falhas nas fixtures; no modo ao vivo, 16 aprovações, 7 falhas e T21 pendente. Esses resultados são históricos e orientam as correções abaixo. A reexecução final deve substituir os valores somente após o código e os oráculos serem revisados.
+| Campo | Registro |
+| --- | --- |
+| Evidência original | G05 T09, em 10/11/2026: `Me mostre ficção científica`. |
+| Esperado | Intenção `buscar_por_assunto` e parâmetro `ficção científica`. |
+| Obtido originalmente | A busca recebeu `Me mostre ficção científica`; no modo ao vivo histórico retornou lista vazia. |
+| Causa técnica | O extrator não isolava o trecho posterior ao comando `mostre`; o fallback preservava a frase inteira. |
+| Impacto | A API recebia uma consulta bibliográfica degradada e podia retornar resultado vazio incorreto para o usuário. |
+| Correção aplicada | Padrão de assunto para `mostre [assunto]`, que extrai somente a entidade. |
+| Regressão | `test_g05_search_variations_use_exact_catalog_parameter` e `test_g05_title_author_subject_and_detail_variations_extract_exact_entities`. |
+| Comparação honesta | Falhou na G05 histórica; passou 3/3 na G06 controlada com a chamada `subject: ficção científica`. |
 
-| Caso | Falha observada | Camada provável | Próxima ação |
-| --- | --- | --- | --- |
-| T03 | Paráfrase de busca por título foi abstida. | Intenção de título. | Cobrir “estou atrás de um livro chamado”. |
-| T06 | Lista por autor foi abstida. | Intenção e extração de autor. | Cobrir “mostre obras de [autor]”. |
-| T09 | Comando entrou no assunto enviado à API. | Extração de assunto. | Extrair somente “ficção científica”. |
-| T10 | Paráfrase de assunto foi abstida. | Intenção e extração de assunto. | Cobrir “leitura a respeito de [assunto]”. |
-| T12 | Pedido de detalhes foi abstido. | Intenção e extração de detalhes. | Cobrir “quero saber mais sobre [obra]”. |
-| T16 | “um autor” virou assunto e consultou a fonte. | Validação de entidade obrigatória. | Pedir o nome do autor sem chamada externa. |
-| T20 | Autor inexistente não alcançou a busca por autor. | Intenção de busca por autor. | Cobrir “obras de [autor]” com retorno vazio controlado. |
+## E12-03 — Interface presa quando a requisição não responde
 
-T21 permanece uma falha **injetada em fixture**; não se provoca indisponibilidade artificial contra a Open Library ao vivo.
+| Campo | Registro |
+| --- | --- |
+| Evidência original | M05-D01, UI-14, em 17/11/2026. |
+| Esperado | Após resposta, erro **ou timeout**, o loading termina e controles são liberados. |
+| Obtido originalmente | Com `fetch` que nunca resolve, `Consultando acervo...` persistia e a página precisava ser recarregada. |
+| Causa técnica | A UI aguardava `fetch` sem prazo; assim, o bloco `finally`, responsável por remover o loading e reabilitar controles, nunca era executado. |
+| Impacto | A conversa podia ficar inutilizável diante de rede travada ou servidor sem resposta. |
+| Correção aplicada | `fetchWithTimeout` usa `AbortController` e `Promise.race` com limite de 15 segundos. O timeout cancela a requisição, exibe mensagem de nova tentativa e alcança o `finally`. |
+| Regressão | `test_timeout_cancels_request_and_releases_the_ui_path` em `tests/test_static_ui_contract.py`. |
+| Comparação honesta | A falha manual está preservada em M05. A regressão automatizada verifica a presença do cancelamento, limite, mensagem e limpeza. A confirmação visual após 15 s ainda deve ser registrada no navegador. |
 
-## Reexecução controlada — 16/11/2026
+## Prioridade e limites
 
-Após as correções de intenção e extração, o comando abaixo foi executado sem rede:
+| Prioridade | Item | Situação |
+| --- | --- | --- |
+| P0 | E12-03 — timeout da interface | Corrigido no código; aguarda aceite visual de 15 s. |
+| P1 | E12-01 e E12-02 — variações de linguagem | Corrigidas e cobertas por regressão controlada. |
+| P2 | Ampliar frases inéditas | Recomendado para evolução do corpus; não alegar que mede generalização independente. |
+
+## Comandos de reprodução
 
 ```text
+python scripts/run_g06_reproduction.py --repeats 3
 python scripts/run_g05_acceptance.py --mode fixture
+pytest -q tests/test_entity_extraction.py tests/test_chat_integration.py tests/test_static_ui_contract.py tests/test_main.py
 ```
-
-Resultado: **24 de 24 casos passaram**. As regressões específicas também foram verificadas em `tests/test_entity_extraction.py` (1 teste) e `tests/test_chat_integration.py` (7 testes). A trilha ao vivo de 10/11 permanece no CSV como observação histórica da fonte externa; ela não é reescrita como se tivesse sido executada nesta versão.

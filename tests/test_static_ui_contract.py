@@ -7,7 +7,7 @@ CHAT_JS = (Path(__file__).resolve().parents[1] / "static" / "chat.js").read_text
 
 
 def test_ui_uses_the_contract_route_and_session_fields() -> None:
-    assert 'fetch("/api/chat"' in CHAT_JS
+    assert 'fetchWithTimeout("/api/chat"' in CHAT_JS
     assert "message: text, session_id: currentSessionId" in CHAT_JS
     assert "currentSessionId = data.session_id" in CHAT_JS
     assert "currentSessionId = null" in CHAT_JS
@@ -24,3 +24,13 @@ def test_http_and_network_failures_have_distinct_messages() -> None:
     assert "class ChatHttpError" in CHAT_JS
     assert "O servidor não aceitou esta solicitação" in CHAT_JS
     assert "Não foi possível comunicar com o servidor" in CHAT_JS
+
+
+def test_timeout_cancels_request_and_releases_the_ui_path() -> None:
+    assert "const CHAT_REQUEST_TIMEOUT_MS = 15000" in CHAT_JS
+    assert "class ChatTimeoutError" in CHAT_JS
+    assert "new AbortController()" in CHAT_JS
+    assert "Promise.race([request, timeout])" in CHAT_JS
+    assert "controller.abort()" in CHAT_JS
+    assert "window.clearTimeout(timeoutId)" in CHAT_JS
+    assert "A consulta demorou mais do que o esperado" in CHAT_JS

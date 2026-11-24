@@ -16,9 +16,17 @@ class ChatHttpError extends Error {
     }
 }
 
+class ChatTimeoutError extends Error {
+    constructor() {
+        super("Tempo limite da consulta excedido");
+        this.name = "ChatTimeoutError";
+    }
+}
+
 // O servidor cria a sessão no primeiro turno e devolve seu UUID no contrato.
 let currentSessionId = null;
 let isSending = false;
+const CHAT_REQUEST_TIMEOUT_MS = 15000;
 
 function scrollToBottom() {
     chatHistory.scrollTop = chatHistory.scrollHeight;
@@ -144,6 +152,20 @@ function isChatResponse(data) {
         && Array.isArray(data.results);
 }
 
+function fetchWithTimeout(url, options) {
+    const controller = new AbortController();
+    let timeoutId;
+    const timeout = new Promise((_, reject) => {
+        timeoutId = window.setTimeout(() => {
+            controller.abort();
+            reject(new ChatTimeoutError());
+        }, CHAT_REQUEST_TIMEOUT_MS);
+    });
+
+    const request = fetch(url, { ...options, signal: controller.signal });
+    return Promise.race([request, timeout]).finally(() => window.clearTimeout(timeoutId));
+}
+
 async function handleSend(event) {
     event?.preventDefault();
     if (isSending) return;
@@ -162,7 +184,7 @@ async function handleSend(event) {
     const loadingMessage = showLoading();
 
     try {
-        const response = await fetch("/api/chat", {
+        const response = await fetchWithTimeout("/api/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: text, session_id: currentSessionId }),
@@ -178,9 +200,11 @@ async function handleSend(event) {
     } catch (error) {
         console.error("Falha em POST /api/chat:", error);
         appStatusText.textContent = "Servidor indisponível";
-        const message = error instanceof ChatHttpError
-            ? "O servidor não aceitou esta solicitação. Revise a mensagem e tente novamente."
-            : "Não foi possível comunicar com o servidor. Tente novamente em instantes.";
+        const message = error instanceof ChatTimeoutError
+            ? "A consulta demorou mais do que o esperado. Tente novamente."
+            : error instanceof ChatHttpError
+                ? "O servidor não aceitou esta solicitação. Revise a mensagem e tente novamente."
+                : "Não foi possível comunicar com o servidor. Tente novamente em instantes.";
         addBotMessage(message, [], "source_unavailable");
     } finally {
         loadingMessage.remove();
