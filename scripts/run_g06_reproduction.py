@@ -73,7 +73,7 @@ CASES = (
     ReproductionCase(
         "T16",
         "Mostre livros de um autor",
-        None,
+        Intent.SEARCH_AUTHOR_WORKS,
         ConversationState.AWAITING_CLARIFICATION,
         (),
         "Pedir o nome do autor sem consultar o catálogo.",
@@ -144,13 +144,21 @@ class ControlledCatalog:
 
 
 def _git_version() -> str:
-    return subprocess.run(
+    version = subprocess.run(
         ["git", "rev-parse", "--short", "HEAD"],
         cwd=ROOT,
         check=True,
         capture_output=True,
         text=True,
     ).stdout.strip()
+    status = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    return f"{version} + working tree" if status else version
 
 
 def _signature(row: dict[str, str]) -> tuple[str, ...]:
