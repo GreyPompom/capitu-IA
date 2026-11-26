@@ -18,8 +18,7 @@ Consulte [`docs/README.md`](docs/README.md) para os documentos de planejamento e
 
 ## Funcionalidades e limites atuais
 
-Planejamento aprovado pelo professor conforme informado pela equipe. A CAPITU
-interpreta quatro intenções bibliográficas: busca por título, obras de autor,
+Planejamento aprovado pelo professor. A CAPITU interpreta quatro intenções bibliográficas: busca por título, obras de autor,
 busca por assunto/gênero e consulta de detalhes. A interpretação combina
 normalização, TF-IDF/similaridade, regras de alta precisão, extração de
 entidades e contexto mínimo da conversa. Os dados bibliográficos vêm da Open
