@@ -154,6 +154,7 @@ activemq-data/
 .envrc
 .venv
 .venv-e02/
+.venv-run01/
 .localdeps/
 artifacts/intent_index.joblib
 artifacts/intent_index_config.json
