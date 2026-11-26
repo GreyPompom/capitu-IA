@@ -84,7 +84,7 @@ def test_root_serves_base_html_and_local_asset_references(client) -> None:
 
     assert response.status_code == 200
     assert "text/html" in response.headers["content-type"]
-    assert "CAPITU" in response.text
+    assert "Capitu.IA" in response.text
     assert "/static/styles.css" in response.text
     assert "/static/chat.js" in response.text
 
