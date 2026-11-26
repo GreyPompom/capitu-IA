@@ -14,7 +14,7 @@ STATIC_DIR = PROJECT_ROOT / "static"
 
 app = FastAPI(
     title="CAPITU",
-    description="Chatbot local de descoberta bibliográfica. Resposta de demonstração E02.",
+    description="Chatbot local de descoberta bibliográfica com PLN e Open Library.",
     version="0.1.0",
 )
 

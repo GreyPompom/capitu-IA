@@ -1,6 +1,6 @@
 # CAPITU IA
 
-Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. O backend FastAPI valida o contrato E01 e disponibiliza uma resposta demonstrativa local; o índice TF-IDF de intenções da E04 está implementado, mas ainda será integrado ao fluxo de diálogo e à Open Library nas próximas tarefas.
+Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. O backend FastAPI expõe o contrato do chat, integra interpretação TF-IDF/regras, contexto de conversa e a Open Library como fonte externa de dados.
 
 ## Documentação
 
@@ -63,9 +63,12 @@ Nesse caso, abra `http://127.0.0.1:8766/`.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe scripts\build_index.py
 .\.venv\Scripts\python.exe scripts\run_g05_acceptance.py --mode fixture
 .\.venv\Scripts\python.exe scripts\run_g06_reproduction.py --repeats 3
 ```
 
-Os casos controlados não dependem de rede. Evidências, métricas e limitações
-estão em [`docs/evidence/`](docs/evidence/) e [`evaluation/`](evaluation/).
+`build_index.py` ajusta o índice somente com `data/splits/reference.csv` e cria
+artefatos locais em `artifacts/`; os arquivos gerados não são versionados. Os
+casos controlados não dependem de rede. Evidências, métricas e limitações estão
+em [`docs/evidence/`](docs/evidence/) e [`evaluation/`](evaluation/).
