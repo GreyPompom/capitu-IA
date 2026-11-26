@@ -153,6 +153,7 @@ activemq-data/
 .env
 .envrc
 .venv
+.venv-*/
 .venv-e02/
 .venv-run01/
 .localdeps/
