@@ -1,0 +1,128 @@
+{
+  "source": {
+    "reference": "C:\\Projetos\\Unisul\\capitu-ia-e03\\data\\splits\\reference.csv",
+    "reference_sha256": "8674c756853bff189fb0fa56e6b6c3595c98fb6a817255e8cbbafca2394d01b7",
+    "validation": "C:\\Projetos\\Unisul\\capitu-ia-e03\\data\\splits\\validation.csv",
+    "known_negative_ambiguous": "C:\\Projetos\\Unisul\\capitu-ia-e03\\data\\Fora_Do_Escopo_Ambiguo.csv",
+    "test_split_used": false
+  },
+  "policy": {
+    "acceptance_threshold": 0.25,
+    "ambiguity_margin": 0.12,
+    "score_is_probability": false
+  },
+  "methods": {
+    "nearest_neighbor": {
+      "validation": {
+        "rows": 18,
+        "raw_top_1_correct": 6,
+        "raw_top_1_accuracy": 0.3333,
+        "accepted_correct": 3,
+        "accepted_incorrect": 6,
+        "false_accept_rate_among_accepted": 0.6667,
+        "decision_counts": {
+          "accepted": 9,
+          "ambiguous": 7,
+          "rejected": 2
+        }
+      },
+      "known_negative_ambiguous": {
+        "rows": 20,
+        "expected_decision_matches": 20,
+        "decision_counts": {
+          "ambiguous": 8,
+          "out_of_scope": 12
+        }
+      }
+    },
+    "top_3_mean": {
+      "validation": {
+        "rows": 18,
+        "raw_top_1_correct": 7,
+        "raw_top_1_accuracy": 0.3889,
+        "accepted_correct": 2,
+        "accepted_incorrect": 0,
+        "false_accept_rate_among_accepted": 0.0,
+        "decision_counts": {
+          "accepted": 2,
+          "ambiguous": 1,
+          "rejected": 15
+        }
+      },
+      "known_negative_ambiguous": {
+        "rows": 20,
+        "expected_decision_matches": 20,
+        "decision_counts": {
+          "ambiguous": 8,
+          "out_of_scope": 12
+        }
+      }
+    }
+  },
+  "top_3_mean_threshold_trials": {
+    "0.18": {
+      "rows": 18,
+      "raw_top_1_correct": 7,
+      "raw_top_1_accuracy": 0.3889,
+      "accepted_correct": 2,
+      "accepted_incorrect": 0,
+      "false_accept_rate_among_accepted": 0.0,
+      "decision_counts": {
+        "accepted": 2,
+        "ambiguous": 10,
+        "rejected": 6
+      }
+    },
+    "0.2": {
+      "rows": 18,
+      "raw_top_1_correct": 7,
+      "raw_top_1_accuracy": 0.3889,
+      "accepted_correct": 2,
+      "accepted_incorrect": 0,
+      "false_accept_rate_among_accepted": 0.0,
+      "decision_counts": {
+        "accepted": 2,
+        "ambiguous": 6,
+        "rejected": 10
+      }
+    },
+    "0.23": {
+      "rows": 18,
+      "raw_top_1_correct": 7,
+      "raw_top_1_accuracy": 0.3889,
+      "accepted_correct": 2,
+      "accepted_incorrect": 0,
+      "false_accept_rate_among_accepted": 0.0,
+      "decision_counts": {
+        "accepted": 2,
+        "ambiguous": 1,
+        "rejected": 15
+      }
+    },
+    "0.25": {
+      "rows": 18,
+      "raw_top_1_correct": 7,
+      "raw_top_1_accuracy": 0.3889,
+      "accepted_correct": 2,
+      "accepted_incorrect": 0,
+      "false_accept_rate_among_accepted": 0.0,
+      "decision_counts": {
+        "accepted": 2,
+        "ambiguous": 1,
+        "rejected": 15
+      }
+    },
+    "0.3": {
+      "rows": 18,
+      "raw_top_1_correct": 7,
+      "raw_top_1_accuracy": 0.3889,
+      "accepted_correct": 0,
+      "accepted_incorrect": 0,
+      "false_accept_rate_among_accepted": null,
+      "decision_counts": {
+        "ambiguous": 1,
+        "rejected": 17
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Quarto de Despejo",
+  "authors": [
+    {
+      "key": "/authors/OL217145A"
+    }
+  ],
+  "publish_date": "1993",
+  "type": {
+    "key": "/type/edition"
+  },
+  "local_id": [
+    "urn:bwbsku:W8-BQC-439"
+  ],
+  "publishers": [
+    "Atica"
+  ],
+  "source_records": [
+    "promise:bwb_daily_pallets_2023-02-15:W8-BQC-439",
+    "ia:quartodedespejod0000caro",
+    "amazon:8508105312"
+  ],
+  "key": "/books/OL46864874M",
+  "works": [
+    {
+      "key": "/works/OL1810404W"
+    }
+  ],
+  "covers": [14510512],
+  "number_of_pages": 202,
+  "identifiers": {
+
+  },
+  "subtitle": "Diário de uma Favelada",
+  "languages": [
+    {
+      "key": "/languages/por"
+    }
+  ],
+  "ocaid": "quartodedespejod0000caro",
+  "isbn_10": [
+    "8508105312"
+  ],
+  "isbn_13": [
+    "9788508105311"
+  ],
+  "latest_revision": 10,
+  "revision": 10,
+  "created": {
+    "type": "/type/datetime",
+    "value": "2023-02-27T20:40:29.408600"
+  },
+  "last_modified": {
+    "type": "/type/datetime",
+    "value": "2025-11-02T04:06:47.877211"
+  }
+}

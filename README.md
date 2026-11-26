@@ -1,6 +1,6 @@
 # CAPITU IA
 
-Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. O backend FastAPI valida o contrato E01 e disponibiliza uma resposta demonstrativa local; a interpretação de intenções e a consulta real à Open Library serão implementadas nas próximas tarefas.
+Chatbot inteligente de descoberta bibliográfica para a atividade A3 de Inteligência Artificial. O backend FastAPI valida o contrato E01 e disponibiliza uma resposta demonstrativa local; o índice TF-IDF de intenções da E04 está implementado, mas ainda será integrado ao fluxo de diálogo e à Open Library nas próximas tarefas.
 
 ## Documentação
 
@@ -16,13 +16,32 @@ Consulte [`docs/README.md`](docs/README.md) para os documentos de planejamento e
 - `data/`, `artifacts/`, `evaluation/` e `tests/`: dados, avaliações e testes.
 - `docs/`: requisitos, arquitetura, planejamento e evidências.
 
-## Estado
+## Funcionalidades e limites atuais
 
-Planejamento aprovado pelo professor conforme informado pela equipe. E01 define o contrato v1 e os schemas Pydantic. E02 entrega o servidor local, `POST /api/chat`, página estática-base e testes HTTP. A resposta da E02 contém um livro fictício explicitamente identificado como simulação; ainda não há PLN nem chamada à Open Library.
+Planejamento aprovado pelo professor conforme informado pela equipe. A CAPITU
+interpreta quatro intenções bibliográficas: busca por título, obras de autor,
+busca por assunto/gênero e consulta de detalhes. A interpretação combina
+normalização, TF-IDF/similaridade, regras de alta precisão, extração de
+entidades e contexto mínimo da conversa. Os dados bibliográficos vêm da Open
+Library.
+
+O sistema trata ambiguidade, ausência de parâmetro, resultado vazio, pergunta
+fora de escopo e indisponibilidade da fonte. A interface cancela uma requisição
+de chat que ultrapasse 15 segundos e permite nova tentativa.
+
+Limites intencionais: a CAPITU não realiza empréstimos, reservas, consulta a
+acervo institucional ou respostas interpretativas sobre personagens/enredo.
+Resultados da Open Library podem variar e uma busca vazia não comprova que uma
+obra não exista.
 
 ## Executar localmente
 
-Requer Python 3.10 ou superior.
+Requisitos:
+
+- Python 3.10 ou superior;
+- `pip` disponível no Python escolhido;
+- conexão com a internet apenas para consultas reais à Open Library;
+- navegador moderno para a interface web.
 
 ```powershell
 python -m venv .venv
@@ -33,4 +52,21 @@ python -m venv .venv
 
 Abra `http://127.0.0.1:8000/`. A documentação HTTP fica em `http://127.0.0.1:8000/docs`.
 
-Para validar o projeto, execute `.\.venv\Scripts\python.exe -m pytest -q`.
+Se a porta 8000 estiver ocupada, use outra porta, por exemplo:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8766
+```
+
+Nesse caso, abra `http://127.0.0.1:8766/`.
+
+## Validar o projeto
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe scripts\run_g05_acceptance.py --mode fixture
+.\.venv\Scripts\python.exe scripts\run_g06_reproduction.py --repeats 3
+```
+
+Os casos controlados não dependem de rede. Evidências, métricas e limitações
+estão em [`docs/evidence/`](docs/evidence/) e [`evaluation/`](evaluation/).

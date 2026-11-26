@@ -1,0 +1,14 @@
+{
+  "key": "/books/OL46864874M",
+  "title": "Quarto de Despejo",
+  "works": [
+    {
+      "key": "/works/OL1810404W"
+    }
+  ],
+  "publish_date": "1993",
+  "publishers": ["Atica"],
+  "number_of_pages": 202,
+  "isbn_10": ["8508105312"],
+  "isbn_13": ["9788508105311"]
+}

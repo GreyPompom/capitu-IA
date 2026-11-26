@@ -1,0 +1,65 @@
+{
+  "title": "Quarto de Despejo",
+  "covers": [295782, 14510512],
+  "first_sentence": {
+    "type": "/type/text",
+    "value": "July 15, 1955 The birthday of my daughter Vera Eunice."
+  },
+  "subject_places": [
+    "Brazil",
+    "São Paulo (Brazil)",
+    "São Paulo"
+  ],
+  "first_publish_date": "1960",
+  "subject_people": [
+    "Carolina Maria de Jesus"
+  ],
+  "key": "/works/OL1810404W",
+  "authors": [
+    {
+      "author": {
+        "key": "/authors/OL217145A"
+      },
+      "type": {
+        "key": "/type/author_role"
+      }
+    }
+  ],
+  "type": {
+    "key": "/type/work"
+  },
+  "subjects": [
+    "Poor",
+    "Social life and customs",
+    "Race relations",
+    "Blacks",
+    "Social conditions",
+    "Rural conditions",
+    "Childhood and youth",
+    "Biography",
+    "Sao Paulo (Brazil)",
+    "Poverty",
+    "Cities and towns",
+    "Autobiography",
+    "Brazil, biography",
+    "Women, biography",
+    "Poor--brazil--são paulo",
+    "Hn290.s33 j43 2003",
+    "Black people"
+  ],
+  "subtitle": "Diário de uma Favelada",
+  "description": {
+    "type": "/type/text",
+    "value": "A first-hand account of life in the streets of Sao Paulo from 1955 to 1960, details the plight of an artist, writer and single mother of three children who, while living in a hovel, supported her family by digging through the garbage for paper and scraps to sell."
+  },
+  "latest_revision": 20,
+  "revision": 20,
+  "created": {
+    "type": "/type/datetime",
+    "value": "2009-12-09T22:24:49.591859"
+  },
+  "last_modified": {
+    "type": "/type/datetime",
+    "value": "2026-09-18T08:18:49.091217"
+  }
+}

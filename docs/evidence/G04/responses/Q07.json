@@ -1,0 +1,48 @@
+{
+  "numFound": 44,
+  "start": 0,
+  "numFoundExact": true,
+  "num_found": 44,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "",
+  "offset": null,
+  "docs": [
+    {
+      "author_name": [
+        "Carolina Maria de Jesus"
+      ],
+      "edition_count": 22,
+      "first_publish_year": 1960,
+      "key": "/works/OL1810404W",
+      "language": [
+        "eng",
+        "por"
+      ],
+      "title": "Quarto de Despejo"
+    },
+    {
+      "author_name": [
+        "Carolina Maria de Jesus"
+      ],
+      "edition_count": 1,
+      "first_publish_year": 1962,
+      "key": "/works/OL10623266W",
+      "language": [
+        "eng"
+      ],
+      "title": "Child of the dark"
+    },
+    {
+      "author_name": [
+        "Carolina Maria de Jesus"
+      ],
+      "edition_count": 1,
+      "first_publish_year": 2021,
+      "key": "/works/OL32130065W",
+      "language": [
+        "por"
+      ],
+      "title": "Casa de alvenaria"
+    }
+  ]
+}

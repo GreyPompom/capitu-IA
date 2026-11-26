@@ -1,13 +1,12 @@
-"""Backend HTTP mínimo da CAPITU, com resposta demonstrativa para E02."""
+"""Backend HTTP da CAPITU: contrato, PLN, diálogo e fonte bibliográfica."""
 
 from pathlib import Path
-from uuid import uuid4
-
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.schemas import BookSummary, ChatRequest, ChatResponse, ConversationState
+from app.chat_service import CapituChatService
+from app.schemas import ChatRequest, ChatResponse
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +19,7 @@ app = FastAPI(
 )
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+chat_service = CapituChatService()
 
 
 @app.get("/", include_in_schema=False)
@@ -31,28 +31,6 @@ def serve_chat() -> FileResponse:
 
 @app.post("/api/chat", response_model=ChatResponse)
 def chat(request: ChatRequest) -> ChatResponse:
-    """Valida o contrato e devolve dados locais simulados, sem IA ou rede externa."""
+    """Processa uma mensagem válida usando o fluxo integrado da CAPITU."""
 
-    session_id = request.session_id or uuid4()
-    demo_book = BookSummary(
-        openlibrary_key="/works/OL-E02-DEMO",
-        title="Livro de demonstração (dados fictícios)",
-        authors=["Autoria fictícia para demonstração"],
-        first_publish_year=None,
-        edition_count=None,
-        isbn=[],
-        subjects=["simulação"],
-        cover_url=None,
-        source_url="https://example.org/capitu-fixtures/OL-E02-DEMO",
-    )
-    return ChatResponse(
-        session_id=session_id,
-        text=(
-            "Resposta simulada da E02. A mensagem foi recebida, mas a intenção "
-            "ainda não é interpretada e este registro fictício não foi consultado "
-            "na Open Library."
-        ),
-        state=ConversationState.ANSWERED,
-        intent=None,
-        results=[demo_book],
-    )
+    return chat_service.handle(request)

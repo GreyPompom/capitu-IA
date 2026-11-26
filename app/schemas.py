@@ -85,6 +85,7 @@ class ExtractedEntities(ContractModel):
     isbn: str | None = Field(default=None, max_length=20)
     year: int | None = Field(default=None, ge=0, le=9_999)
     requested_field: str | None = Field(default=None, max_length=80)
+    has_interpretive_content_question: bool = False
 
 
 class IntentCandidate(ContractModel):
@@ -128,6 +129,17 @@ class BookSummary(ContractModel):
     source_url: HttpUrl
 
 
+class BookDetails(BookSummary):
+    """Detalhes normalizados de obra ou edição; ainda não é resposta pública."""
+
+    description: str | None = Field(default=None, max_length=10_000)
+    publishers: list[str] = Field(default_factory=list, max_length=10)
+    publication_date: str | None = Field(default=None, max_length=100)
+    work_key: str | None = Field(default=None, max_length=120)
+    author_keys: list[str] = Field(default_factory=list, max_length=10)
+    page_count: int | None = Field(default=None, ge=0)
+
+
 class ChatResponse(ContractModel):
     """Envelope estável para toda resposta de negócio do chat."""
 
@@ -146,3 +158,4 @@ class ConversationSession(ContractModel):
     pending_intent: Intent | None = None
     pending_parameter: EntitySlot | None = None
     last_results: list[BookSummary] = Field(default_factory=list, max_length=5)
+    selected_book: BookSummary | None = None
